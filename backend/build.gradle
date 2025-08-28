@@ -19,9 +19,21 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// Core Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    // Web + REST APIs
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // Validation annotations (@NotBlank, @Email, etc.)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Dev tools (hot reload in dev mode, optional but nice)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
