@@ -4,7 +4,7 @@ import TagChip from "@/ui/TagChip";
 export default function ProjectCard({ p }: { p: Project }) {
   return (
     <a
-      href={p.url}
+      href={p.repoUrl}
       target="_blank"
       rel="noreferrer"
       className="block rounded-2xl shadow p-5 hover:shadow-lg transition"
