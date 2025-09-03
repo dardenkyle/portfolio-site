@@ -22,7 +22,7 @@ export default function Projects() {
       .then((data) => {
         if (!alive) return;
         const mapped: Project[] = data.map((p) => ({
-          id: p.slug,
+          slug: p.slug,
           title: p.title,
           summary: p.summary,
           tags: p.tags ?? [],
