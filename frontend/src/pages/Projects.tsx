@@ -1,34 +1,43 @@
-import type { Project } from "@/domain/projects";
+import { useEffect, useState } from "react";
 import ProjectsGrid from "@/ui/ProjectGrid";
+import type { Project } from "@/domain/projects";
+import { apiGet } from "@/api/client";
 
-/** TODO(api): replace with backend data later. */
-const PROJECTS: Project[] = [
-  {
-    id: "freightfolio",
-    title: "FreightFolio (Logistics SaaS)",
-    summary:
-      "Load Manager, Invoices, AR/AP microservices; production-grade FastAPI + Postgres.",
-    tags: ["FastAPI", "Postgres", "Docker"],
-    url: "https://github.com/dardenkyle/freightfolio",
-  },
-  {
-    id: "cs2-analytics",
-    title: "CS2 Analytics",
-    summary:
-      "Queue-based scraping and analytics API for pro matches (ETL + SQL).",
-    tags: ["Python", "ETL", "Postgres"],
-    url: "https://github.com/dardenkyle/cs2-analytics",
-  },
-  {
-    id: "portfolio",
-    title: "This Portfolio",
-    summary:
-      "Vite + React + Tailwind frontend; Spring Boot backend (to be wired).",
-    tags: ["React", "Tailwind", "Java"],
-    url: "https://github.com/dardenkyle/portfolio-site",
-  },
-];
+type ApiProject = {
+  slug: string;
+  title: string;
+  summary: string;
+  repoUrl?: string;
+  liveUrl?: string;
+  tags?: string[];
+};
 
 export default function Projects() {
-  return <ProjectsGrid projects={PROJECTS} />;
+  const [projects, setProjects] = useState<Project[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    apiGet<ApiProject[]>("/projects")
+      .then((data) => {
+        if (!alive) return;
+        const mapped: Project[] = data.map((p) => ({
+          id: p.slug,
+          title: p.title,
+          summary: p.summary,
+          tags: p.tags ?? [],
+          url: p.liveUrl ?? p.repoUrl ?? "",
+        }));
+        setProjects(mapped);
+      })
+      .catch((e) => alive && setError(e.message));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  if (error)
+    return <main className="max-w-5xl mx-auto p-6">Error: {error}</main>;
+  if (!projects) return <main className="max-w-5xl mx-auto p-6">Loading…</main>;
+  return <ProjectsGrid projects={projects} />;
 }
