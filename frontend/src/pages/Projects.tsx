@@ -2,15 +2,8 @@ import { useEffect, useState } from "react";
 import ProjectsGrid from "@/ui/ProjectGrid";
 import type { Project } from "@/domain/projects";
 import { apiGet } from "@/api/client";
-
-type ApiProject = {
-  slug: string;
-  title: string;
-  summary: string;
-  repoUrl?: string;
-  liveUrl?: string;
-  tags?: string[];
-};
+import type { ApiProject } from "@/api/types";
+import { toProject } from "@/api/mappers";
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[] | null>(null);
@@ -18,16 +11,10 @@ export default function Projects() {
 
   useEffect(() => {
     let alive = true;
-    apiGet<ApiProject[]>("/projects")
+    apiGet<ApiProject[]>("projects")
       .then((data) => {
         if (!alive) return;
-        const mapped: Project[] = data.map((p) => ({
-          slug: p.slug,
-          title: p.title,
-          summary: p.summary,
-          tags: p.tags ?? [],
-          url: p.liveUrl ?? p.repoUrl ?? "",
-        }));
+        const mapped = data.map(toProject);
         setProjects(mapped);
       })
       .catch((e) => alive && setError(e.message));
