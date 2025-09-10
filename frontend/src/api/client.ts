@@ -1,9 +1,10 @@
 import { API_BASE } from "@/config";
 
 export async function apiGet<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: { Accept: "application/json" },
-  });
-  if (!res.ok) throw new Error(`GET ${path} ${res.status}`);
+  const clean = path.replace(/^\/+/, "");
+  const url = `${API_BASE}/${clean}`;
+
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  if (!res.ok) throw new Error(`GET ${url} → ${res.status} ${res.statusText}`);
   return res.json() as Promise<T>;
 }
