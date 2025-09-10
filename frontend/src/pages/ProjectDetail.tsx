@@ -2,20 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { apiGet } from "@/api/client";
 import type { Project } from "@/domain/projects";
-
-type ApiProject = {
-  slug: string;
-  title: string;
-  summary: string;
-  repoUrl?: string;
-  liveUrl?: string;
-  tags?: string[];
-  // Optional extended fields you can add later:
-  // problem?: string;
-  // solution?: string;
-  // videoId?: string; // YouTube
-  // screenshots?: string[];
-};
+import type { ApiProject } from "@/api/types";
+import { toProject } from "@/api/mappers";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -23,26 +11,24 @@ export default function ProjectDetail() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!slug) {
+      setError("Missing project slug.");
+      return;
+    }
     let alive = true;
 
-    // For now, fetch the list and pick by slug.
-    // (Later: switch to /api/projects/:slug when the backend exposes it.)
     apiGet<ApiProject[]>("projects")
       .then((list) => {
         if (!alive) return;
-        const p = list.find((x) => x.slug === slug);
+        const mapped = list.map(toProject);
+        const p = mapped.find(
+          (x) => x.slug.toLowerCase() === slug.toLowerCase()
+        );
         if (!p) {
           setError("Project not found.");
           return;
         }
-        const mapped: Project = {
-          slug: p.slug,
-          title: p.title,
-          summary: p.summary,
-          repoUrl: p.repoUrl ?? "",
-          tags: p.tags ?? [],
-        };
-        setProject(mapped);
+        setProject(p);
       })
       .catch((e) => alive && setError(e.message));
 
@@ -109,26 +95,20 @@ export default function ProjectDetail() {
         </ul>
       </section>
 
-      {/* Media (replace with real embed if you have one) */}
-      {/* Example YouTube embed:
-      <section className="space-y-3">
-        <h2 className="text-xl font-medium">Demo</h2>
-        <div className="aspect-video">
-          <iframe
-            className="w-full h-full rounded-xl"
-            src="https://www.youtube.com/embed/VIDEO_ID"
-            title="Demo video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-      </section>
-      */}
-
       {/* Links */}
       <section className="space-y-3">
         <h2 className="text-xl font-medium">Links</h2>
         <div className="flex gap-4">
+          {project.liveUrl && (
+            <a
+              className="underline opacity-90 hover:opacity-100"
+              href={project.liveUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Live
+            </a>
+          )}
           {project.repoUrl && (
             <a
               className="underline opacity-90 hover:opacity-100"
@@ -136,10 +116,9 @@ export default function ProjectDetail() {
               target="_blank"
               rel="noreferrer"
             >
-              Live / Repo
+              GitHub
             </a>
           )}
-          {/* Add more: GitHub, API docs, Swagger, etc. */}
         </div>
       </section>
     </main>
