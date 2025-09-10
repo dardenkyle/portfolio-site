@@ -18,9 +18,9 @@ public class ProjectService {
         new Project(
             "cs2-analytics",
             "CS2 Analytics Platform",
-            "Queue-based scraping, PostgreSQL storage, analytics API.",
-            List.of("Java", "Spring Boot", "PostgreSQL"),
-            "https://github.com/youruser/cs2-analytics",  // repoUrl
+            "Open-source, modular backend data pipeline designed to scrape, parse, and analyze professional Counter-Strike 2 (CS2) match data",
+            List.of("Python", "SQL", "PostgreSQL"),
+            "https://github.com/dardenkyle/CS2-analytics",  // repoUrl
             null,                                         // liveUrl
             20,                                           // order
             OffsetDateTime.parse("2024-10-01T00:00:00Z"), // updatedAt (ISO 8601) or null
@@ -30,10 +30,10 @@ public class ProjectService {
         new Project(
             "freightfolio",
             "FreightFolio (Logistics SaaS)",
-            "Load manager, invoices, AR/AP; AWS-ready.",
-            List.of("Java", "Spring Boot", "AWS"),
-            "https://github.com/youruser/freightfolio",
-            "https://demo.example",
+            "Private, production-grade SaaS backend designed for small freight carriers. It provides a modular, scalable system to streamline logistics operations through microservices, focusing on load management, invoicing, and secure user authentication.",
+            List.of("Python", "FastAPI", "AWS"),
+            "https://github.com/dardenkyle/freightfolio-overview",
+            null,
             10,
             null,
             null,
