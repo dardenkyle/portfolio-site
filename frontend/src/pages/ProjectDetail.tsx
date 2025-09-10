@@ -39,7 +39,7 @@ export default function ProjectDetail() {
           slug: p.slug,
           title: p.title,
           summary: p.summary,
-          url: p.liveUrl ?? p.repoUrl ?? "",
+          repoUrl: p.repoUrl ?? "",
           tags: p.tags ?? [],
         };
         setProject(mapped);
@@ -129,10 +129,10 @@ export default function ProjectDetail() {
       <section className="space-y-3">
         <h2 className="text-xl font-medium">Links</h2>
         <div className="flex gap-4">
-          {project.url && (
+          {project.repoUrl && (
             <a
               className="underline opacity-90 hover:opacity-100"
-              href={project.url}
+              href={project.repoUrl}
               target="_blank"
               rel="noreferrer"
             >
