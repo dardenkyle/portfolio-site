@@ -87,14 +87,16 @@ export default function ProjectDetail() {
       {!!tech.length && (
         <section className="space-y-3">
           <h2 className="text-xl font-medium">Tech Stack</h2>
-          <ul className="flex flex-wrap gap-2">
+          <ul className="list-disc pl-6 space-y-1">
             {tech.map((t) => (
-              <li
-                key={t.id}
-                className="text-sm px-3 py-1 rounded-full border border-white/15"
-              >
+              <li key={t.id}>
                 {t.url ? (
-                  <a href={t.url} target="_blank" rel="noreferrer">
+                  <a
+                    href={t.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline"
+                  >
                     {t.name}
                   </a>
                 ) : (
@@ -110,7 +112,7 @@ export default function ProjectDetail() {
       {!!challenges.length && (
         <section className="space-y-3">
           <h2 className="text-xl font-medium">Challenges &amp; Solutions</h2>
-          <ol className="mt-2 space-y-4 list-decimal pl-5">
+          <ul className="mt-2 space-y-4 list-none pl-0">
             {challenges.map((c) => (
               <li key={c.id} id={c.id} className="bg-white/5 rounded-2xl p-4">
                 <h3 className="font-medium">{c.title}</h3>
@@ -150,7 +152,7 @@ export default function ProjectDetail() {
                 ) : null}
               </li>
             ))}
-          </ol>
+          </ul>
         </section>
       )}
 
