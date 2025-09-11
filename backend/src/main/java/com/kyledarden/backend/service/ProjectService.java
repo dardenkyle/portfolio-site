@@ -26,9 +26,26 @@ public class ProjectService {
             OffsetDateTime.parse("2024-10-01T00:00:00Z"), // updatedAt (ISO 8601) or null
             null,                                         // heroImage
             null,                                         // videoId
-            null,                                         // overview
-            null,                                         // techStack
-            null                                      // challenges
+            "Test",                                         // overview
+            List.of(
+                new Project.TechItem("python", "Python", "Language", "https://www.python.org", 1),
+                new Project.TechItem("fastapi", "FastAPI", "Backend", "https://fastapi.tiangolo.com", 2),
+                new Project.TechItem("postgres", "PostgreSQL", "Database", "https://www.postgresql.org", 3)
+            ),                                         // techStack
+            List.of(
+                new Project.Challenge(
+                    "rate-limits",
+                    "Handling scrape rate limits reliably",
+                    "Long-running scraping against external endpoints needs to be resilient to throttling and transient failures.",
+                    "Queue workers with exponential backoff + jitter; idempotent upserts keyed by match id; resumable runs.",
+                    "Stable runs with near-zero duplicates and recoverability after failures.",
+                    List.of(
+                        new Project.Link("Design notes", "https://example.com/cs2-scraper-notes")
+                    ),
+                    List.of("scraping", "queues", "resilience"),
+                    1
+                )            // challenges
+            )
         ),
         new Project(
             "freightfolio",
