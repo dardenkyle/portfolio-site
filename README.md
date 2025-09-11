@@ -1,5 +1,5 @@
 [![Deploy](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml/badge.svg)](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml)
-
+[![CI](https://github.com/dardenkyle/portfolio-site/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dardenkyle/portfolio-site/actions/workflows/ci.yml)
 
 # Portfolio
 
