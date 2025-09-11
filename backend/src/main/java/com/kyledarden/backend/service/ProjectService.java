@@ -25,7 +25,10 @@ public class ProjectService {
             20,                                           // order
             OffsetDateTime.parse("2024-10-01T00:00:00Z"), // updatedAt (ISO 8601) or null
             null,                                         // heroImage
-            null                                          // videoId
+            null,                                         // videoId
+            null,                                         // overview
+            null,                                         // techStack
+            null                                      // challenges
         ),
         new Project(
             "freightfolio",
@@ -37,7 +40,10 @@ public class ProjectService {
             10,
             null,
             null,
-            null
+            null,
+            null,                                         // overview
+            null,                                         // techStack
+            null                                      // challenges
         )
     );
 
