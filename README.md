@@ -1,3 +1,6 @@
+[![Deploy](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml/badge.svg)](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml)
+
+
 # Portfolio
 
 Full-stack portfolio site with a **Spring Boot (Java 21)** backend and a **Vite + React + TypeScript** frontend.
