@@ -89,20 +89,7 @@ export default function ProjectDetail() {
           <h2 className="text-xl font-medium">Tech Stack</h2>
           <ul className="list-disc pl-6 space-y-1">
             {tech.map((t) => (
-              <li key={t.id}>
-                {t.url ? (
-                  <a
-                    href={t.url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="underline"
-                  >
-                    {t.name}
-                  </a>
-                ) : (
-                  t.name
-                )}
-              </li>
+              <li key={t.id}>{t.name}</li>
             ))}
           </ul>
         </section>

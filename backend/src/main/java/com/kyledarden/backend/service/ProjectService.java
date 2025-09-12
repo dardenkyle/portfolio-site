@@ -18,20 +18,28 @@ public class ProjectService {
         new Project(
             "cs2-analytics",
             "CS2 Analytics Platform",
-            "Open-source, modular backend data pipeline designed to scrape, parse, and analyze professional Counter-Strike 2 (CS2) match data",
-            List.of("Python", "SQL", "PostgreSQL"),
+            "Queue-based backend that scrapes and normalizes CS2 match data into a queryable Postgres schema.",
+            List.of("Scraping", "Queues", "Idempotency", "Parsing", "Resilience", "ETL"),
             "https://github.com/dardenkyle/CS2-analytics",  // repoUrl
             null,                                         // liveUrl
             20,                                           // order
-            OffsetDateTime.parse("2024-10-01T00:00:00Z"), // updatedAt (ISO 8601) or null
+            OffsetDateTime.parse("2025-06-30T00:00:00Z"), // updatedAt (ISO 8601) or null
             null,                                         // heroImage
             null,                                         // videoId
-            "Test",                                         // overview
+            
+            /* overview */
+            "CS2 Analytics is an open-source, modular backend that scrapes, parses, and normalizes professional Counter-Strike 2 match data into a queryable PostgreSQL schema. I built it end-to-end — data model, scrapers, worker orchestration, and API — with reliability as the primary goal.",
+            
+            /* techStack */
             List.of(
                 new Project.TechItem("python", "Python", "Language", "https://www.python.org", 1),
+                new Project.TechItem("sqlalchemy-alembic", "SQLAlchemy + Alembic", "ORM & Migrations", "https://www.sqlalchemy.org", 4),
                 new Project.TechItem("fastapi", "FastAPI", "Backend", "https://fastapi.tiangolo.com", 2),
-                new Project.TechItem("postgres", "PostgreSQL", "Database", "https://www.postgresql.org", 3)
-            ),                                         // techStack
+                new Project.TechItem("postgres", "PostgreSQL", "Database", "https://www.postgresql.org", 3),
+                new Project.TechItem("beautifulsoup", "BeautifulSoup4", "HTML parsing", "https://www.crummy.com/software/BeautifulSoup/bs4/doc/", 5)
+            ),
+            
+            /* challenges */
             List.of(
                 new Project.Challenge(
                     "rate-limits",
@@ -44,23 +52,36 @@ public class ProjectService {
                     ),
                     List.of("scraping", "queues", "resilience"),
                     1
-                )            // challenges
+                )
             )
         ),
         new Project(
             "freightfolio",
             "FreightFolio (Logistics SaaS)",
-            "Private, production-grade SaaS backend designed for small freight carriers. It provides a modular, scalable system to streamline logistics operations through microservices, focusing on load management, invoicing, and secure user authentication.",
-            List.of("Python", "FastAPI", "AWS"),
+            "Modular logistics backend for small carriers—AR/AP & invoicing on Postgres with per-service migrations.",
+            List.of("invoicing", "AR/AP", "migrations", "auth", "RBAC", "auditability"),
             "https://github.com/dardenkyle/freightfolio-overview",
             null,
             10,
+            OffsetDateTime.parse("2025-07-07T00:00:00Z"),
             null,
             null,
-            null,
-            null,                                         // overview
-            null,                                         // techStack
-            null                                      // challenges
+
+            /* overview */
+            "Private, production-grade SaaS backend designed for small freight carriers. It provides a modular, scalable system to streamline logistics operations through microservices, focusing on load management, invoicing, and secure user authentication.",
+
+            /* techStack */
+            List.of(
+                new Project.TechItem("python", "Python", "Language", "https://www.python.org", 1),
+                new Project.TechItem("fastapi", "FastAPI", "Backend", "https://fastapi.tiangolo.com", 2),
+                new Project.TechItem("postgres", "PostgreSQL", "Database", "https://www.postgresql.org", 3),
+                new Project.TechItem("sqlalchemy-alembic", "SQLAlchemy + Alembic", "ORM & Migrations", "https://www.sqlalchemy.org", 4),
+                new Project.TechItem("cognito", "AWS Cognito", "Auth", "https://aws.amazon.com/cognito", 5),
+                new Project.TechItem("github-actions", "GitHub Actions", "CI/CD", "https://github.com/features/actions", 6)
+            ),
+            
+            /* challenges */
+            null
         )
     );
 
