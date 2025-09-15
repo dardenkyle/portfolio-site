@@ -82,6 +82,45 @@ public class ProjectService {
             
             /* challenges */
             null
+        ),
+        new Project(
+            "portfolio-website",
+            "Portfolio Website",
+            "Full-stack portfolio — Spring Boot backend + React/Vite frontend, CI/CD.",
+            List.of("Full-Stack", "Portfolio", "Deployment"),
+            "https://github.com/dardenkyle/portfolio-site",
+            null,
+            10,
+            OffsetDateTime.parse("2025-09-15T00:00:00Z"),
+            null,
+            null,
+
+            /* overview */
+            "Full-stack portfolio website showcasing projects and skills, built with Spring Boot and React/Vite.",
+
+            /* techStack */
+            List.of(
+                new Project.TechItem("java", "Java", "Language", "https://www.java.com", 1),
+                new Project.TechItem("spring-boot", "Spring Boot", "Backend", "https://spring.io/projects/spring-boot", 2),
+                new Project.TechItem("react", "React", "Frontend", "https://react.dev", 3),
+                new Project.TechItem("vite", "Vite", "Build Tool", "https://vitejs.dev", 4),
+                new Project.TechItem("tailwind", "Tailwind CSS", "Styling", "https://tailwindcss.com", 5),
+                new Project.TechItem("github-actions", "GitHub Actions", "CI/CD", "https://github.com/features/actions", 6)
+            ),
+            
+            /* challenges */
+            List.of(
+                new Project.Challenge(
+                    "gradle-compatibility",
+                    "Fixing incompatible Gradle versions",
+                    "The Spring Boot backend wouldn’t build consistently due to mismatched Gradle wrapper and plugin versions.",
+                    "Aligned Gradle wrapper version with Spring Boot plugin requirements and updated build configuration.",
+                    "Restored reliable local and CI builds; ensured reproducibility across environments.",
+                    List.of(),
+                    List.of("gradle", "spring-boot", "build-tools"),
+                    1
+                )
+            )
         )
     );
 
