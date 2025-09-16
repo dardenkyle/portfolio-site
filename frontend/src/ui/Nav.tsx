@@ -30,7 +30,7 @@ export default function Nav() {
             className="p-2 rounded hover:bg-neutral-800"
           >
             <img
-              src="public/github.png"
+              src="/github.png"
               alt="GitHub"
               width="20"
               height="20"
@@ -46,7 +46,7 @@ export default function Nav() {
             className="p-2 rounded hover:bg-neutral-800"
           >
             <img
-              src="public/linkedin.png"
+              src="/linkedin.png"
               alt="LinkedIn"
               width="20"
               height="20"
