@@ -34,9 +34,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold">
           Kyle Darden — Backend-focused Engineer
         </h1>
-        <p className="opacity-80">
-          I build resilient data systems and clean APIs with production polish.
-        </p>
+        <p className="opacity-80">FastAPI • Postgres • CI/CD</p>
         <div className="flex items-center justify-center gap-3">
           <Link
             to="/projects"
@@ -44,26 +42,43 @@ export default function Home() {
           >
             View projects
           </Link>
+          <a
+            href="/DARDEN_BACKEND_v2.pdf"
+            download="Kyle_Darden_Resume.pdf"
+            className="rounded-xl px-4 py-2 border border-white/20 hover:bg-white/10"
+          >
+            Download Resume
+          </a>
+          <Link
+            to="mailto:darden_kyle@hotmail.com"
+            className="rounded-xl px-4 py-2 border border-white/20 hover:bg-white/10"
+          >
+            Email Me
+          </Link>
         </div>
       </section>
 
-      {/* HIGHLIGHTS (no duplication of project content) */}
-      <header className="flex items-end justify-between">
-        <h2 className="text-2xl font-semibold">Highlights</h2>
-      </header>
-      <section className="grid sm:grid-cols-3 gap-4">
-        <Highlight
-          kpi="Resilient pipelines"
-          blurb="Backoff, retries, idempotent upserts"
-        />
-        <Highlight
-          kpi="PostgreSQL first"
-          blurb="Migrations, indexing, data integrity"
-        />
-        <Highlight
-          kpi="Production polish"
-          blurb="CI/CD, error handling, logging, docs"
-        />
+      {/* Principles */}
+
+      <section className="space-y-6">
+        <header className="flex items-end justify-between">
+          <h2 className="text-2xl font-semibold">How I Build Backends</h2>
+        </header>
+
+        <div className="grid sm:grid-cols-3 gap-4">
+          <Highlight
+            kpi="Resilient pipelines"
+            blurb="Backoff, retries, idempotent upserts → safe re-runs"
+          />
+          <Highlight
+            kpi="Data integrity by design"
+            blurb="Constraints, migrations, indexing → clean queries"
+          />
+          <Highlight
+            kpi="Production readiness"
+            blurb="CI/CD, structured logs, alerting → faster fixes"
+          />
+        </div>
       </section>
 
       {/* PROJECT TEASERS: titles + a couple concept tags + updated date */}
@@ -96,6 +111,15 @@ export default function Home() {
           I focus on data-heavy backends and API design. I like predictable
           systems, clear interfaces, and making trade-offs explicit in docs and
           code.
+        </p>
+      </section>
+
+      {/* LFG TEASER */}
+      <section className="space-y-3">
+        <h2 className="text-2xl font-semibold">What I'm looking for?</h2>
+        <p className="opacity-80 max-w-3xl">
+          Open to Backend Engineer roles (Python/FastAPI/SQL, AWS). Austin or
+          remote. Start ASAP.
         </p>
       </section>
 
@@ -146,6 +170,8 @@ function ProjectTeaser({ p }: { p: Project }) {
           </span>
         )}
       </header>
+
+      {p.summary && <p className="opacity-80 text-sm flex-grow">{p.summary}</p>}
 
       {tags.length ? (
         <div className="flex flex-wrap gap-2">
