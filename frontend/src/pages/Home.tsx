@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet } from "@/api/client";
 import type { ApiProject } from "@/api/types";
+import ProjectsGrid from "@/ui/ProjectGrid";
 import { toProject } from "@/api/mappers";
 import type { Project } from "@/domain/projects";
 
@@ -13,6 +14,15 @@ function sortProjects(a: Project, b: Project) {
   const ad = a.updatedAt ? Date.parse(a.updatedAt) : 0;
   const bd = b.updatedAt ? Date.parse(b.updatedAt) : 0;
   return bd - ad; // newer first
+}
+
+function TechItem({ name, category }: { name: string; category: string }) {
+  return (
+    <div className="rounded-2xl border border-white/15 p-4 text-center space-y-2">
+      <div className="font-semibold">{name}</div>
+      <div className="opacity-60 text-xs">{category}</div>
+    </div>
+  );
 }
 
 export default function Home() {
@@ -34,7 +44,9 @@ export default function Home() {
         <h1 className="text-4xl font-bold">
           Kyle Darden — Backend-focused Engineer
         </h1>
-        <p className="opacity-80">FastAPI • Postgres • CI/CD</p>
+        <p className="opacity-80">
+          Python • FastAPI • Postgres • Docker • AWS • CI/CD
+        </p>
         <div className="flex items-center justify-center gap-3">
           <Link
             to="/projects"
@@ -58,31 +70,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Principles */}
-
-      <section className="space-y-6">
+      {/* ABOUT TEASER */}
+      <section className="space-y-3">
         <header className="flex items-end justify-between">
-          <h2 className="text-2xl font-semibold">How I Build Backends</h2>
+          <h2 className="text-2xl font-semibold">About</h2>
+          <Link to="/about" className="underline opacity-80 hover:opacity-100">
+            View more
+          </Link>
         </header>
-
-        <div className="grid sm:grid-cols-3 gap-4">
-          <Highlight
-            kpi="Resilient pipelines"
-            blurb="Backoff, retries, idempotent upserts → safe re-runs"
-          />
-          <Highlight
-            kpi="Data integrity by design"
-            blurb="Constraints, migrations, indexing → clean queries"
-          />
-          <Highlight
-            kpi="Production readiness"
-            blurb="CI/CD, structured logs, alerting → faster fixes"
-          />
-        </div>
+        <p className="opacity-80 max-w-6xl mx-auto">
+          I’m a backend engineer specializing in Python, FastAPI, and
+          PostgreSQL, with experience building production-grade systems from ETL
+          pipelines processing 176M+ records to SaaS platforms with per-service
+          migrations and CI/CD automation. I focus on resilient, data-heavy
+          backends and API design, with clear documentation and trade-off
+          decisions. <br />
+          <br />
+          Currently open to Backend Engineer roles (Python/FastAPI/SQL, AWS) —
+          Austin or remote.
+        </p>
       </section>
 
       {/* PROJECT TEASERS: titles + a couple concept tags + updated date */}
-      <section className="space-y-6">
+      <section className="space-y-3">
         <header className="flex items-end justify-between">
           <h2 className="text-2xl font-semibold">Featured Projects</h2>
           <Link
@@ -96,31 +106,30 @@ export default function Home() {
         {err ? (
           <p className="text-red-400">Failed to load projects: {err}</p>
         ) : (
-          <div className="grid md:grid-cols-3 gap-5">
-            {teasers.map((p) => (
-              <ProjectTeaser key={p.slug} p={p} />
-            ))}
-          </div>
+          <ProjectsGrid projects={teasers} />
         )}
       </section>
 
-      {/* ABOUT TEASER */}
+      {/* Tech Stack - replaces the "How I Build Backends" section */}
       <section className="space-y-3">
-        <h2 className="text-2xl font-semibold">About</h2>
-        <p className="opacity-80 max-w-3xl">
-          I focus on data-heavy backends and API design. I like predictable
-          systems, clear interfaces, and making trade-offs explicit in docs and
-          code.
-        </p>
-      </section>
+        <header className="flex items-end justify-between">
+          <h2 className="text-2xl font-semibold">Tech Stack</h2>
+        </header>
 
-      {/* LFG TEASER */}
-      <section className="space-y-3">
-        <h2 className="text-2xl font-semibold">What I'm looking for?</h2>
-        <p className="opacity-80 max-w-3xl">
-          Open to Backend Engineer roles (Python/FastAPI/SQL, AWS). Austin or
-          remote. Start ASAP.
-        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <TechItem name="Python" category="Language" />
+          <TechItem name="Java" category="Language" />
+          <TechItem name="TypeScript" category="Language" />
+          <TechItem name="FastAPI" category="Backend" />
+          <TechItem name="Spring Boot" category="Backend" />
+          <TechItem name="React" category="Frontend" />
+          <TechItem name="PostgreSQL" category="Database" />
+          <TechItem name="Docker" category="DevOps" />
+          <TechItem name="AWS" category="Cloud" />
+          <TechItem name="dbt" category="Data" />
+          <TechItem name="GitHub Actions" category="CI/CD" />
+          <TechItem name="Tailwind CSS" category="Styling" />
+        </div>
       </section>
 
       {/* CONTACT CTA */}
@@ -138,53 +147,5 @@ export default function Home() {
         </Link>
       </section>
     </main>
-  );
-}
-
-function Highlight({ kpi, blurb }: { kpi: string; blurb: string }) {
-  return (
-    <div className="rounded-2xl border border-white/15 p-4">
-      <div className="font-semibold">{kpi}</div>
-      <div className="opacity-80 text-sm">{blurb}</div>
-    </div>
-  );
-}
-
-function ProjectTeaser({ p }: { p: Project }) {
-  const updated =
-    p.updatedAt && new Date(p.updatedAt).toISOString().slice(0, 10);
-  const tags = (p.tags ?? []).slice(0, 3); // keep home minimal
-
-  return (
-    <article className="rounded-2xl border border-white/15 p-4 flex flex-col gap-3">
-      <header className="flex items-center gap-2">
-        <Link
-          to={`/projects/${p.slug}`}
-          className="text-lg font-semibold underline-offset-4 hover:underline"
-        >
-          {p.title}
-        </Link>
-        {updated && (
-          <span className="ml-auto text-xs px-2 py-0.5 rounded-full border border-white/15">
-            {updated}
-          </span>
-        )}
-      </header>
-
-      {p.summary && <p className="opacity-80 text-sm flex-grow">{p.summary}</p>}
-
-      {tags.length ? (
-        <div className="flex flex-wrap gap-2">
-          {tags.map((t) => (
-            <span
-              key={t}
-              className="text-xs px-2 py-0.5 rounded-full border border-white/15"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      ) : null}
-    </article>
   );
 }
