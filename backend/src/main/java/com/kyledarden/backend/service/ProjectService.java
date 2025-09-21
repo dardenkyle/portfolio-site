@@ -22,7 +22,7 @@ public class ProjectService {
             List.of("Scraping", "Queues", "Idempotency", "Parsing", "Resilience", "ETL"),
             "https://github.com/dardenkyle/CS2-analytics",  // repoUrl
             null,                                         // liveUrl
-            20,                                           // order
+            30,                                           // order
             OffsetDateTime.parse("2025-06-30T00:00:00Z"), // updatedAt (ISO 8601) or null
             null,                                         // heroImage
             null,                                         // videoId
@@ -90,7 +90,7 @@ public class ProjectService {
             List.of("Full-Stack", "Portfolio", "Deployment"),
             "https://github.com/dardenkyle/portfolio-site",
             null,
-            10,
+            40,
             OffsetDateTime.parse("2025-09-15T00:00:00Z"),
             null,
             null,
@@ -121,8 +121,60 @@ public class ProjectService {
                     1
                 )
             )
+        ),
+        new Project(
+            "movie-analytics-etl",
+            "Movie Analytics ETL Pipeline",
+            "End-to-end data engineering project processing 176M+ IMDb records into a dimensional warehouse with dbt and PostgreSQL.",
+            List.of("ETL", "Data Engineering", "dbt", "PostgreSQL", "Analytics", "Docker"),
+            "https://github.com/dardenkyle/movie_analytics_etl",
+            null, // No live demo for ETL pipeline
+            20, // Adjust order as needed
+            OffsetDateTime.parse("2025-09-21T00:00:00Z"),
+            null,
+            null,
+
+            /* overview */
+            "An end-to-end data engineering project that transforms raw IMDb datasets into a production-ready dimensional data warehouse. The pipeline processes over 176 million records across 5 datasets, implementing comprehensive data quality measures and creating business-ready analytics with interactive dashboards.",
+
+            /* techStack */
+            List.of(
+                new Project.TechItem("postgresql", "PostgreSQL 16", "Database", "https://www.postgresql.org", 1),
+                new Project.TechItem("dbt", "dbt 1.9.1", "Transform Tool", "https://www.getdbt.com", 2),
+                new Project.TechItem("python", "Python 3.11+", "Language", "https://www.python.org", 3),
+                new Project.TechItem("sql", "SQL", "Query Language", "https://en.wikipedia.org/wiki/SQL", 4),
+                new Project.TechItem("docker", "Docker", "Containerization", "https://www.docker.com", 5),
+                new Project.TechItem("github-actions", "GitHub Actions", "CI/CD", "https://github.com/features/actions", 6)
+            ),
+            
+            /* challenges */
+            List.of(
+                new Project.Challenge(
+                    "massive-data-processing",
+                    "Processing 176M+ records efficiently",
+                    "Loading and transforming massive IMDb datasets (176M+ records) while maintaining data quality and managing memory constraints in a containerized environment.",
+                    "Implemented incremental dbt models, optimized PostgreSQL configurations, and used chunked data loading with proper indexing strategies to handle large-scale data processing.",
+                    "Successfully processed all datasets with 80% data quality test pass rate and created a fully dimensional warehouse ready for analytics.",
+                    List.of(
+                        new Project.Link("Project README", "https://github.com/dardenkyle/movie_analytics_etl/blob/main/README.md")
+                    ),
+                    List.of("data-engineering", "postgresql", "dbt", "performance"),
+                    1
+                ),
+                new Project.Challenge(
+                    "referential-integrity",
+                    "Maintaining data relationships across complex schema",
+                    "IMDb datasets contain complex relationships between titles, names, ratings, and crew data, with many orphaned records and missing references that needed to be cleaned.",
+                    "Built comprehensive dbt data quality tests (30 total) covering nulls, uniqueness, and relationships. Implemented staging models to handle orphaned records and proper foreign key constraints.",
+                    "Achieved referential integrity across all dimensional tables with proper handling of missing data and comprehensive documentation of data lineage.",
+                    List.of(),
+                    List.of("data-quality", "dbt", "dimensional-modeling"),
+                    2
+                )
+            )
         )
     );
+
 
     public List<Project> all() {
         return projects;
