@@ -27,6 +27,11 @@ export default function Button({
   useGlow = false,
   glowKey = "",
 }: ButtonProps) {
+  if (href && to) {
+    throw new Error(
+      "Button component cannot have both 'href' and 'to' props at the same time."
+    );
+  }
   const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
 
   // Base styles matching ProjectCard
