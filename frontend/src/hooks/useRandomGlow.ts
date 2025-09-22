@@ -8,7 +8,7 @@ export function useRandomGlow() {
   const handleMouseEnter = (key: string) => {
     setGlowColors((prev) => ({
       ...prev,
-      [key]: getRandomShadowColor(), // Change from getRandomHoverColor
+      [key]: getRandomShadowColor(),
     }));
     setHoveredItem(key);
   };
