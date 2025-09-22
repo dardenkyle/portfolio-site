@@ -51,7 +51,7 @@ export default function ProjectDetail() {
     <main className="max-w-5xl mx-auto p-6 space-y-8">
       <nav>
         <Button
-          href="/projects"
+          to="/projects"
           size="sm"
           variant="link"
           useGlow
