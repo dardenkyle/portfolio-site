@@ -1,21 +1,44 @@
 import { NavLink } from "react-router-dom";
+import { useRandomGlow } from "@/hooks/useRandomGlow";
 
 export default function Nav() {
-  const base = "px-3 py-2 rounded hover:bg-neutral-800";
-  const cls = ({ isActive }: { isActive: boolean }) =>
-    isActive ? `${base} bg-neutral-800` : base;
+  const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
+
+  const base = "px-3 py-2 rounded transition-all duration-300";
+  const cls = ({ isActive }: { isActive: boolean }, key: string) => {
+    const glowClass = getGlowClass(key);
+    const activeClass = isActive ? "shadow-lg shadow-blue-500/20" : "";
+
+    return `${base} ${glowClass} ${activeClass}`;
+  };
 
   return (
     <header className="sticky top-0 z-10 border-b border-neutral-800 bg-neutral-950/80 backdrop-blur">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         <div className="flex items-center gap-2">
-          <NavLink to="/" className={cls} end>
+          <NavLink
+            to="/"
+            className={(props) => cls(props, "home")}
+            onMouseEnter={() => handleMouseEnter("home")}
+            onMouseLeave={handleMouseLeave}
+            end
+          >
             Home
           </NavLink>
-          <NavLink to="/projects" className={cls}>
+          <NavLink
+            to="/projects"
+            className={(props) => cls(props, "projects")}
+            onMouseEnter={() => handleMouseEnter("projects")}
+            onMouseLeave={handleMouseLeave}
+          >
             Projects
           </NavLink>
-          <NavLink to="/contact" className={cls}>
+          <NavLink
+            to="/contact"
+            className={(props) => cls(props, "contact")}
+            onMouseEnter={() => handleMouseEnter("contact")}
+            onMouseLeave={handleMouseLeave}
+          >
             Contact
           </NavLink>
         </div>
@@ -25,33 +48,25 @@ export default function Nav() {
             href="https://github.com/dardenkyle"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
-            title="GitHub"
-            className="p-2 rounded hover:bg-neutral-800"
+            className={`p-2 rounded transition-all duration-300 ${getGlowClass(
+              "github"
+            )}`}
+            onMouseEnter={() => handleMouseEnter("github")}
+            onMouseLeave={handleMouseLeave}
           >
-            <img
-              src="/github.png"
-              alt="GitHub"
-              width="20"
-              height="20"
-              className="h-5 w-5"
-            />
+            <img src="/github.png" alt="GitHub" className="w-5 h-5" />
           </a>
           <a
-            href="https://www.linkedin.com/in/kyle-darden/"
+            href="https://linkedin.com/in/kyle-darden"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            title="LinkedIn"
-            className="p-2 rounded hover:bg-neutral-800"
+            className={`p-2 rounded transition-all duration-300 ${getGlowClass(
+              "linkedin"
+            )}`}
+            onMouseEnter={() => handleMouseEnter("linkedin")}
+            onMouseLeave={handleMouseLeave}
           >
-            <img
-              src="/linkedin.png"
-              alt="LinkedIn"
-              width="20"
-              height="20"
-              className="h-5 w-5"
-            />
+            <img src="/linkedin.png" alt="LinkedIn" className="w-5 h-5" />
           </a>
         </div>
       </nav>

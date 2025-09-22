@@ -1,8 +1,9 @@
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { apiGet } from "@/api/client";
 import type { Project } from "@/domain/projects";
+import Button from "@/ui/Button";
 import type { ApiProject } from "@/api/types";
 import { toProject } from "@/api/mappers";
 
@@ -48,10 +49,16 @@ export default function ProjectDetail() {
 
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-8">
-      <nav className="text-sm">
-        <Link to="/projects" className="opacity-70 hover:opacity-100">
+      <nav>
+        <Button
+          to="/projects"
+          size="sm"
+          variant="link"
+          useGlow
+          glowKey="projects-back"
+        >
           ← Back to Projects
-        </Link>
+        </Button>
       </nav>
 
       <header className="space-y-2">
@@ -149,24 +156,26 @@ export default function ProjectDetail() {
           <h2 className="text-xl font-medium">Links</h2>
           <div className="flex gap-4">
             {project.liveUrl && (
-              <a
-                className="underline opacity-90 hover:opacity-100"
+              <Button
                 href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
+                size="sm"
+                variant="link"
+                useGlow
+                glowKey="demo-live"
               >
-                Live
-              </a>
+                Live Demo
+              </Button>
             )}
             {project.repoUrl && (
-              <a
-                className="underline opacity-90 hover:opacity-100"
+              <Button
                 href={project.repoUrl}
-                target="_blank"
-                rel="noreferrer"
+                size="sm"
+                variant="link"
+                useGlow
+                glowKey="github-repo"
               >
                 GitHub
-              </a>
+              </Button>
             )}
           </div>
         </section>
