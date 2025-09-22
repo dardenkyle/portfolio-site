@@ -1,29 +1,15 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { getRandomHoverColor } from "@/utils/colors";
+import { useRandomGlow } from "@/hooks/useRandomGlow";
 
 export default function Nav() {
-  const [glowColors, setGlowColors] = useState<Record<string, string>>({});
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
-
-  const handleMouseEnter = (key: string) => {
-    setGlowColors((prev) => ({
-      ...prev,
-      [key]: getRandomHoverColor(),
-    }));
-    setHoveredLink(key);
-  };
-
-  const handleMouseLeave = () => {
-    setHoveredLink(null);
-  };
+  const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
 
   const base = "px-3 py-2 rounded transition-all duration-300";
   const cls = ({ isActive }: { isActive: boolean }, key: string) => {
-    const isHovered = hoveredLink === key;
-    const glowClass = isHovered ? `shadow-lg ${glowColors[key] || ""}` : "";
+    const glowClass = getGlowClass(key);
+    const activeClass = isActive ? "shadow-lg shadow-blue-500/20" : "";
 
-    return isActive ? `${base} ${glowClass}` : `${base} ${glowClass}`;
+    return `${base} ${glowClass} ${activeClass}`;
   };
 
   return (
@@ -58,7 +44,30 @@ export default function Nav() {
         </div>
 
         <div className="flex items-center gap-2">
-          {/* ...existing social links... */}
+          <a
+            href="https://github.com/dardenkyle"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`p-2 rounded transition-all duration-300 ${getGlowClass(
+              "github"
+            )}`}
+            onMouseEnter={() => handleMouseEnter("github")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img src="/github.png" alt="GitHub" className="w-5 h-5" />
+          </a>
+          <a
+            href="https://linkedin.com/in/kyle-darden"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`p-2 rounded transition-all duration-300 ${getGlowClass(
+              "linkedin"
+            )}`}
+            onMouseEnter={() => handleMouseEnter("linkedin")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img src="/linkedin.png" alt="LinkedIn" className="w-5 h-5" />
+          </a>
         </div>
       </nav>
     </header>
