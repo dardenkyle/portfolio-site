@@ -1,20 +1,13 @@
 import { useEffect, useRef } from "react";
 
 type StarfieldProps = {
-  /** Stars per 10,000 CSS px² */
-  density?: number;
-  /** Base speed in CSS px per frame (subtle = 0.4–0.8) */
-  speed?: number;
-  /** Optional background fill; leave undefined for transparent */
-  background?: string;
-  /** Star color */
-  color?: string;
-  /** Max star radius in CSS px */
-  maxRadius?: number;
-  /** z-index for the canvas (put content above this) */
-  zIndex?: number;
-  /** Set true to draw a debug magenta box in the top-left */
-  debug?: boolean;
+  density?: number; // Stars per 10,000px² (0.1–2)
+  speed?: number; // Base speed in CSS px per frame (subtle = 0.4–0.8)
+  background?: string; // Background fill style, or undefined for transparent
+  color?: string; // Star color
+  maxRadius?: number; // Max star radius in CSS px
+  zIndex?: number; // z-index for the canvas (put content above this)
+  debug?: boolean; // draw a debug rectangle in the corner
 };
 
 interface Star {
@@ -32,12 +25,11 @@ export default function Starfield({
   background,
   color = "#ffffff",
   maxRadius = 1.4,
-  zIndex = 0,
   debug = false,
 }: StarfieldProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const starsRef = useRef<Star[]>([]);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -71,13 +63,17 @@ export default function Starfield({
       h = window.innerHeight;
 
       // Backing store in device pixels for crispness
-      canvas.width = Math.floor(w * dpr);
-      canvas.height = Math.floor(h * dpr);
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
+      if (canvas) {
+        canvas.width = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        canvas.style.width = `${w}px`;
+        canvas.style.height = `${h}px`;
+      }
 
       // Map 1 canvas unit to 1 CSS pixel
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (ctx) {
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
 
       const targetCount = Math.floor(((w * h) / 10000) * density);
       starsRef.current = Array.from({ length: targetCount }, () => spawnStar());
@@ -85,18 +81,24 @@ export default function Starfield({
 
     function drawFrame() {
       if (background) {
-        ctx.fillStyle = background;
-        ctx.fillRect(0, 0, w, h);
+        if (ctx) {
+          ctx.fillStyle = background;
+          ctx.fillRect(0, 0, w, h);
+        }
       } else {
-        ctx.clearRect(0, 0, w, h);
+        if (ctx) {
+          ctx.clearRect(0, 0, w, h);
+        }
       }
 
       if (debug) {
-        ctx.fillStyle = "magenta";
-        ctx.fillRect(10, 10, 120, 40);
-        ctx.fillStyle = "white";
-        ctx.font = "16px sans-serif";
-        ctx.fillText("STARFIELD", 16, 36);
+        if (ctx) {
+          ctx.fillStyle = "magenta";
+          ctx.fillRect(10, 10, 120, 40);
+          ctx.fillStyle = "white";
+          ctx.font = "16px sans-serif";
+          ctx.fillText("STARFIELD", 16, 36);
+        }
       }
 
       for (const s of starsRef.current) {
@@ -109,13 +111,17 @@ export default function Starfield({
         }
 
         const alpha = 0.4 + (Math.sin(s.twinkle) + 1) * 0.3;
+
+        if (!ctx) continue;
         ctx.globalAlpha = alpha;
         ctx.fillStyle = color;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
-      ctx.globalAlpha = 1;
+      if (ctx) {
+        ctx.globalAlpha = 1;
+      }
     }
 
     resize();
