@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
 type StarfieldProps = {
+
   density?: number; // Stars per 10,000px² (0.1–2)
   speed?: number; // Base speed in CSS px per frame (subtle = 0.4–0.8)
   background?: string; // Background fill style, or undefined for transparent
@@ -8,6 +9,7 @@ type StarfieldProps = {
   maxRadius?: number; // Max star radius in CSS px
   zIndex?: number; // z-index for the canvas (put content above this)
   debug?: boolean; // draw a debug rectangle in the corner
+
 };
 
 interface Star {
@@ -30,6 +32,7 @@ export default function Starfield({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const starsRef = useRef<Star[]>([]);
   const rafRef = useRef<number | undefined>(undefined);
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -75,12 +78,14 @@ export default function Starfield({
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
+
       const targetCount = Math.floor(((w * h) / 10000) * density);
       starsRef.current = Array.from({ length: targetCount }, () => spawnStar());
     }
 
     function drawFrame() {
       if (background) {
+
         if (ctx) {
           ctx.fillStyle = background;
           ctx.fillRect(0, 0, w, h);
@@ -99,6 +104,7 @@ export default function Starfield({
           ctx.font = "16px sans-serif";
           ctx.fillText("STARFIELD", 16, 36);
         }
+
       }
 
       for (const s of starsRef.current) {
@@ -112,6 +118,7 @@ export default function Starfield({
 
         const alpha = 0.4 + (Math.sin(s.twinkle) + 1) * 0.3;
 
+
         if (!ctx) continue;
         ctx.globalAlpha = alpha;
         ctx.fillStyle = color;
@@ -119,9 +126,11 @@ export default function Starfield({
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
+
       if (ctx) {
         ctx.globalAlpha = 1;
       }
+
     }
 
     resize();
