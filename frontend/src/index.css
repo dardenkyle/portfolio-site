@@ -13,7 +13,9 @@
 }
 
 /* Small global niceties */
-html,
+html {
+  scrollbar-gutter: stable;
+}
 body,
 #root {
   height: 100%;
