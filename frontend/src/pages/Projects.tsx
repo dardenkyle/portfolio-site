@@ -29,23 +29,11 @@ export default function Projects() {
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-8">
-      {/* PAGE HEADER */}
-      <section className="mx-auto max-w-3xl text-center space-y-4">
-        <h1 className="text-4xl font-bold">
-          Kyle Darden — Backend-focused Engineer
-        </h1>
-        <p className="opacity-80">
-          Python • FastAPI • Postgres • Docker • AWS • CI/CD
-        </p>
-      </section>
-
       {/* PROJECTS GRID */}
       <section>
-        <section className="space-y-3">
-          <header className="flex items-end justify-between">
-            <h2 className="text-2xl font-semibold">Projects</h2>
-          </header>
-          <p className="opacity-80 max-w-6xl mx-auto">
+        <section className="mx-auto max-w-3xl text-center space-y-4">
+          <h1 className="text-4xl font-bold">Projects</h1>
+          <p className="opacity-80">
             A selection of my work, showcasing backend engineering with Python,
             FastAPI, and PostgreSQL. These projects highlight my skills in API
             design, data workflows, and system reliability.

@@ -22,9 +22,14 @@ export function useRandomGlow() {
     return isHovered ? `shadow-lg ${glowColors[key] || ""}` : "";
   };
 
+  const getStoredColor = (key: string) => {
+    return glowColors[key] || null;
+  };
+
   return {
     handleMouseEnter,
     handleMouseLeave,
     getGlowClass,
+    getStoredColor,
   };
 }
