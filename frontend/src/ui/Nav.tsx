@@ -2,12 +2,19 @@ import { NavLink } from "react-router-dom";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
 
 export default function Nav() {
-  const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
+  const { handleMouseEnter, handleMouseLeave, getGlowClass, getStoredColor } =
+    useRandomGlow();
 
   const base = "px-3 py-2 rounded transition-all duration-300";
   const cls = ({ isActive }: { isActive: boolean }, key: string) => {
     const glowClass = getGlowClass(key);
-    const activeClass = isActive ? "shadow-lg shadow-blue-500/20" : "";
+    const storedColor = getStoredColor(key);
+    const activeClass =
+      isActive && storedColor
+        ? `shadow-lg ${storedColor}`
+        : isActive
+        ? "shadow-lg shadow-blue-500/20"
+        : "";
 
     return `${base} ${glowClass} ${activeClass}`;
   };

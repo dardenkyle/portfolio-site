@@ -46,7 +46,7 @@ export default function Home() {
             useGlow
             glowKey="hero-projects"
           >
-            View projects
+            View Projects
           </Button>
           <Button
             href="/DARDEN_BACKEND_v2.pdf"
@@ -57,12 +57,12 @@ export default function Home() {
             Download Resume
           </Button>
           <Button
-            href="mailto:darden_kyle@hotmail.com"
+            to="/contact"
             variant="secondary"
             useGlow
-            glowKey="hero-email"
+            glowKey="hero-contact"
           >
-            Email Me
+            Get in Touch
           </Button>
         </div>
       </section>
@@ -81,17 +81,19 @@ export default function Home() {
             View more
           </Button>
         </header>
-        <p className="opacity-80 max-w-6xl mx-auto">
-          I’m a backend engineer specializing in Python, FastAPI, and
-          PostgreSQL, with experience building production-grade systems from ETL
-          pipelines processing 176M+ records to SaaS platforms with per-service
-          migrations and CI/CD automation. I focus on resilient, data-heavy
-          backends and API design, with clear documentation and trade-off
-          decisions. <br />
-          <br />
-          Currently open to Backend Engineer roles (Python/FastAPI/SQL, AWS) —
-          Austin or remote.
-        </p>
+        <div className="bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
+          <p className="opacity-80 max-w-6xl mx-auto">
+            I'm a backend engineer specializing in Python, FastAPI, and
+            PostgreSQL, with experience building production-grade systems from
+            ETL pipelines processing 176M+ records to SaaS platforms with
+            per-service migrations and CI/CD automation. I focus on resilient,
+            data-heavy backends and API design, with clear documentation and
+            trade-off decisions. <br />
+            <br />
+            Currently open to Backend Engineer, QA Automation, and Data
+            Engineering roles (Python/FastAPI/SQL, AWS) — Austin or remote.
+          </p>
+        </div>
       </section>
 
       {/* PROJECT TEASERS: titles + a couple concept tags + updated date */}
