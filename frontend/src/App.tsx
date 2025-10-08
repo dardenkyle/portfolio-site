@@ -1,11 +1,18 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "@/routes";
 import Starfield from "@/ui/Starfield";
+import Planet from "@/ui/Planet";
 
 export default function App() {
   return (
     <div className="relative min-h-screen bg-black">
       {/* Put the canvas above the body background but below content */}
+
+      {/* Planet in background */}
+      <div className="absolute z-[2]">
+        <Planet />
+      </div>
+
       <Starfield
         density={0.5}
         speed={0.001}
