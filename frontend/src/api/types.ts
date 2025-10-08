@@ -21,6 +21,15 @@ export type ApiChallengeItem = {
   order?: number;
 };
 
+export type ApiSkillItem = {
+  name: string;
+  category: string;
+  slug: string;
+  description: string;
+  experience: string;
+  projects: ApiProject[];
+};
+
 export type ApiProject = {
   slug: string;
   title: string;

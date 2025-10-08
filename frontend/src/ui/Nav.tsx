@@ -34,6 +34,14 @@ export default function Nav() {
             Projects
           </NavLink>
           <NavLink
+            to="/skills"
+            className={(props) => cls(props, "skills")}
+            onMouseEnter={() => handleMouseEnter("skills")}
+            onMouseLeave={handleMouseLeave}
+          >
+            Skills
+          </NavLink>
+          <NavLink
             to="/about"
             className={(props) => cls(props, "about")}
             onMouseEnter={() => handleMouseEnter("about")}

@@ -105,7 +105,7 @@ export default function Home() {
             useGlow
             glowKey="projects-more"
           >
-            Browse all
+            View all projects
           </Button>
         </header>
 
@@ -122,18 +122,6 @@ export default function Home() {
           <h2 className="text-2xl font-semibold">Tech Stack</h2>
         </header>
         <TechStack />
-      </section>
-
-      {/* CONTACT CTA */}
-      <section className="rounded-2xl border border-white/15 p-6 flex items-center justify-between">
-        <div>
-          <h3 className="text-xl font-semibold">
-            Have a question or opportunity?
-          </h3>
-        </div>
-        <Button to="/contact" variant="primary" useGlow glowKey="contact-cta">
-          Get in touch
-        </Button>
       </section>
     </main>
   );

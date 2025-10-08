@@ -1,5 +1,3 @@
-import Button from "@/ui/Button";
-
 export default function About() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-14">
@@ -56,18 +54,6 @@ export default function About() {
           gym, I find that these pursuits keep me energized, creative, and
           balanced—qualities I bring back into my engineering work.
         </p>
-      </section>
-
-      {/* CONTACT CTA */}
-      <section className="rounded-2xl border border-white/15 p-6 flex items-center justify-between">
-        <div>
-          <h3 className="text-xl font-semibold">
-            Have a question or opportunity?
-          </h3>
-        </div>
-        <Button to="/contact" variant="primary" useGlow glowKey="contact-cta">
-          Get in touch
-        </Button>
       </section>
     </main>
   );
