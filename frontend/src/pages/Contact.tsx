@@ -1,10 +1,15 @@
 import Button from "@/ui/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [showSuccess, setShowSuccess] = useState(false);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const validateForm = (formData: FormData) => {
     const errors: { [key: string]: string } = {};

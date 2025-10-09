@@ -21,6 +21,11 @@ export default function SkillDetail() {
       .finally(() => setLoading(false));
   }, [slug]);
 
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -49,21 +54,24 @@ export default function SkillDetail() {
         </Button>
       </nav>
 
-      <header className="space-y-2">
-        <div className="flex items-center gap-4">
-          <h1 className="text-3xl font-semibold">{skill.name}</h1>
-          <span className="text-sm opacity-60">{skill.category}</span>
+      <header className="space-y-3">
+        <div>
+          <div className="flex items-center gap-2 text-sm text-slate-400 mb-1">
+            <span>{skill.category}</span>
+          </div>
+          <h1 className="text-4xl font-bold">{skill.name}</h1>
         </div>
-        <div className="flex items-center gap-2 opacity-80">
-          <span>Experience:</span>
-          <span className="font-medium">{skill.experience}</span>
+        <div className="text-slate-300">
+          <span className="font-medium">{skill.experience}</span> of experience
         </div>
       </header>
 
       {/* Description */}
-      <section className="space-y-3">
+      <section className="space-y-4">
         <h2 className="text-xl font-medium">About {skill.name}</h2>
-        <p className="opacity-80 leading-relaxed">{skill.description}</p>
+        <div className="bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
+          <p className="opacity-80 leading-relaxed">{skill.description}</p>
+        </div>
       </section>
 
       {/* Related Projects */}

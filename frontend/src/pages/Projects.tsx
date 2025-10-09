@@ -15,12 +15,19 @@ export default function Projects() {
       .then((data) => {
         if (!alive) return;
         const mapped = data.map(toProject);
-        setProjects(mapped);
+        // Sort projects by order value (ascending)
+        const sorted = mapped.sort((a, b) => (a.order || 0) - (b.order || 0));
+        setProjects(sorted);
       })
       .catch((e) => alive && setError(e.message));
     return () => {
       alive = false;
     };
+  }, []);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
   }, []);
 
   if (error)

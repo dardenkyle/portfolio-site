@@ -33,6 +33,11 @@ export default function CaseStudy() {
       });
   }, [slug]);
 
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
   if (loading) {
     return (
       <main className="max-w-5xl mx-auto p-6">

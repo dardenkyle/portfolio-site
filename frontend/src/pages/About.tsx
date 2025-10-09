@@ -1,4 +1,11 @@
+import { useEffect } from "react";
+
 export default function About() {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-14">
       {/* ABOUT */}
@@ -6,49 +13,37 @@ export default function About() {
         <section className="mx-auto max-w-3xl text-center space-y-4">
           <h1 className="text-4xl font-bold">About</h1>
           <p className="opacity-80">
-            Backend engineer looking for new opportunities and exciting
-            challenges.
+            Python-based Backend Engineer building data-heavy systems with
+            FastAPI and PostgreSQL.
           </p>
         </section>
         <div className="space-y-6 bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
           <p className="opacity-80 max-w-6xl mx-auto">
-            I’m a backend engineer with a strong focus on building scalable,
-            resilient, and data-driven systems. My core stack is Python,
-            FastAPI, and PostgreSQL, and I’ve worked across the full backend
-            lifecycle—from designing efficient APIs and orchestrating data
-            workflows to implementing CI/CD pipelines that ensure reliable
-            deployments. My experience spans ETL pipelines processing 176M+
-            records, SaaS platforms with per-service migrations, and automation
-            setups that support modern development at scale. I care deeply about
-            clarity in design and documentation, making sure architectural
-            decisions and trade-offs are transparent and maintainable over the
-            long term.
+            I’m a backend engineer specializing in Python, FastAPI, and
+            PostgreSQL. I build scalable, resilient, and data-driven systems —
+            from ETL pipelines processing 176M+ records to SaaS platforms with
+            per-service migrations and CI/CD automation.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            My academic background reflects the same balance of rigor and
-            curiosity. I earned my Bachelor’s degree in Physics from The
-            University of Texas at Austin in 2022, which gave me a strong
-            foundation in problem-solving and quantitative thinking. To build on
-            that, I completed a post-graduate program in Artificial Intelligence
-            and Machine Learning at McCombs School of Business in 2024, where I
-            expanded my technical perspective to include data science and
+            My work emphasizes clear architecture, documentation, and trade-offs
+            that ensure long-term maintainability.
+          </p>
+          <p className="opacity-80 max-w-6xl mx-auto">
+            I hold a Bachelor’s degree in Physics from UT Austin (2022) and a
+            postgraduate certification in AI/ML from McCombs (2024), which
+            broadened my technical perspective to include data science and
             applied machine learning.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            I’m now looking for opportunities as a Backend Engineer
-            (Python/FastAPI/SQL, AWS) in Austin or remote, where I can
-            contribute to teams tackling complex engineering challenges,
-            particularly those involving data-heavy backends, API architecture,
-            and system reliability. My goal is to bring a mix of engineering
-            discipline, adaptability, and curiosity to projects that demand
-            long-term scalability and thoughtful technical choices.
+            I’m currently pursuing backend or data-engineering roles
+            (Python/FastAPI/SQL/AWS) — Austin or remote — where I can contribute
+            to teams tackling complex data-heavy backends, API architecture, and
+            system reliability.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            Outside of work, I’m passionate about gaming, reading, music, and
-            fitness. Whether diving into immersive game worlds, exploring new
-            books (non-fiction), discovering fresh music, or pushing myself in
-            the gym, I find that these pursuits keep me energized, creative, and
-            balanced—qualities I bring back into my engineering work.
+            Outside of work, I’m passionate about competitive gaming, music, and
+            lifting weights. These pursuits keep me creative and balanced —
+            qualities I bring into my engineering work.
           </p>
         </div>
       </section>

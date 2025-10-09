@@ -27,6 +27,11 @@ export default function Home() {
       .catch((e) => setErr(e.message));
   }, []);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const teasers = useMemo(() => projects.slice(0, 3), [projects]);
 
   return (
@@ -78,7 +83,7 @@ export default function Home() {
             useGlow
             glowKey="about-more"
           >
-            View more
+            View more →
           </Button>
         </header>
         <div className="bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
@@ -107,7 +112,7 @@ export default function Home() {
             useGlow
             glowKey="projects-more"
           >
-            View all projects
+            View more →
           </Button>
         </header>
 
@@ -122,6 +127,15 @@ export default function Home() {
       <section className="space-y-3">
         <header className="flex items-end justify-between">
           <h2 className="text-2xl font-semibold">Tech Stack</h2>
+          <Button
+            to="/skills"
+            size="sm"
+            variant="link"
+            useGlow
+            glowKey="projects-more"
+          >
+            View more →
+          </Button>
         </header>
         <TechStack />
       </section>
