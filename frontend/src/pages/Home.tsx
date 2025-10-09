@@ -27,6 +27,11 @@ export default function Home() {
       .catch((e) => setErr(e.message));
   }, []);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const teasers = useMemo(() => projects.slice(0, 3), [projects]);
 
   return (
@@ -38,6 +43,10 @@ export default function Home() {
         </h1>
         <p className="opacity-80">
           Python • FastAPI • Postgres • Docker • AWS • CI/CD
+        </p>
+        <p className="opacity-80">
+          Focused on building data-heavy, reliable backends and automation
+          pipelines.
         </p>
         <div className="flex items-center justify-center gap-3">
           <Button
@@ -78,20 +87,20 @@ export default function Home() {
             useGlow
             glowKey="about-more"
           >
-            View more
+            View more →
           </Button>
         </header>
         <div className="bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
           <p className="opacity-80 max-w-6xl mx-auto">
-            I'm a backend engineer specializing in Python, FastAPI, and
-            PostgreSQL, with experience building production-grade systems from
-            ETL pipelines processing 176M+ records to SaaS platforms with
-            per-service migrations and CI/CD automation. I focus on resilient,
-            data-heavy backends and API design, with clear documentation and
-            trade-off decisions. <br />
+            I’m a backend-focused engineer skilled in Python, FastAPI, and
+            PostgreSQL, with hands-on experience building data-heavy systems,
+            ETL pipelines, and automated CI/CD workflows. My background bridges
+            software engineering, QA automation, and data engineering — giving
+            me a strong edge in designing reliable, analytics-driven backends.{" "}
             <br />
-            Currently open to Backend Engineer, QA Automation, and Data
-            Engineering roles (Python/FastAPI/SQL, AWS) — Austin or remote.
+            <br />
+            Currently open to Backend, QA Automation, Data Engineering, and Data
+            Science roles — Austin or remote.
           </p>
         </div>
       </section>
@@ -107,7 +116,7 @@ export default function Home() {
             useGlow
             glowKey="projects-more"
           >
-            View all projects
+            View more →
           </Button>
         </header>
 
@@ -122,6 +131,15 @@ export default function Home() {
       <section className="space-y-3">
         <header className="flex items-end justify-between">
           <h2 className="text-2xl font-semibold">Tech Stack</h2>
+          <Button
+            to="/skills"
+            size="sm"
+            variant="link"
+            useGlow
+            glowKey="projects-more"
+          >
+            View more →
+          </Button>
         </header>
         <TechStack />
       </section>

@@ -59,15 +59,16 @@ FreightFolio is composed of several independent services tied together through a
 - Achieved **85% test coverage** across all routes and services.
 - Modular architecture allows each domain (loads, invoices, payments) to evolve independently or scale into microservices.
 - Documented with clear API specs and onboarding guides for future integration with a frontend or third-party dashboard.
+- Simple dashboard that displays some KPIs, this will be expanded on in later versions.
 
 ---
 
 ### Future Work
 
-- **Add analytics dashboards** to visualize loads, revenue, and customer data.
+- **Expand analytics dashboards** to visualize loads, revenue, and customer data.
 - **Integrate third-party APIs** (e.g., route optimization or carrier load boards).
 - **Introduce event-driven workflows** (e.g., via AWS Lambda or Celery for async automation).
-- **Refactor for serverless deployment** to demonstrate modern infrastructure design.
+- **Refactor for serverless deployment** to demonstrate modern infrastructure design using AWS.
 
 ---
 

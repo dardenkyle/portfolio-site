@@ -86,6 +86,20 @@ public final class Project {
         public Integer getOrder() { return order; }
     }
 
+    /** Reference to a tech item from TechService by slug and display order. */
+    public static final class TechReference {
+        private final String slug;     // matches TechService slug
+        private final Integer order;   // display order for this project
+        
+        public TechReference(String slug, Integer order) {
+            this.slug = slug;
+            this.order = order;
+        }
+        
+        public String getSlug() { return slug; }
+        public Integer getOrder() { return order; }
+    }
+
     /** Link associated with a challenge (PR, doc, ticket). */
     public static final class Link {
       private final String label;

@@ -23,7 +23,9 @@ public class TechController {
 
     @GetMapping("/skills")
     public List<TechItem> getAllSkills() {
-        return techService.getAllTechItems();
+        // Get all projects first, then populate tech items with project associations
+        List<Project> projects = projectService.all();
+        return techService.getAllTechItemsWithProjects(projects);
     }
 
     @GetMapping("/skills/{slug}")
