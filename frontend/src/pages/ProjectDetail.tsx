@@ -6,6 +6,7 @@ import type { Project } from "@/domain/projects";
 import Button from "@/ui/Button";
 import type { ApiProject } from "@/api/types";
 import { toProject } from "@/api/mappers";
+import { PROJECTS_WITH_CASE_STUDIES } from "@/config/caseStudies";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -62,7 +63,20 @@ export default function ProjectDetail() {
       </nav>
 
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold">{project.title}</h1>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+          <h1 className="text-3xl font-semibold">{project.title}</h1>
+          {PROJECTS_WITH_CASE_STUDIES.includes(project.slug) && (
+            <Button
+              to={`/projects/${project.slug}/case-study`}
+              size="sm"
+              variant="link"
+              useGlow
+              glowKey="case-study"
+            >
+              Case Study →
+            </Button>
+          )}
+        </div>
         {project.summary && (
           <p className="text-lg opacity-80">{project.summary}</p>
         )}
@@ -151,7 +165,9 @@ export default function ProjectDetail() {
       )}
 
       {/* Links */}
-      {(project.liveUrl || project.repoUrl) && (
+      {(project.liveUrl ||
+        project.repoUrl ||
+        PROJECTS_WITH_CASE_STUDIES.includes(project.slug)) && (
         <section className="space-y-3">
           <h2 className="text-xl font-medium">Links</h2>
           <div className="flex gap-4">
@@ -175,6 +191,17 @@ export default function ProjectDetail() {
                 glowKey="github-repo"
               >
                 GitHub
+              </Button>
+            )}
+            {PROJECTS_WITH_CASE_STUDIES.includes(project.slug) && (
+              <Button
+                to={`/projects/${project.slug}/case-study`}
+                size="sm"
+                variant="link"
+                useGlow
+                glowKey="case-study-link"
+              >
+                Case Study
               </Button>
             )}
           </div>
