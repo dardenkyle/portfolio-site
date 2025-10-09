@@ -13,37 +13,35 @@ export default function About() {
         <section className="mx-auto max-w-3xl text-center space-y-4">
           <h1 className="text-4xl font-bold">About</h1>
           <p className="opacity-80">
-            Python-based Backend Engineer building data-heavy systems with
-            FastAPI and PostgreSQL.
+            Focused on building data-heavy, reliable backends and automation
+            pipelines.
           </p>
         </section>
         <div className="space-y-6 bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
           <p className="opacity-80 max-w-6xl mx-auto">
             I’m a backend engineer specializing in Python, FastAPI, and
-            PostgreSQL. I build scalable, resilient, and data-driven systems —
-            from ETL pipelines processing 176M+ records to SaaS platforms with
+            PostgreSQL. I build scalable, data-driven systems — from ETL
+            pipelines processing 176M+ records to SaaS platforms with
             per-service migrations and CI/CD automation.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            My work emphasizes clear architecture, documentation, and trade-offs
-            that ensure long-term maintainability.
+            I emphasize clear architecture, maintainable code, and thoughtful
+            trade-offs that ensure reliability at scale.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            I hold a Bachelor’s degree in Physics from UT Austin (2022) and a
-            postgraduate certification in AI/ML from McCombs (2024), which
-            broadened my technical perspective to include data science and
-            applied machine learning.
+            I hold a B.S. in Physics from UT Austin (2022) and a postgraduate
+            certification in AI/ML from McCombs (2024), which strengthened my
+            foundation in data science and applied machine learning.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            I’m currently pursuing backend or data-engineering roles
+            I’m currently focused on backend and data-engineering roles
             (Python/FastAPI/SQL/AWS) — Austin or remote — where I can contribute
-            to teams tackling complex data-heavy backends, API architecture, and
-            system reliability.
+            to data-heavy APIs, automation, and production-grade infrastructure.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            Outside of work, I’m passionate about competitive gaming, music, and
-            lifting weights. These pursuits keep me creative and balanced —
-            qualities I bring into my engineering work.
+            Outside of work, I enjoy competitive gaming, music, and weight
+            training — interests that keep me focused and creative in
+            engineering.
           </p>
         </div>
       </section>
