@@ -8,6 +8,7 @@ import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 import ProjectDetail from "@/pages/ProjectDetail";
 import SkillDetail from "@/pages/SkillDetail";
+import CaseStudy from "@/pages/CaseStudy";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       { path: "skills", element: <Skills /> },
       { path: "about", element: <About /> },
       { path: "/projects/:slug", element: <ProjectDetail /> },
+      { path: "/projects/:slug/case-study", element: <CaseStudy /> },
       { path: "/skills/:slug", element: <SkillDetail /> },
       { path: "contact", element: <Contact /> },
       { path: "*", element: <NotFound /> },
