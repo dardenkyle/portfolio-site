@@ -80,7 +80,7 @@ export default function SkillDetail() {
           <header className="flex items-end justify-between">
             <h2 className="text-xl font-medium">Projects Using {skill.name}</h2>
             <Button to="/projects" size="sm" variant="link">
-              View all projects
+              View all projects →
             </Button>
           </header>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
