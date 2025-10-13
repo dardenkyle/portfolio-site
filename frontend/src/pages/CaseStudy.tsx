@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import Button from "@/ui/Button";
+import { trackContentView } from "@/utils/analytics";
 
 export default function CaseStudy() {
   const { slug } = useParams();
@@ -24,6 +25,9 @@ export default function CaseStudy() {
         }
         const text = await response.text();
         setContent(text);
+        
+        // Track case study view
+        trackContentView('case_study', slug, slug);
       })
       .catch((err) => {
         setError(err.message);

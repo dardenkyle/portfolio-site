@@ -8,6 +8,7 @@ import type { ApiProject } from "@/api/types";
 import { toProject } from "@/api/mappers";
 import { PROJECTS_WITH_CASE_STUDIES } from "@/config/caseStudies";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
+import { trackContentView } from "@/utils/analytics";
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -34,6 +35,9 @@ export default function ProjectDetail() {
           return;
         }
         setProject(p);
+        
+        // Track project view
+        trackContentView('project', p.title, p.slug);
       })
       .catch((e) => alive && setError(e.message));
 

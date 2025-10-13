@@ -1,9 +1,15 @@
 import { NavLink } from "react-router-dom";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
+import { trackExternalLink } from "@/utils/analytics";
 
 export default function Nav() {
   const { handleMouseEnter, handleMouseLeave, getGlowClass, getStoredColor } =
     useRandomGlow();
+
+  // Helper to track external link clicks
+  const handleExternalLinkClick = (url: string, linkText: string) => {
+    trackExternalLink(url, linkText, 'social');
+  };
 
   const base = "px-3 py-2 rounded transition-all duration-300";
   const cls = ({ isActive }: { isActive: boolean }, key: string) => {
@@ -76,6 +82,7 @@ export default function Nav() {
             )}`}
             onMouseEnter={() => handleMouseEnter("github")}
             onMouseLeave={handleMouseLeave}
+            onClick={() => handleExternalLinkClick("https://github.com/dardenkyle", "GitHub")}
           >
             <img src="/github.png" alt="GitHub" className="w-5 h-5" />
           </a>
@@ -88,6 +95,7 @@ export default function Nav() {
             )}`}
             onMouseEnter={() => handleMouseEnter("linkedin")}
             onMouseLeave={handleMouseLeave}
+            onClick={() => handleExternalLinkClick("https://linkedin.com/in/kyle-darden", "LinkedIn")}
           >
             <img src="/linkedin.png" alt="LinkedIn" className="w-5 h-5" />
           </a>

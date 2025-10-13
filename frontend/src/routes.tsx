@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "@/ui/Layout";
+import AppWithTracking from "@/components/AppWithTracking";
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import Skills from "@/pages/Skills";
@@ -13,17 +14,23 @@ import CaseStudy from "@/pages/CaseStudy";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <AppWithTracking />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "projects", element: <Projects /> },
-      { path: "skills", element: <Skills /> },
-      { path: "about", element: <About /> },
-      { path: "/projects/:slug", element: <ProjectDetail /> },
-      { path: "/projects/:slug/case-study", element: <CaseStudy /> },
-      { path: "/skills/:slug", element: <SkillDetail /> },
-      { path: "contact", element: <Contact /> },
-      { path: "*", element: <NotFound /> },
+      {
+        path: "/",
+        element: <Layout />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: "projects", element: <Projects /> },
+          { path: "skills", element: <Skills /> },
+          { path: "about", element: <About /> },
+          { path: "/projects/:slug", element: <ProjectDetail /> },
+          { path: "/projects/:slug/case-study", element: <CaseStudy /> },
+          { path: "/skills/:slug", element: <SkillDetail /> },
+          { path: "contact", element: <Contact /> },
+          { path: "*", element: <NotFound /> },
+        ],
+      },
     ],
   },
 ]);
