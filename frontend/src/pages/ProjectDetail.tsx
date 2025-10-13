@@ -35,9 +35,9 @@ export default function ProjectDetail() {
           return;
         }
         setProject(p);
-        
+
         // Track project view
-        trackContentView('project', p.title, p.slug);
+        trackContentView("project", p.title, p.slug);
       })
       .catch((e) => alive && setError(e.message));
 

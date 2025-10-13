@@ -25,9 +25,9 @@ export default function CaseStudy() {
         }
         const text = await response.text();
         setContent(text);
-        
+
         // Track case study view
-        trackContentView('case_study', slug, slug);
+        trackContentView("case_study", slug, slug);
       })
       .catch((err) => {
         setError(err.message);

@@ -3,13 +3,18 @@
 
 // Helper function to safely check if gtag is available
 function isGtagAvailable(): boolean {
-  return typeof window !== 'undefined' && 
-         typeof window.gtag === 'function';
+  return typeof window !== "undefined" && typeof window.gtag === "function";
 }
 
 // Helper function for development logging
-function logAnalyticsEvent(eventName: string, parameters: Record<string, unknown>) {
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+function logAnalyticsEvent(
+  eventName: string,
+  parameters: Record<string, unknown>
+) {
+  if (
+    typeof window !== "undefined" &&
+    window.location.hostname === "localhost"
+  ) {
     console.log(`🔍 Analytics Event: ${eventName}`, parameters);
   }
 }
@@ -23,7 +28,7 @@ export function trackCTAClick(
   additionalData?: Record<string, string | number>
 ) {
   const eventData = {
-    event_category: 'engagement',
+    event_category: "engagement",
     event_label: buttonText,
     page_location: location,
     custom_parameters: {
@@ -33,13 +38,13 @@ export function trackCTAClick(
     },
   };
 
-  logAnalyticsEvent('cta_click', eventData);
+  logAnalyticsEvent("cta_click", eventData);
 
   if (isGtagAvailable()) {
     try {
-      window.gtag!('event', 'cta_click', eventData);
+      window.gtag!("event", "cta_click", eventData);
     } catch (error) {
-      console.warn('Analytics tracking error:', error);
+      console.warn("Analytics tracking error:", error);
     }
   }
 }
@@ -53,7 +58,7 @@ export function trackDownload(
   downloadSource: string
 ) {
   const eventData = {
-    event_category: 'downloads',
+    event_category: "downloads",
     event_label: fileName,
     custom_parameters: {
       file_name: fileName,
@@ -62,13 +67,13 @@ export function trackDownload(
     },
   };
 
-  logAnalyticsEvent('file_download', eventData);
+  logAnalyticsEvent("file_download", eventData);
 
   if (isGtagAvailable()) {
     try {
-      window.gtag!('event', 'file_download', eventData);
+      window.gtag!("event", "file_download", eventData);
     } catch (error) {
-      console.warn('Analytics tracking error:', error);
+      console.warn("Analytics tracking error:", error);
     }
   }
 }
@@ -79,12 +84,12 @@ export function trackDownload(
 export function trackExternalLink(
   linkUrl: string,
   linkText: string,
-  linkType: 'social' | 'project' | 'reference' | 'other' = 'other'
+  linkType: "social" | "project" | "reference" | "other" = "other"
 ) {
   if (isGtagAvailable()) {
     try {
-      window.gtag!('event', 'click', {
-        event_category: 'external_links',
+      window.gtag!("event", "click", {
+        event_category: "external_links",
         event_label: linkText,
         custom_parameters: {
           link_url: linkUrl,
@@ -94,7 +99,7 @@ export function trackExternalLink(
         },
       });
     } catch (error) {
-      console.warn('Analytics tracking error:', error);
+      console.warn("Analytics tracking error:", error);
     }
   }
 }
@@ -109,8 +114,8 @@ export function trackInternalNavigation(
 ) {
   if (isGtagAvailable()) {
     try {
-      window.gtag!('event', 'page_navigation', {
-        event_category: 'navigation',
+      window.gtag!("event", "page_navigation", {
+        event_category: "navigation",
         event_label: `${fromPage} → ${toPage}`,
         custom_parameters: {
           from_page: fromPage,
@@ -119,7 +124,7 @@ export function trackInternalNavigation(
         },
       });
     } catch (error) {
-      console.warn('Analytics tracking error:', error);
+      console.warn("Analytics tracking error:", error);
     }
   }
 }
@@ -129,13 +134,13 @@ export function trackInternalNavigation(
  */
 export function trackFormInteraction(
   formName: string,
-  action: 'start' | 'submit' | 'error',
+  action: "start" | "submit" | "error",
   additionalData?: Record<string, string | number>
 ) {
   if (isGtagAvailable()) {
     try {
-      window.gtag!('event', 'form_interaction', {
-        event_category: 'forms',
+      window.gtag!("event", "form_interaction", {
+        event_category: "forms",
         event_label: `${formName}_${action}`,
         custom_parameters: {
           form_name: formName,
@@ -144,7 +149,7 @@ export function trackFormInteraction(
         },
       });
     } catch (error) {
-      console.warn('Analytics tracking error:', error);
+      console.warn("Analytics tracking error:", error);
     }
   }
 }
@@ -153,14 +158,14 @@ export function trackFormInteraction(
  * Track project/skill detail views
  */
 export function trackContentView(
-  contentType: 'project' | 'skill' | 'case_study',
+  contentType: "project" | "skill" | "case_study",
   contentName: string,
   contentId?: string
 ) {
   if (isGtagAvailable()) {
     try {
-      window.gtag!('event', 'content_view', {
-        event_category: 'content',
+      window.gtag!("event", "content_view", {
+        event_category: "content",
         event_label: contentName,
         custom_parameters: {
           content_type: contentType,
@@ -169,7 +174,7 @@ export function trackContentView(
         },
       });
     } catch (error) {
-      console.warn('Analytics tracking error:', error);
+      console.warn("Analytics tracking error:", error);
     }
   }
 }

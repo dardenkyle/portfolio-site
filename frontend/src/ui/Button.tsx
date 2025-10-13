@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
-import { trackCTAClick, trackDownload, trackExternalLink, trackInternalNavigation } from "@/utils/analytics";
+import {
+  trackCTAClick,
+  trackDownload,
+  trackExternalLink,
+  trackInternalNavigation,
+} from "@/utils/analytics";
 
 type ButtonVariant = "primary" | "secondary" | "link";
 type ButtonSize = "sm" | "md" | "lg";
@@ -39,26 +44,30 @@ export default function Button({
     );
   }
   const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
-  
+
   // Get current page path safely
   const getCurrentPage = () => {
     try {
       return window.location.pathname;
     } catch {
-      return '/';
+      return "/";
     }
   };
 
   // Helper to get button text for analytics
   const getButtonText = () => {
     if (trackingLabel) return trackingLabel;
-    if (typeof children === 'string') return children;
-    return 'Button'; // fallback
+    if (typeof children === "string") return children;
+    return "Button"; // fallback
   };
 
   // Helper to determine if this is a download link
   const isDownloadLink = (url: string) => {
-    return url.includes('.pdf') || url.includes('/download') || url.includes('resume');
+    return (
+      url.includes(".pdf") ||
+      url.includes("/download") ||
+      url.includes("resume")
+    );
   };
 
   // Helper to track clicks based on button type
@@ -69,24 +78,28 @@ export default function Button({
     if (href) {
       // External link or download
       if (isDownloadLink(href)) {
-        const fileName = href.split('/').pop() || 'unknown';
-        const fileType = fileName.split('.').pop()?.toUpperCase() || 'FILE';
+        const fileName = href.split("/").pop() || "unknown";
+        const fileType = fileName.split(".").pop()?.toUpperCase() || "FILE";
         trackDownload(fileName, fileType, currentPage);
       } else {
         // External link (GitHub, LinkedIn, etc.)
-        const linkType = href.includes('github') ? 'social' : 
-                        href.includes('linkedin') ? 'social' :
-                        href.includes('http') ? 'project' : 'other';
+        const linkType = href.includes("github")
+          ? "social"
+          : href.includes("linkedin")
+          ? "social"
+          : href.includes("http")
+          ? "project"
+          : "other";
         trackExternalLink(href, buttonText, linkType);
       }
     } else if (to) {
       // Internal navigation
-      trackInternalNavigation(currentPage, to, 'button_click');
+      trackInternalNavigation(currentPage, to, "button_click");
       trackCTAClick(buttonText, currentPage, { destination: to });
     } else {
       // Regular button click
-      trackCTAClick(buttonText, currentPage, { 
-        category: trackingCategory || 'button_action' 
+      trackCTAClick(buttonText, currentPage, {
+        category: trackingCategory || "button_action",
       });
     }
 

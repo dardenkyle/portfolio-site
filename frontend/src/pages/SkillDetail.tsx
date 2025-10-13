@@ -21,7 +21,7 @@ export default function SkillDetail() {
         setSkill(skillData);
         // Track skill view
         if (skillData) {
-          trackContentView('skill', skillData.name, skillData.slug);
+          trackContentView("skill", skillData.name, skillData.slug);
         }
       })
       .catch((err) => setError(err.message))
