@@ -1,5 +1,11 @@
 import { Link } from "react-router-dom";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
+import {
+  trackCTAClick,
+  trackDownload,
+  trackExternalLink,
+  trackInternalNavigation,
+} from "@/utils/analytics";
 
 type ButtonVariant = "primary" | "secondary" | "link";
 type ButtonSize = "sm" | "md" | "lg";
@@ -14,6 +20,9 @@ interface ButtonProps {
   className?: string;
   useGlow?: boolean;
   glowKey?: string;
+  // Analytics props
+  trackingLabel?: string; // Custom label for analytics
+  trackingCategory?: string; // Custom category for CTAs
 }
 
 export default function Button({
@@ -26,6 +35,8 @@ export default function Button({
   className = "",
   useGlow = false,
   glowKey = "",
+  trackingLabel,
+  trackingCategory,
 }: ButtonProps) {
   if (href && to) {
     throw new Error(
@@ -33,6 +44,70 @@ export default function Button({
     );
   }
   const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
+
+  // Get current page path safely
+  const getCurrentPage = () => {
+    try {
+      return window.location.pathname;
+    } catch {
+      return "/";
+    }
+  };
+
+  // Helper to get button text for analytics
+  const getButtonText = () => {
+    if (trackingLabel) return trackingLabel;
+    if (typeof children === "string") return children;
+    return "Button"; // fallback
+  };
+
+  // Helper to determine if this is a download link
+  const isDownloadLink = (url: string) => {
+    return (
+      url.includes(".pdf") ||
+      url.includes("/download") ||
+      url.includes("resume")
+    );
+  };
+
+  // Helper to track clicks based on button type
+  const handleClick = () => {
+    const buttonText = getButtonText();
+    const currentPage = getCurrentPage();
+
+    if (href) {
+      // External link or download
+      if (isDownloadLink(href)) {
+        const fileName = href.split("/").pop() || "unknown";
+        const fileType = fileName.split(".").pop()?.toUpperCase() || "FILE";
+        trackDownload(fileName, fileType, currentPage);
+      } else {
+        // External link (GitHub, LinkedIn, etc.)
+        const linkType = href.includes("github")
+          ? "social"
+          : href.includes("linkedin")
+          ? "social"
+          : href.includes("http")
+          ? "project"
+          : "other";
+        trackExternalLink(href, buttonText, linkType);
+      }
+    } else if (to) {
+      // Internal navigation
+      trackInternalNavigation(currentPage, to, "button_click");
+      trackCTAClick(buttonText, currentPage, { destination: to });
+    } else {
+      // Regular button click
+      trackCTAClick(buttonText, currentPage, {
+        category: trackingCategory || "button_action",
+      });
+    }
+
+    // Call original onClick if provided
+    if (onClick) {
+      onClick();
+    }
+  };
 
   // Base styles matching ProjectCard
   const baseStyles =
@@ -80,6 +155,7 @@ export default function Button({
         className={buttonClasses}
         onMouseEnter={handleMouseEnterWithGlow}
         onMouseLeave={useGlow ? handleMouseLeave : undefined}
+        onClick={handleClick}
       >
         {children}
       </a>
@@ -94,6 +170,7 @@ export default function Button({
         className={buttonClasses}
         onMouseEnter={handleMouseEnterWithGlow}
         onMouseLeave={useGlow ? handleMouseLeave : undefined}
+        onClick={handleClick}
       >
         {children}
       </Link>
@@ -103,7 +180,7 @@ export default function Button({
   // Regular button
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className={buttonClasses}
       onMouseEnter={handleMouseEnterWithGlow}
       onMouseLeave={useGlow ? handleMouseLeave : undefined}

@@ -5,6 +5,7 @@ import type { ApiSkillItem } from "@/api/types";
 import Button from "@/ui/Button";
 import ProjectCard from "@/ui/ProjectCard";
 import { toProject } from "@/api/mappers";
+import { trackContentView } from "@/utils/analytics";
 
 export default function SkillDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -16,7 +17,13 @@ export default function SkillDetail() {
     if (!slug) return;
 
     getSkillBySlug(slug)
-      .then(setSkill)
+      .then((skillData) => {
+        setSkill(skillData);
+        // Track skill view
+        if (skillData) {
+          trackContentView("skill", skillData.name, skillData.slug);
+        }
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [slug]);

@@ -1,9 +1,9 @@
+/* (Optional) font */
+@import "@fontsource-variable/inter";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* (Optional) font */
-@import "@fontsource-variable/inter";
 
 /* Your design tokens / light–dark prefs */
 :root {
