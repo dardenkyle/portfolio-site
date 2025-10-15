@@ -62,6 +62,16 @@ export default function Nav() {
           >
             About
           </NavLink>
+          <a
+            href="/Resume_KyleDarden_Backend_v1.1.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${base} ${getGlowClass("resume")}`}
+            onMouseEnter={() => handleMouseEnter("resume")}
+            onMouseLeave={handleMouseLeave}
+          >
+            Resume
+          </a>
           <NavLink
             to="/contact"
             className={(props) => cls(props, "contact")}
