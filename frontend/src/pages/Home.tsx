@@ -58,7 +58,7 @@ export default function Home() {
             View Projects
           </Button>
           <Button
-            href="/DARDEN_BACKEND_v2.pdf"
+            href="/Resume_KyleDarden_Backend_v1.1.pdf"
             variant="secondary"
             useGlow
             glowKey="hero-resume"
