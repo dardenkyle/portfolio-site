@@ -1,5 +1,6 @@
-[![Deploy](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml/badge.svg)](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml)
 [![CI](https://github.com/dardenkyle/portfolio-site/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/dardenkyle/portfolio-site/actions/workflows/ci.yml)
+[![QA Tests](https://github.com/dardenkyle/site-sentry/actions/workflows/tests.yml/badge.svg)](https://github.com/dardenkyle/site-sentry/actions/workflows/tests.yml)
+[![Deploy](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml/badge.svg)](https://github.com/dardenkyle/portfolio-site/actions/workflows/deploy-frontend.yml)
 [![Last Commit](https://img.shields.io/github/last-commit/dardenkyle/portfolio-site/main)](https://github.com/dardenkyle/portfolio-site/commits/main)
 
 # Portfolio
