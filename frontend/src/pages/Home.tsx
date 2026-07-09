@@ -38,15 +38,13 @@ export default function Home() {
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-14">
       {/* HERO */}
       <section className="mx-auto max-w-3xl text-center space-y-4">
-        <h1 className="text-4xl font-bold">
-          Kyle Darden — Backend-focused Engineer
-        </h1>
+        <h1 className="text-4xl font-bold">Kyle Darden — Data Engineer</h1>
         <p className="opacity-80">
-          Python • FastAPI • Postgres • Docker • AWS • CI/CD
+          Python • SQL • dbt • FastAPI • PostgreSQL • Docker
         </p>
         <p className="opacity-80">
-          Focused on building data-heavy, reliable backends and automation
-          pipelines.
+          I build data platforms end to end — ingestion, storage, and the APIs
+          that serve them, on a backend-engineering foundation.
         </p>
         <div className="flex items-center justify-center gap-3">
           <Button
@@ -92,15 +90,17 @@ export default function Home() {
         </header>
         <div className="bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
           <p className="opacity-80 max-w-6xl mx-auto">
-            I’m a backend-focused engineer skilled in Python, FastAPI, and
-            PostgreSQL, with hands-on experience building data-heavy systems,
-            ETL pipelines, and automated CI/CD workflows. My background bridges
-            software engineering, QA automation, and data engineering — giving
-            me a strong edge in designing reliable, analytics-driven backends.{" "}
+            I build data platforms end to end. My CS2 Analytics project is live
+            and public — a Python ingestion pipeline feeding a PostgreSQL
+            store, a FastAPI service, and a React dashboard, deployed the whole
+            way through. I also build dimensional data warehouses (dbt,
+            star-schema modeling) and production backend services (FastAPI,
+            Postgres, Docker, AWS Cognito auth).{" "}
             <br />
             <br />
-            Currently open to Backend, QA Automation, Data Engineering, and Data
-            Science roles — Austin or remote.
+            B.S. in Physics from UT Austin; graduate training in data science
+            and machine learning; currently completing CS coursework towards
+            enrolling in a graduate program.
           </p>
         </div>
       </section>
