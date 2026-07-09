@@ -63,7 +63,7 @@ export default function Nav() {
             About
           </NavLink>
           <a
-            href="/Resume_KyleDarden_Backend_v1.1.pdf"
+            href="/Kyle_Darden_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className={`${base} ${getGlowClass("resume")}`}

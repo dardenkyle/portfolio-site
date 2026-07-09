@@ -39,7 +39,7 @@ export default function Footer() {
               View My Projects
             </Button>
             <Button
-              href="/DARDEN_BACKEND_v2.pdf"
+              href="/Kyle_Darden_Resume.pdf"
               variant="secondary"
               useGlow
               glowKey="footer-resume"
