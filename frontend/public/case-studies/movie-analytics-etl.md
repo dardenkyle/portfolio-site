@@ -57,7 +57,7 @@ The pipeline follows a **multi-layered architecture** built around dbt and Postg
   - **14.7M+ people** with career metrics
   - **99K+ high-quality ratings** with statistical testing
 - Achieved an **80%+ data quality pass rate** across all dbt tests.
-- Delivered a **fully automated data pipeline** that runs end-to-end with reproducibility and observability.
+- Delivered a **repeatable, script-driven pipeline** that runs end-to-end with reproducibility; workflow orchestration (e.g., Airflow) is planned but not yet implemented.
 - Provided **interactive analytical outputs** via a generated dashboard.
 
 ---

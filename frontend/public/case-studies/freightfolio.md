@@ -4,7 +4,7 @@
 
 **FreightFolio** is a logistics SaaS platform built for small and mid-sized trucking carriers to **reduce reliance on spreadsheets** and **automate daily operational tasks** such as load tracking, invoicing, and payment reconciliation.
 
-It’s designed as a production-style backend system showcasing **multi-tenant architecture**, **modular FastAPI services**, and **clean CI/CD automation** — similar to the kind of software powering real logistics and ERP platforms.
+It’s an **in-development**, production-style backend system showcasing **multi-tenant architecture**, **modular FastAPI services**, and **production-grade AWS Cognito authentication** — similar to the kind of software powering real logistics and ERP platforms. The source is private; a public overview repo describes the system, and code walkthroughs are available on request.
 
 ---
 
@@ -25,7 +25,7 @@ FreightFolio is composed of several independent services tied together through a
   Endpoints follow REST conventions with full OpenAPI documentation and Pydantic-based validation.
 
 - **Data Model & Persistence:**  
-  Each tenant operates under an isolated schema using **PostgreSQL** and **Alembic migrations**, supporting safe multi-tenant design without data overlap.  
+  A multi-tenant **PostgreSQL** design with tenant-scoped data and **per-service Alembic migrations** supports safe schema evolution without data overlap.  
   The ORM layer uses **SQLAlchemy 2.0** with typed models and foreign key constraints to preserve relational integrity.
 
 - **Background Automation:**  
@@ -33,11 +33,11 @@ FreightFolio is composed of several independent services tied together through a
   These processes simulate the automation layer found in real TMS (Transportation Management Systems).
 
 - **Authentication & Security:**  
-  Implements JWT-based auth with password hashing, role-based permissions, and middleware for secure route access.
+  Implements **AWS Cognito**-based authentication (RS256 JWT verification with JWKS caching and key rotation), role-based permissions, and middleware for secure route access.
 
 - **CI/CD & Testing:**  
-  Uses **Pytest** for unit and integration testing and **GitHub Actions** to lint, test, and deploy automatically to Render or AWS.  
-  Each service includes Dockerfiles for consistent containerized builds.
+  Uses **Pytest** for unit and integration testing, with **GitHub Actions** CI in progress.  
+  Each service includes Dockerfiles for consistent containerized builds; the system is not yet deployed to a cloud environment.
 
 ---
 
@@ -45,18 +45,17 @@ FreightFolio is composed of several independent services tied together through a
 
 - Built a **multi-tenant SaaS backend** capable of supporting separate carrier accounts and isolated data.
 - Engineered **per-service Alembic migrations**, ensuring modular and safe schema evolution.
-- Implemented **JWT authentication** and role-based access control for multi-user workflows.
+- Implemented **AWS Cognito authentication** and role-based access control for multi-user workflows.
 - Automated **invoicing, payment tracking, and document generation** via scheduled background tasks.
-- Configured a **CI/CD pipeline** that runs full test coverage, linting, and container deployment on every push.
-- Employed structured logging and environment-based configuration for scalable deployment.
+- Employed structured logging and environment-based configuration in preparation for cloud deployment.
 
 ---
 
 ### Results
 
-- Fully functional backend simulating the operations of a logistics SaaS platform.
+- In-development backend simulating the operations of a logistics SaaS platform, with load, invoice, and auth services functional.
 - **Reduced spreadsheet dependency** by automating load management, invoice creation, and payment tracking.
-- Achieved **85% test coverage** across all routes and services.
+- Pytest unit and integration tests cover routes and services.
 - Modular architecture allows each domain (loads, invoices, payments) to evolve independently or scale into microservices.
 - Documented with clear API specs and onboarding guides for future integration with a frontend or third-party dashboard.
 - Simple dashboard that displays some KPIs, this will be expanded on in later versions.
@@ -75,9 +74,10 @@ FreightFolio is composed of several independent services tied together through a
 ### Stack
 
 **Languages & Frameworks:** Python, FastAPI, SQLAlchemy, Alembic, Pydantic  
+**Auth:** AWS Cognito (with SES for transactional email)  
 **Database:** PostgreSQL  
-**Testing & CI/CD:** Pytest, GitHub Actions  
-**Deployment:** Docker Compose, Render / AWS (planned)
+**Testing & CI/CD:** Pytest; GitHub Actions CI in progress  
+**Deployment:** Docker Compose locally; cloud deployment planned, not yet live
 
 ---
 

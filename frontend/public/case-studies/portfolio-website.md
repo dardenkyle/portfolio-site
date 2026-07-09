@@ -27,8 +27,8 @@ The platform follows a **clean separation** between frontend and backend service
   Implements client-side routing, reusable components, and interactive project showcases with case study integration.
 
 - **Deployment & CI/CD:**  
-  Automated deployment pipeline using **GitHub Actions** with **Docker** containerization.  
-  Separate frontend and backend deployments with environment-specific configurations.
+  **GitHub Actions** runs CI (build, lint, typecheck) on every pull request and deploys the frontend to **GitHub Pages** (kyledarden.com) on every push to main.  
+  The backend is containerized with **Docker** and hosted separately on **Render**, deployed independently of the frontend pipeline.
 
 - **Design & UX:**  
   Clean, professional interface with consistent styling, interactive project cards, and smooth navigation.  
@@ -42,8 +42,9 @@ The platform follows a **clean separation** between frontend and backend service
 - Implemented **TypeScript + React** frontend with reusable components and consistent design patterns.
 - Designed **responsive UI** using **Tailwind CSS** with attention to user experience and accessibility.
 - Created an **interactive project showcase** with detailed case studies and technical documentation.
-- Automated **CI/CD pipeline** with GitHub Actions for reliable deployments.
+- Automated **CI and frontend deployment** with GitHub Actions for reliable releases.
 - Integrated **contact form functionality** with backend validation and error handling.
+- Added **GA4 analytics** for page views and interaction tracking, plus an automated **Playwright QA suite** ([site-sentry](https://github.com/dardenkyle/site-sentry)) that checks the live site twice daily.
 
 ---
 
@@ -59,7 +60,6 @@ The platform follows a **clean separation** between frontend and backend service
 
 ### Future Work
 
-- Add **analytics tracking** to understand visitor engagement and content performance.
 - Integrate **blog functionality** for technical writing and project updates.
 - Add **search and filtering** capabilities for projects and skills.
 
@@ -69,7 +69,7 @@ The platform follows a **clean separation** between frontend and backend service
 
 **Backend:** Java 21, Spring Boot, Gradle  
 **Frontend:** React, TypeScript, Vite, Tailwind CSS  
-**Deployment:** Docker, GitHub Actions  
+**Deployment:** GitHub Pages (frontend), Render (backend), Docker, GitHub Actions  
 **Development:** Git, GitHub, VS Code
 
 ---
