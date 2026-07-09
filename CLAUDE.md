@@ -67,10 +67,10 @@ Content updates are the most common task in this repo. Locations:
   (localhost:5173, kyledarden.com, www.kyledarden.com). `CorsConfig.java`
   allows only GET/OPTIONS — so `POST /api/contact` is blocked cross-origin
   from the browser; keep this in mind when debugging contact-form issues.
-- GA4 analytics: `src/utils/analytics.ts` + `src/hooks/usePageTracking.tsx`,
-  wired through `src/components/AppWithTracking.tsx`. See
-  `ANALYTICS_TRACKING.md` and `ANALYTICS_TESTING.md` for event conventions
-  and manual test steps.
+- GA4 analytics: `frontend/src/utils/analytics.ts` +
+  `frontend/src/hooks/usePageTracking.tsx`, wired through
+  `frontend/src/components/AppWithTracking.tsx`. See `docs/analytics.md`
+  for the event reference and manual verification checklist.
 
 ## Deployment
 
@@ -99,10 +99,9 @@ Update docs in the same branch as the change that affects them:
   scripts, or the repo structure it describes change. Its "Structure" section
   goes stale easily; fix it when touching listed files. Keep README changes
   user-facing and concise.
-- `ANALYTICS_TRACKING.md` — when adding, removing, or renaming GA4 events,
-  parameters, or tracked interactions.
-- `ANALYTICS_TESTING.md` — when analytics changes alter how tracking is
-  manually verified.
+- `docs/analytics.md` — when adding, removing, or renaming GA4 events,
+  parameters, or tracked interactions, or when analytics changes alter how
+  tracking is manually verified.
 - `frontend/public/case-studies/<slug>.md` — when a project's scope, tech
   stack, or outcomes change enough that its case study is no longer accurate.
 - `docs/adr/` — add an Architecture Decision Record when making a decision
