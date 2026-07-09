@@ -14,7 +14,7 @@ Full-stack portfolio site with a **Spring Boot (Java 21)** backend and a **Vite 
 
 - Java 21, Spring Boot
 - Gradle
-- REST API endpoints: Health, Projects, Contact, Hello
+- REST API endpoints: Health, Projects, Skills, Contact, Hello
 
 ### Frontend
 
@@ -71,12 +71,14 @@ Frontend will be available at `http://localhost:5173`
 
 Base URL: `http://localhost:8080/api`
 
-| Method | Endpoint    | Description              |
-| ------ | ----------- | ------------------------ |
-| GET    | `/health`   | Health check for the API |
-| GET    | `/projects` | Fetch all projects       |
-| GET    | `/hello`    | Simple demo endpoint     |
-| POST   | `/contact`  | Submit a contact request |
+| Method | Endpoint         | Description              |
+| ------ | ---------------- | ------------------------ |
+| GET    | `/health`        | Health check for the API |
+| GET    | `/projects`      | Fetch all projects       |
+| GET    | `/skills`        | Fetch all skills         |
+| GET    | `/skills/{slug}` | Fetch a skill by slug    |
+| GET    | `/hello`         | Simple demo endpoint     |
+| POST   | `/contact`       | Submit a contact request |
 
 ## Structure
 
@@ -88,17 +90,22 @@ backend/
 ├── src/
 │   ├── main/java/com/kyledarden/backend/
 │   │   ├── BackendApplication.java
+│   │   ├── config/
+│   │   │   └── CorsConfig.java
 │   │   ├── controller/
 │   │   │   ├── ContactController.java
 │   │   │   ├── HealthController.java
 │   │   │   ├── HelloController.java
-│   │   │   └── ProjectController.java
+│   │   │   ├── ProjectController.java
+│   │   │   └── TechController.java
 │   │   ├── model/
 │   │   │   ├── ContactRequest.java
-│   │   │   └── Project.java
+│   │   │   ├── Project.java
+│   │   │   └── TechItem.java
 │   │   └── service/
 │   │       ├── ContactService.java
-│   │       └── ProjectService.java
+│   │       ├── ProjectService.java
+│   │       └── TechService.java
 │   └── test/java/com/kyledarden/backend/
 │       └── BackendApplicationTests.java
 
@@ -107,20 +114,23 @@ frontend/
 ├── tsconfig.json
 ├── vite.config.ts
 ├── index.html
+├── public/
+│   └── case-studies/       # case study markdown per project
 └── src/
     ├── main.tsx
     ├── App.tsx
-    ├── App.css
     ├── index.css
     ├── routes.tsx
-    ├── pages/
-    │   ├── Home.tsx
-    │   ├── About.tsx
-    │   └── NotFound.tsx
-    ├── ui/
-    │   └── Layout.tsx
-    └── utils/
-        └── hello.ts
+    ├── config.ts
+    ├── api/                # API client, wire types, mappers
+    ├── domain/             # UI domain model
+    ├── config/             # case study configuration
+    ├── components/         # app-level components (analytics wiring)
+    ├── hooks/              # page tracking, UI hooks
+    ├── pages/              # Home, About, Projects, Skills, Contact, ...
+    ├── types/              # ambient type declarations
+    ├── ui/                 # layout, nav, cards, shared UI
+    └── utils/              # analytics, tech stack helpers
 
 ```
 

@@ -88,7 +88,7 @@ public class ProjectService {
             new ProjectTemplate(
                     "cs2-analytics",
                     "CS2 Analytics Platform",
-                    "Queue-based backend that scrapes and normalizes CS2 match data into a queryable Postgres schema.",
+                    "Live, end-to-end CS2 analytics platform - Python ingestion pipeline into PostgreSQL, a public FastAPI on Render, and a React dashboard on GitHub Pages.",
                     List.of("Gaming Analytics", "Data Pipeline", "Web Scraping", "API Development", "Automation"),
                     "https://github.com/dardenkyle/CS2-analytics",
                     "https://dardenkyle.github.io/CS2-analytics/",
@@ -98,7 +98,7 @@ public class ProjectService {
                     null,
 
                     /* overview */
-                    "CS2 Analytics is an open-source, modular backend that scrapes, parses, and normalizes professional Counter-Strike 2 match data into a queryable PostgreSQL schema. I built it end-to-end — data model, scrapers, worker orchestration, and API — with reliability as the primary goal.",
+                    "CS2 Analytics is an open-source platform that scrapes, parses, and normalizes professional Counter-Strike 2 match data into a queryable PostgreSQL schema. I built it end-to-end - data model, scrapers, ingestion-state orchestration, API, and frontend - with reliability as the primary goal. It is deployed end to end: the FastAPI service runs on Render and a React dashboard on GitHub Pages serves player statistics from the production database.",
 
                     /* techStack - now using references to TechService */
                     List.of(
@@ -107,9 +107,12 @@ public class ProjectService {
                             new Project.TechReference("postgresql", 3),
                             new Project.TechReference("sqlalchemy", 4),
                             new Project.TechReference("beautifulsoup", 5),
-                            new Project.TechReference("git", 6),
-                            new Project.TechReference("pytest", 8),
-                            new Project.TechReference("postman", 9)),
+                            new Project.TechReference("react", 6),
+                            new Project.TechReference("typescript", 7),
+                            new Project.TechReference("docker", 8),
+                            new Project.TechReference("github-actions", 9),
+                            new Project.TechReference("pytest", 10),
+                            new Project.TechReference("git", 11)),
 
                     /* challenges */
                     List.of(
@@ -124,11 +127,11 @@ public class ProjectService {
                                     1),
 
                             new Project.Challenge(
-                                    "from-long-runner-to-queued-jobs",
-                                    "Migrating from a single long-running script to a queued pattern",
-                                    "Initial ingestion ran as one long process, making failures costly and restarts painful; no isolation between work units.",
-                                    "Refactored into discrete idempotent jobs (per-match/per-page) with checkpointing and deduping. Introduced a simple terminal-driven dispatch loop to enqueue/dequeue units and record progress.",
-                                    "Improved resilience and recovery—failed jobs can be retried without re-running the entire pipeline.",
+                                    "from-long-runner-to-ingestion-state",
+                                    "Migrating from a single long-running script to ingestion-state tables",
+                                    "Initial ingestion ran as one long process, making failures costly and restarts painful; no isolation between work units and no durable record of what had been processed.",
+                                    "Refactored around PostgreSQL-backed ingestion-state tables for matches, maps, and demos, with source IDs as primary keys and explicit lifecycle states (rediscovery, retry, processed, failed, skipped) so rediscovery refreshes existing rows instead of duplicating work. Batch controllers own retry policy, scraper reset/rotation, and run summaries, while per-item stage services own fetch/parse/persist outcomes; scrapers only fetch and parsers only parse.",
+                                    "The pipeline is resumable and idempotent - failed items can be retried without re-running the entire pipeline.",
                                     List.of(),
                                     List.of("python", "architecture", "idempotency"),
                                     1),
@@ -147,10 +150,10 @@ public class ProjectService {
                                     "env-parity-without-containers",
                                     "Maintaining reproducible local environments before containerization",
                                     "Different developer machines and OS setups led to inconsistent Python deps, env vars, and DB connections.",
-                                    "Introduced `.env.example`, Makefile tasks (setup/run/test), pinned versions, seed scripts, and a Postman collection for API checks. Documented one-command bootstrap and DB init steps.",
-                                    "Reduced setup friction and made runs predictable; paved the way for future Docker/CI adoption.",
+                                    "Introduced `.env`-driven configuration, uv-managed dependencies with a committed lockfile, Alembic migrations behind a one-command DB init (`manage_db.py --init`), and Makefile-style entrypoints for setup, runs, and tests.",
+                                    "Reduced setup friction and made runs predictable; the setup evolved into the Docker Compose and CI baseline the project runs on today.",
                                     List.of(),
-                                    List.of("python", "git", "postman", "devx"),
+                                    List.of("python", "git", "devx"),
                                     3)
 
                     )),
@@ -167,7 +170,7 @@ public class ProjectService {
                     null,
 
                     /* overview */
-                    "Private, production-grade SaaS backend designed for small freight carriers. It provides a modular, scalable system to streamline logistics operations through microservices, focusing on load management, invoicing, and secure user authentication.",
+                    "Private, in-development SaaS backend designed for small freight carriers. It provides a modular, scalable system to streamline logistics operations through FastAPI services, focusing on load management, invoicing, and secure user authentication via AWS Cognito. Not yet deployed; the source is private, with a public overview repo.",
 
                     /* techStack - using references to TechService */
                     List.of(
@@ -229,14 +232,14 @@ public class ProjectService {
                     "Full-stack portfolio — Spring Boot backend + React/Vite frontend, CI/CD.",
                     List.of("Full-Stack", "Portfolio", "Deployment", "UI/UX"),
                     "https://github.com/dardenkyle/portfolio-site",
-                    null,
+                    "https://kyledarden.com",
                     40,
                     OffsetDateTime.parse("2025-09-15T00:00:00Z"),
                     null,
                     null,
 
                     /* overview */
-                    "Full-stack portfolio website showcasing projects and skills, built with Spring Boot and React/Vite.",
+                    "Full-stack portfolio website showcasing projects and skills, built with Spring Boot and React/Vite. The frontend is deployed to GitHub Pages at kyledarden.com via GitHub Actions; the Spring Boot API is hosted separately on Render.",
 
                     /* techStack - using references to TechService */
                     List.of(
@@ -265,7 +268,7 @@ public class ProjectService {
                                     "cross-origin-deployment",
                                     "Coordinating separate frontend and backend deployments",
                                     "Frontend hosted on GitHub Pages and backend on Render required consistent routing, API URLs, and secure CORS configuration for production environments.",
-                                    "Configured environment variables and API base URLs per environment, implemented CORS rules in Spring Boot, and validated integration through Postman and live staging builds. Automated both deploys via GitHub Actions workflows.",
+                                    "Configured environment variables and API base URLs per environment, implemented CORS rules in Spring Boot, and validated integration through Postman and live staging builds. Automated the frontend deploy via GitHub Actions; the backend deploys separately on Render.",
                                     "Seamless communication between GitHub-hosted frontend and Render backend with stable API connectivity and secure CORS handling.",
                                     List.of(),
                                     List.of("Java", "Spring Boot", "React", "TypeScript", "GitHub Actions", "Postman",
@@ -337,8 +340,8 @@ public class ProjectService {
                                     "massive-data-processing",
                                     "Processing 176M+ records efficiently",
                                     "Loading and transforming massive IMDb datasets (176M+ records) while maintaining data quality and managing memory constraints during transformation and load operations.",
-                                    "Implemented chunked data loading using Python and optimized PostgreSQL configurations (work_mem, parallel workers). Leveraged incremental dbt models to reduce rebuild times and created indexes for high-cardinality joins.",
-                                    "Successfully processed all datasets with sub-hour model refreshes and 80% data quality test pass rate across dbt layers.",
+                                    "Implemented bulk loading with PostgreSQL COPY driven by Python (psycopg2), staging data in a raw schema before transformation. Kept dbt models modular across staging and marts layers so rebuilds stay manageable.",
+                                    "Successfully processed all five datasets into the warehouse with an 80% data quality test pass rate across dbt layers.",
                                     List.of(),
                                     List.of("Python", "dbt", "PostgreSQL", "Data Engineering", "Performance"),
                                     1),
