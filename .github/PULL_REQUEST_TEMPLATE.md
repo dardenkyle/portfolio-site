@@ -42,7 +42,7 @@ Documentation:
 Reason:
 
 <!-- If docs were not needed, explain why. -->
-<!-- See the Documentation Expectations section in CLAUDE.md: README, analytics docs, case studies, ADRs, and CLAUDE.md itself. -->
+<!-- See the Documentation Expectations section in AGENTS.md: README, analytics docs, case studies, ADRs, and AGENTS.md itself. -->
 
 ## Verification
 

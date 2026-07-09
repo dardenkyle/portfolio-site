@@ -14,7 +14,7 @@ The GA4 property is `G-RR5WDS9DYH`, loaded via the gtag snippet in
 
 Event names and parameters are load-bearing: GA4 reports depend on them. Do
 not rename events or parameters without updating dashboards (see the Agent
-Change Policy in `CLAUDE.md`).
+Change Policy in `AGENTS.md`).
 
 ## Event Reference
 
