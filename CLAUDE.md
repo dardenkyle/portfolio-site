@@ -16,7 +16,10 @@ backend service classes** — see "Where Content Lives" below.
 
 ### Frontend (run from `frontend/`)
 
-- `npm install` — install deps (required after fresh clone)
+- `npm ci` — install deps (required after fresh clone or in a new worktree).
+  Always use `npm ci`, not `npm install`, so `package-lock.json` is never
+  rewritten as a side effect; `npm install` is only for intentionally adding
+  or upgrading dependencies.
 - `npm run dev` — dev server at http://localhost:5173
 - `npm run typecheck` — TypeScript check (`tsc -b`)
 - `npm run lint` — ESLint

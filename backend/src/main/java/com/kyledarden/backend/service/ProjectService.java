@@ -91,7 +91,7 @@ public class ProjectService {
                     "Queue-based backend that scrapes and normalizes CS2 match data into a queryable Postgres schema.",
                     List.of("Gaming Analytics", "Data Pipeline", "Web Scraping", "API Development", "Automation"),
                     "https://github.com/dardenkyle/CS2-analytics",
-                    null,
+                    "https://dardenkyle.github.io/CS2-analytics/",
                     30,
                     OffsetDateTime.parse("2025-06-30T00:00:00Z"),
                     null,

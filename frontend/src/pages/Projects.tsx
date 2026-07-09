@@ -41,9 +41,10 @@ export default function Projects() {
         <section className="mx-auto max-w-3xl text-center space-y-4">
           <h1 className="text-4xl font-bold">Projects</h1>
           <p className="opacity-80">
-            A selection of my work, showcasing backend engineering with Python,
-            FastAPI, and PostgreSQL. These projects highlight my skills in API
-            design, data workflows, and system reliability.
+            A selection of my work — data pipelines, warehouses, and backend
+            services built with Python, SQL, dbt, FastAPI, PostgreSQL, and
+            Docker. These projects highlight my skills in data workflows, API
+            design, and system reliability.
           </p>
         </section>
         <ProjectsGrid projects={projects} />
