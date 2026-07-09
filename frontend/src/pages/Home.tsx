@@ -95,7 +95,7 @@ export default function Home() {
             store, a FastAPI service, and a React dashboard, deployed the whole
             way through. I also build dimensional data warehouses (dbt,
             star-schema modeling) and production backend services (FastAPI,
-            Postgres, Docker, AWS Cognito auth).{" "}
+            PostgreSQL, Docker, AWS Cognito auth).
             <br />
             <br />
             B.S. in Physics from UT Austin; graduate training in data science
