@@ -29,7 +29,7 @@ export default function About() {
             I also build dimensional data warehouses — most recently a
             star-schema warehouse over 176M+ IMDb records, with dbt staging and
             marts layers backed by data-quality tests — and backend services
-            with production-grade AWS Cognito auth, Dockerized Postgres, and
+            with production-grade AWS Cognito auth, Dockerized PostgreSQL, and
             per-service migrations.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
