@@ -46,7 +46,7 @@ Backend will be available at `http://localhost:8080`
 
 ```
 cd frontend
-npm install
+npm ci
 npm run dev
 ```
 
@@ -142,7 +142,7 @@ frontend/
 ## Contact
 
 - Email: [darden_kyle@hotmail.com](mailto:darden_kyle@hotmail.com)
-- LinkedIn: [linkedin.com/in/kyle-darden](https://www.linkedin.com/in/kyle-darden)
+- LinkedIn: [linkedin.com/in/kyle-darden](https://www.linkedin.com/in/kyle-darden/)
 - GitHub: [github.com/dardenkyle](https://github.com/dardenkyle)
 
 ## License

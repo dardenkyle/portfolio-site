@@ -81,8 +81,8 @@ export default function Contact() {
 
             {/* Tagline */}
             <p className="text-slate-300">
-              Backend-focused engineer passionate about building scalable,
-              efficient systems and learning cutting-edge technologies.
+              I build data platforms end to end — ingestion, storage, and the
+              APIs that serve them, on a backend-engineering foundation.
             </p>
 
             {/* Contact Methods */}
@@ -101,6 +101,8 @@ export default function Contact() {
                 <a
                   className="text-white hover:text-blue-400 transition-colors"
                   href="https://www.linkedin.com/in/kyle-darden/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   kyle-darden
                 </a>
@@ -111,6 +113,8 @@ export default function Contact() {
                 <a
                   className="text-white hover:text-blue-400 transition-colors"
                   href="https://github.com/dardenkyle"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   dardenkyle
                 </a>

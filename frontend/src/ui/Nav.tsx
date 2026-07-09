@@ -99,7 +99,7 @@ export default function Nav() {
             <img src="/github.png" alt="GitHub" className="w-5 h-5" />
           </a>
           <a
-            href="https://linkedin.com/in/kyle-darden"
+            href="https://www.linkedin.com/in/kyle-darden/"
             target="_blank"
             rel="noopener noreferrer"
             className={`p-2 rounded transition-all duration-300 ${getGlowClass(
@@ -109,7 +109,7 @@ export default function Nav() {
             onMouseLeave={handleMouseLeave}
             onClick={() =>
               handleExternalLinkClick(
-                "https://linkedin.com/in/kyle-darden",
+                "https://www.linkedin.com/in/kyle-darden/",
                 "LinkedIn"
               )
             }
