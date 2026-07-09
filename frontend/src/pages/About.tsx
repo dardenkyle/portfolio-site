@@ -13,16 +13,24 @@ export default function About() {
         <section className="mx-auto max-w-3xl text-center space-y-4">
           <h1 className="text-4xl font-bold">About</h1>
           <p className="opacity-80">
-            Focused on building data-heavy, reliable backends and automation
-            pipelines.
+            I build data platforms end to end — ingestion, storage, and the
+            APIs that serve them, on a backend-engineering foundation.
           </p>
         </section>
         <div className="space-y-6 bg-neutral-900/30 border border-neutral-800/50 rounded-xl p-6 shadow-lg">
           <p className="opacity-80 max-w-6xl mx-auto">
-            I’m a backend engineer specializing in Python, FastAPI, and
-            PostgreSQL. I build scalable, data-driven systems — from ETL
-            pipelines processing 176M+ records to SaaS platforms with
-            per-service migrations and CI/CD automation.
+            I’m a data engineer working in Python, SQL, and dbt on a
+            backend-engineering foundation of FastAPI, PostgreSQL, and Docker.
+            My flagship project, CS2 Analytics, is live and public — a Python
+            ingestion pipeline feeding a PostgreSQL store, a FastAPI service,
+            and a React dashboard, deployed the whole way through.
+          </p>
+          <p className="opacity-80 max-w-6xl mx-auto">
+            I also build dimensional data warehouses — most recently a
+            star-schema warehouse over 176M+ IMDb records, with dbt staging and
+            marts layers backed by data-quality tests — and backend services
+            with production-grade AWS Cognito auth, Dockerized PostgreSQL, and
+            per-service migrations.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
             I emphasize clear architecture, maintainable code, and thoughtful
@@ -30,13 +38,15 @@ export default function About() {
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
             I hold a B.S. in Physics from UT Austin (2022) and a postgraduate
-            certification in AI/ML from McCombs (2024), which strengthened my
-            foundation in data science and applied machine learning.
+            certificate in data science and machine learning from McCombs
+            (2024), and I’m currently completing CS coursework towards
+            enrolling in a graduate program.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
-            I’m currently focused on backend and data-engineering roles
-            (Python/FastAPI/SQL/AWS) — Austin or remote — where I can contribute
-            to data-heavy APIs, automation, and production-grade infrastructure.
+            I’m currently focused on data-engineering roles
+            (Python/SQL/dbt/AWS) — Austin or remote — where I can build
+            ingestion pipelines, warehouses, and the data-heavy APIs that
+            serve them.
           </p>
           <p className="opacity-80 max-w-6xl mx-auto">
             Outside of work, I enjoy competitive gaming, music, and weight
