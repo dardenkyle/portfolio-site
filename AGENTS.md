@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
@@ -54,7 +54,7 @@ Content updates are the most common task in this repo. Locations:
 - **Resume PDF and static assets** — `frontend/public/`
 
 Descriptions of external projects must match the actual state of their
-repos (`github.com/dardenkyle/<repo>`) and any live URLs — verify hosting,
+repos (`github.com/dardenkyle/<repo>`) and any live URLs - verify hosting,
 deploy status, test counts, and tech stacks there before writing claims.
 
 ## Architecture
@@ -113,7 +113,7 @@ Update docs in the same branch as the change that affects them:
   changes, hosting/deployment changes, analytics schema changes, or anything
   from the "must ask before" list below. Number files sequentially
   (`0001-short-title.md`) and follow the template in `docs/adr/0000-template.md`.
-- `CLAUDE.md` (this file) — when commands, content locations, architecture
+- `AGENTS.md` (this file, exposed as `CLAUDE.md` via symlink) — when commands, content locations, architecture
   boundaries, or deployment behavior change.
 
 Purely internal refactors that change no behavior, commands, or public

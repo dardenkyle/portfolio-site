@@ -4,7 +4,7 @@
 
 **FreightFolio** is a logistics SaaS platform built for small and mid-sized trucking carriers to **reduce reliance on spreadsheets** and **automate daily operational tasks** such as load tracking, invoicing, and payment reconciliation.
 
-It’s an **in-development**, production-style backend system showcasing **multi-tenant architecture**, **modular FastAPI services**, and **production-grade AWS Cognito authentication** — similar to the kind of software powering real logistics and ERP platforms. The source is private; a public overview repo describes the system, and code walkthroughs are available on request.
+It’s an **in-development**, production-style backend system showcasing **multi-tenant architecture**, **modular FastAPI services**, and **production-grade AWS Cognito authentication** - similar to the kind of software powering real logistics and ERP platforms. The source is private; a public overview repo describes the system, and code walkthroughs are available on request.
 
 ---
 

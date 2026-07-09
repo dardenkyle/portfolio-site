@@ -2,7 +2,7 @@
 
 ## Overview
 
-CS2 Analytics is a data platform built to help players and analysts make data-driven performance predictions in competitive Counter-Strike. It transforms raw match data into structured, queryable insights using a scraping and processing pipeline backed by PostgreSQL ingestion-state tables, then exposes this data through a documented API. The system is deployed end to end — a FastAPI service on Render serves player statistics from the production database to a public React dashboard on GitHub Pages — and demonstrates strong backend, data engineering, and DevOps fundamentals, including modular design, reliability patterns, and production-ready tooling.
+CS2 Analytics is a data platform built to help players and analysts make data-driven performance predictions in competitive Counter-Strike. It transforms raw match data into structured, queryable insights using a scraping and processing pipeline backed by PostgreSQL ingestion-state tables, then exposes this data through a documented API. The system is deployed end to end - a FastAPI service on Render serves player statistics from the production database to a public React dashboard on GitHub Pages - and demonstrates strong backend, data engineering, and DevOps fundamentals, including modular design, reliability patterns, and production-ready tooling.
 
 ## Purpose
 
@@ -39,7 +39,7 @@ A 130+ test Pytest suite runs in GitHub Actions on every push alongside Ruff lin
 
 - Deployed end to end: public dashboard on GitHub Pages backed by a live FastAPI service on Render and a production PostgreSQL database
 - Professional match, map, and player data collected and normalized into relational datasets ready for analytics or ML modeling
-- 130+ automated tests with linting and type checks running in CI on every push, for both backend and frontend
+- 130+ backend tests (Pytest) with linting and type checks running in CI on every push; the frontend is gated by its own build-and-lint CI workflow
 - Delivered professional documentation, tests, and modular architecture consistent with industry standards
 
 ## Future Work

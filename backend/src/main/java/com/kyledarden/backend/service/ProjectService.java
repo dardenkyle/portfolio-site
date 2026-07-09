@@ -88,7 +88,7 @@ public class ProjectService {
             new ProjectTemplate(
                     "cs2-analytics",
                     "CS2 Analytics Platform",
-                    "Live, end-to-end CS2 analytics platform — Python ingestion pipeline into PostgreSQL, a public FastAPI on Render, and a React dashboard on GitHub Pages.",
+                    "Live, end-to-end CS2 analytics platform - Python ingestion pipeline into PostgreSQL, a public FastAPI on Render, and a React dashboard on GitHub Pages.",
                     List.of("Gaming Analytics", "Data Pipeline", "Web Scraping", "API Development", "Automation"),
                     "https://github.com/dardenkyle/CS2-analytics",
                     "https://dardenkyle.github.io/CS2-analytics/",
@@ -98,7 +98,7 @@ public class ProjectService {
                     null,
 
                     /* overview */
-                    "CS2 Analytics is an open-source platform that scrapes, parses, and normalizes professional Counter-Strike 2 match data into a queryable PostgreSQL schema. I built it end-to-end — data model, scrapers, ingestion-state orchestration, API, and frontend — with reliability as the primary goal. It is deployed end to end: the FastAPI service runs on Render and a React dashboard on GitHub Pages serves player statistics from the production database.",
+                    "CS2 Analytics is an open-source platform that scrapes, parses, and normalizes professional Counter-Strike 2 match data into a queryable PostgreSQL schema. I built it end-to-end - data model, scrapers, ingestion-state orchestration, API, and frontend - with reliability as the primary goal. It is deployed end to end: the FastAPI service runs on Render and a React dashboard on GitHub Pages serves player statistics from the production database.",
 
                     /* techStack - now using references to TechService */
                     List.of(
@@ -127,11 +127,11 @@ public class ProjectService {
                                     1),
 
                             new Project.Challenge(
-                                    "from-long-runner-to-queued-jobs",
-                                    "Migrating from a single long-running script to a queued pattern",
-                                    "Initial ingestion ran as one long process, making failures costly and restarts painful; no isolation between work units.",
-                                    "Refactored into discrete idempotent jobs (per-match/per-page) with checkpointing and deduping. Introduced a simple terminal-driven dispatch loop to enqueue/dequeue units and record progress.",
-                                    "Improved resilience and recovery—failed jobs can be retried without re-running the entire pipeline.",
+                                    "from-long-runner-to-ingestion-state",
+                                    "Migrating from a single long-running script to ingestion-state tables",
+                                    "Initial ingestion ran as one long process, making failures costly and restarts painful; no isolation between work units and no durable record of what had been processed.",
+                                    "Refactored around PostgreSQL-backed ingestion-state tables for matches, maps, and demos, with source IDs as primary keys and explicit lifecycle states (rediscovery, retry, processed, failed, skipped) so rediscovery refreshes existing rows instead of duplicating work. Batch controllers own retry policy, scraper reset/rotation, and run summaries, while per-item stage services own fetch/parse/persist outcomes; scrapers only fetch and parsers only parse.",
+                                    "The pipeline is resumable and idempotent - failed items can be retried without re-running the entire pipeline.",
                                     List.of(),
                                     List.of("python", "architecture", "idempotency"),
                                     1),
@@ -150,10 +150,10 @@ public class ProjectService {
                                     "env-parity-without-containers",
                                     "Maintaining reproducible local environments before containerization",
                                     "Different developer machines and OS setups led to inconsistent Python deps, env vars, and DB connections.",
-                                    "Introduced `.env.example`, Makefile tasks (setup/run/test), pinned versions, seed scripts, and a Postman collection for API checks. Documented one-command bootstrap and DB init steps.",
-                                    "Reduced setup friction and made runs predictable; paved the way for future Docker/CI adoption.",
+                                    "Introduced `.env`-driven configuration, uv-managed dependencies with a committed lockfile, Alembic migrations behind a one-command DB init (`manage_db.py --init`), and Makefile-style entrypoints for setup, runs, and tests.",
+                                    "Reduced setup friction and made runs predictable; the setup evolved into the Docker Compose and CI baseline the project runs on today.",
                                     List.of(),
-                                    List.of("python", "git", "postman", "devx"),
+                                    List.of("python", "git", "devx"),
                                     3)
 
                     )),
