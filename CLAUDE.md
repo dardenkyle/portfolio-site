@@ -67,10 +67,10 @@ Content updates are the most common task in this repo. Locations:
   (localhost:5173, kyledarden.com, www.kyledarden.com). `CorsConfig.java`
   allows only GET/OPTIONS — so `POST /api/contact` is blocked cross-origin
   from the browser; keep this in mind when debugging contact-form issues.
-- GA4 analytics: `src/utils/analytics.ts` + `src/hooks/usePageTracking.tsx`,
-  wired through `src/components/AppWithTracking.tsx`. See
-  `docs/analytics.md` for the event reference and manual verification
-  checklist.
+- GA4 analytics: `frontend/src/utils/analytics.ts` +
+  `frontend/src/hooks/usePageTracking.tsx`, wired through
+  `frontend/src/components/AppWithTracking.tsx`. See `docs/analytics.md`
+  for the event reference and manual verification checklist.
 
 ## Deployment
 
