@@ -63,8 +63,10 @@ Content updates are the most common task in this repo. Locations:
 - API endpoints (all under `/api`): `/health`, `/hello`, `/projects`,
   `/skills`, `/skills/{slug}`, `POST /contact`. Controllers are thin;
   services own the data.
-- CORS allowed origins are set in `backend/src/main/resources/application.properties`
-  (localhost:5173 + kyledarden.com).
+- CORS: allowed origins are set in `backend/src/main/resources/application.properties`
+  (localhost:5173, kyledarden.com, www.kyledarden.com). `CorsConfig.java`
+  allows only GET/OPTIONS — so `POST /api/contact` is blocked cross-origin
+  from the browser; keep this in mind when debugging contact-form issues.
 - GA4 analytics: `src/utils/analytics.ts` + `src/hooks/usePageTracking.tsx`,
   wired through `src/components/AppWithTracking.tsx`. See
   `ANALYTICS_TRACKING.md` and `ANALYTICS_TESTING.md` for event conventions
