@@ -1,0 +1,41 @@
+# Label set for dardenkyle/portfolio-site (see issue #59).
+# Source of truth for the repo's labels: name, color, description.
+
+# Area
+- name: frontend
+  color: "1d76db"
+  description: Vite + React frontend
+- name: backend
+  color: "0e8a16"
+  description: Spring Boot API
+- name: content
+  color: "fbca04"
+  description: Projects, skills, page copy, case studies
+- name: analytics
+  color: "5319e7"
+  description: GA4 events and tracking
+- name: docs
+  color: "006b75"
+  description: README, ADRs, docs/
+- name: ci/deploy
+  color: "c5def5"
+  description: Workflows, GitHub Pages, build tooling
+
+# Type
+- name: bug
+  color: "d73a4a"
+  description: Something isn't working
+- name: enhancement
+  color: "a2eeef"
+  description: New feature or request
+- name: documentation
+  color: "0075ca"
+  description: Improvements or additions to documentation
+- name: question
+  color: "d876e3"
+  description: Further information is requested
+
+# Meta
+- name: chore
+  color: "ededed"
+  description: Maintenance with no user-facing change
