@@ -103,16 +103,18 @@ public class ProjectService {
                     /* techStack - now using references to TechService */
                     List.of(
                             new Project.TechReference("python", 1),
-                            new Project.TechReference("fastapi", 2),
-                            new Project.TechReference("postgresql", 3),
-                            new Project.TechReference("sqlalchemy", 4),
-                            new Project.TechReference("beautifulsoup", 5),
-                            new Project.TechReference("react", 6),
-                            new Project.TechReference("typescript", 7),
-                            new Project.TechReference("docker", 8),
-                            new Project.TechReference("github-actions", 9),
-                            new Project.TechReference("pytest", 10),
-                            new Project.TechReference("git", 11)),
+                            new Project.TechReference("sql", 2),
+                            new Project.TechReference("fastapi", 3),
+                            new Project.TechReference("postgresql", 4),
+                            new Project.TechReference("sqlalchemy", 5),
+                            new Project.TechReference("beautifulsoup", 6),
+                            new Project.TechReference("react", 7),
+                            new Project.TechReference("typescript", 8),
+                            new Project.TechReference("vite", 9),
+                            new Project.TechReference("docker", 10),
+                            new Project.TechReference("github-actions", 11),
+                            new Project.TechReference("pytest", 12),
+                            new Project.TechReference("git", 13)),
 
                     /* challenges */
                     List.of(
