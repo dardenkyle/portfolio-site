@@ -70,4 +70,4 @@ CS2 Analytics demonstrates how I approach backend and data engineering challenge
 
 **[View Source Code](https://github.com/dardenkyle/CS2-analytics)** - Complete implementation with documentation
 
-**[Live Demo](https://dardenkyle.github.io/CS2-analytics/)** - Public dashboard served live from the production database (the free-tier API can take ~30 seconds to wake after idle periods)
+**[Live Demo](https://dardenkyle.github.io/CS2-analytics/)** - Public dashboard served live from the production database
