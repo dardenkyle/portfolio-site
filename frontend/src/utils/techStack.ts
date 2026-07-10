@@ -6,6 +6,7 @@ export interface TechItem {
 
 export const TECH_STACK: TechItem[] = [
   { name: "Python", category: "Language", slug: "python" },
+  { name: "SQL", category: "Language", slug: "sql" },
   { name: "Java", category: "Language", slug: "java" },
   { name: "TypeScript", category: "Language", slug: "typescript" },
   { name: "FastAPI", category: "Backend", slug: "fastapi" },
@@ -16,5 +17,4 @@ export const TECH_STACK: TechItem[] = [
   { name: "AWS", category: "Cloud", slug: "aws" },
   { name: "dbt", category: "Data", slug: "dbt" },
   { name: "GitHub Actions", category: "CI/CD", slug: "github-actions" },
-  { name: "Tailwind CSS", category: "Styling", slug: "tailwind-css" },
 ];
