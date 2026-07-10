@@ -4,15 +4,15 @@
 
 **FreightFolio** is a logistics SaaS platform built for small and mid-sized trucking carriers to **reduce reliance on spreadsheets** and **automate daily operational tasks** such as load tracking, invoicing, and payment reconciliation.
 
-It’s an **in-development**, production-style backend system showcasing **multi-tenant architecture**, **modular FastAPI services**, and **production-grade AWS Cognito authentication** - similar to the kind of software powering real logistics and ERP platforms. The source is private; a public overview repo describes the system, and code walkthroughs are available on request.
+It’s an **in-development** backend system built from **modular FastAPI services** with **production-grade AWS Cognito authentication**, and a data model designed for planned multi-tenancy - similar to the kind of software powering real logistics and ERP platforms. The source is private; a public overview repo describes the system, and code walkthroughs are available on request.
 
 ---
 
 ### Purpose
 
-The goal of FreightFolio was to create a backend-driven SaaS product that demonstrates my ability to architect, document, and deploy **scalable, data-heavy applications** that solve real business problems.
+The goal of FreightFolio was to create a backend-driven SaaS product that demonstrates my ability to architect, document, and build **data-heavy backend applications** that solve real business problems.
 
-It bridges backend engineering and business process automation — replacing fragmented workflows with structured data models and automated logic for freight management, billing, and customer visibility.
+It bridges backend engineering and business process automation — replacing fragmented workflows with structured data models and validated API workflows for freight management, billing, and customer visibility.
 
 ---
 
@@ -25,12 +25,12 @@ FreightFolio is composed of several independent services tied together through a
   Endpoints follow REST conventions with full OpenAPI documentation and Pydantic-based validation.
 
 - **Data Model & Persistence:**  
-  A multi-tenant **PostgreSQL** design with tenant-scoped data and **per-service Alembic migrations** supports safe schema evolution without data overlap.  
+  A **PostgreSQL** design with **per-service Alembic migrations** supports safe schema evolution without data overlap; tenant-scoped data isolation is designed and planned for an upcoming milestone.  
   The ORM layer uses **SQLAlchemy 2.0** with typed models and foreign key constraints to preserve relational integrity.
 
-- **Background Automation:**  
-  Periodic jobs handle invoice generation, payment reminders, and load status updates.  
-  These processes simulate the automation layer found in real TMS (Transportation Management Systems).
+- **Domain Workflows:**  
+  Load, invoice, and payment operations are handled as structured, validated API workflows across the services.  
+  Scheduled background automation (invoice generation, payment reminders, load status updates) is planned, mirroring the automation layer found in real TMS (Transportation Management Systems).
 
 - **Authentication & Security:**  
   Implements **AWS Cognito**-based authentication (RS256 JWT verification with JWKS caching and key rotation), role-based permissions, and middleware for secure route access.
@@ -43,10 +43,10 @@ FreightFolio is composed of several independent services tied together through a
 
 ### Technical Highlights
 
-- Built a **multi-tenant SaaS backend** capable of supporting separate carrier accounts and isolated data.
+- Designed the data model for **planned multi-tenancy**, with tenant-scoped isolation ready to enable when it lands on the roadmap.
 - Engineered **per-service Alembic migrations**, ensuring modular and safe schema evolution.
 - Implemented **AWS Cognito authentication** and role-based access control for multi-user workflows.
-- Automated **invoicing, payment tracking, and document generation** via scheduled background tasks.
+- Modeled **invoicing, payment tracking, and load management** as structured API workflows, with scheduled automation planned.
 - Employed structured logging and environment-based configuration in preparation for cloud deployment.
 
 ---
@@ -54,9 +54,9 @@ FreightFolio is composed of several independent services tied together through a
 ### Results
 
 - In-development backend simulating the operations of a logistics SaaS platform, with load, invoice, and auth services functional.
-- **Reduced spreadsheet dependency** by automating load management, invoice creation, and payment tracking.
+- Replaces spreadsheet workflows with **structured data models and API-driven workflows** for load management, invoice creation, and payment tracking.
 - Pytest unit and integration tests cover routes and services.
-- Modular architecture allows each domain (loads, invoices, payments) to evolve independently or scale into microservices.
+- Modular architecture allows each domain (loads, invoices, payments) to evolve independently.
 - Documented with clear API specs and onboarding guides for future integration with a frontend or third-party dashboard.
 - Simple dashboard that displays some KPIs, this will be expanded on in later versions.
 
@@ -83,7 +83,7 @@ FreightFolio is composed of several independent services tied together through a
 
 ### Key Takeaway
 
-FreightFolio demonstrates how I build **production-ready backend systems** that automate real business workflows.  
+FreightFolio demonstrates how I build **well-structured backend systems** around real business workflows.  
 It reflects strong skills in **API design, data modeling, DevOps, and system modularity** — the same skills required for backend or platform engineering roles.
 
-The project mirrors the architecture of real SaaS logistics products and serves as a concrete example of my ability to design, document, and deploy reliable backend software.
+The project mirrors the architecture of real SaaS logistics products and serves as a concrete example of my ability to design, document, and build reliable backend software.
