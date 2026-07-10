@@ -160,8 +160,8 @@ public class ProjectService {
             new ProjectTemplate(
                     "freightfolio",
                     "FreightFolio (Logistics SaaS)",
-                    "Modular logistics SaaS backend for small carriers — AR/AP modules with per-service migrations, authentication via AWS Cognito, and a multi-tenant PostgreSQL design.",
-                    List.of("Logistics", "SaaS Platform", "Auth (AWS Cognito)", "Multi-tenant", "API Backend"),
+                    "Modular logistics SaaS backend for small carriers - AR/AP modules with per-service migrations, AWS Cognito authentication, and Dockerized PostgreSQL.",
+                    List.of("Logistics", "SaaS Platform", "Auth (AWS Cognito)", "API Backend"),
                     "https://github.com/dardenkyle/freightfolio-overview",
                     null,
                     10,
@@ -170,7 +170,7 @@ public class ProjectService {
                     null,
 
                     /* overview */
-                    "Private, in-development SaaS backend designed for small freight carriers. It provides a modular, scalable system to streamline logistics operations through FastAPI services, focusing on load management, invoicing, and secure user authentication via AWS Cognito. Not yet deployed; the source is private, with a public overview repo.",
+                    "Private, in-development SaaS backend designed for small freight carriers. It provides a modular system to streamline logistics operations through FastAPI services, focusing on load management, invoicing, and secure user authentication via AWS Cognito. Multi-tenant data isolation is designed and planned for an upcoming milestone. Not yet deployed; the source is private, with a public overview repo.",
 
                     /* techStack - using references to TechService */
                     List.of(
@@ -188,10 +188,10 @@ public class ProjectService {
                     List.of(
                             new Project.Challenge(
                                     "multi-tenant-shared-schema",
-                                    "Ensuring data isolation with a shared schema",
-                                    "Used a shared PostgreSQL schema with tenant_id on every table; needed strict isolation and performant queries while exposing tenant-scoped APIs.",
-                                    "Added tenant-aware query filters at the FastAPI dependency layer, enforced request-scoped tenant context, and created composite indexes on (tenant_id, key columns). Documented patterns for inserts/joins and added tests for cross-tenant leakage.",
-                                    "Achieved clean isolation with zero cross-tenant leaks in tests and sub-50ms median queries on tenant-scoped endpoints.",
+                                    "Designing for tenant data isolation",
+                                    "Planned multi-tenancy requires strict data isolation on a shared PostgreSQL schema with tenant_id on every table, without hurting query performance on tenant-scoped APIs.",
+                                    "Designed tenant-aware query filters at the FastAPI dependency layer with request-scoped tenant context, and composite indexes on (tenant_id, key columns). Documented patterns for inserts and joins so tenancy can be enabled consistently across services.",
+                                    "The isolation model is settled and documented, ready to enable when multi-tenancy lands on the roadmap.",
                                     List.of(),
                                     List.of("postgresql", "sql", "fastapi", "sqlalchemy + alembic", "api-design",
                                             "performance"),
@@ -202,7 +202,7 @@ public class ProjectService {
                                     "Integrating AWS Cognito with tenant-aware RBAC",
                                     "Needed authentication/authorization with roles and tenant context; JWTs had to carry role + tenant_id and be verified per route.",
                                     "Provisioned Cognito user pool & app client; normalized users/roles/tenants in Postgres; added JWT verification middleware and route-level role checks; mapped claims → request context for downstream queries.",
-                                    "Secure multi-tenant auth in place: route-level guards, least-privilege access, and auditable user/role changes.",
+                                    "Secure authentication in place: route-level guards, least-privilege access, and auditable user/role changes.",
                                     List.of(),
                                     List.of("aws", "fastapi", "postgresql", "api-security", "auth"),
                                     2),
