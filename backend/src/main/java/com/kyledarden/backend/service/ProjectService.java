@@ -408,7 +408,7 @@ public class ProjectService {
                                     "Containerized the suite with Docker so the same image runs locally and in CI, and managed dependencies with Poetry with pinned Playwright browser installs.",
                                     "The suite behaves the same everywhere it runs, from a laptop to the scheduled CI workflow.",
                                     List.of(),
-                                    List.of("Docker", "Python", "DevX"),
+                                    List.of("Docker", "Python", "devx"),
                                     2))));
 
     public List<Project> all() {
