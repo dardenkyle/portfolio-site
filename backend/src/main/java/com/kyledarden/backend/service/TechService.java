@@ -130,6 +130,11 @@ public class TechService {
                                         YearMonth.of(2024, 3),
                                         new ArrayList<>()),
 
+                        new TechItem("Playwright", "DevOps & Tools", "playwright",
+                                        "I use Playwright for real-browser automation in my QA work. It drives site-sentry's smoke, navigation, and UI checks against kyledarden.com on a twice-daily schedule.",
+                                        YearMonth.of(2025, 10),
+                                        new ArrayList<>()),
+
                         new TechItem("Postman", "DevOps & Tools", "postman",
                                         "I use Postman to test, document, and automate RESTful API requests and workflows during backend and data service development.",
                                         YearMonth.of(2024, 2),

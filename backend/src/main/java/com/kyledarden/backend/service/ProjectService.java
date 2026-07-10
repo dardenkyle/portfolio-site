@@ -363,7 +363,53 @@ public class ProjectService {
                                     "Delivered a clean dimensional warehouse powering downstream analytics and dashboards with minimal join complexity and intuitive naming conventions.",
                                     List.of(),
                                     List.of("dbt", "PostgreSQL", "Data Modeling", "Analytics"),
-                                    3))));
+                                    3))),
+
+            new ProjectTemplate(
+                    "site-sentry",
+                    "Site Sentry (QA Automation)",
+                    "Automated QA suite for kyledarden.com - Playwright + Pytest browser tests running twice daily via GitHub Actions, with HTML reports and Docker support.",
+                    List.of("QA Automation", "Testing", "CI/CD", "Monitoring"),
+                    "https://github.com/dardenkyle/site-sentry",
+                    null,
+                    50,
+                    OffsetDateTime.parse("2025-10-15T00:00:00Z"),
+                    null,
+                    null,
+
+                    /* overview */
+                    "site-sentry is an automated QA suite that continuously verifies kyledarden.com. Playwright drives real-browser smoke, navigation, and UI tests orchestrated with Pytest, and a scheduled GitHub Actions workflow runs the suite twice daily. Failures produce HTML reports with screenshots, and the suite runs locally or in Docker for consistent environments.",
+
+                    /* techStack - using references to TechService */
+                    List.of(
+                            new Project.TechReference("python", 1),
+                            new Project.TechReference("playwright", 2),
+                            new Project.TechReference("pytest", 3),
+                            new Project.TechReference("docker", 4),
+                            new Project.TechReference("github-actions", 5),
+                            new Project.TechReference("git", 6)),
+
+                    /* challenges */
+                    List.of(
+                            new Project.Challenge(
+                                    "scheduled-browser-tests-in-ci",
+                                    "Running browser tests unattended on a schedule",
+                                    "Real-browser tests had to run twice a day in CI without anyone watching, so failures needed to be diagnosable after the fact rather than reproduced live.",
+                                    "Built a scheduled GitHub Actions workflow around Playwright with Pytest as the runner, generating HTML reports and capturing screenshots automatically on failure. Kept the suite fast so scheduled runs give quick feedback.",
+                                    "Twice-daily automated runs complete in about two and a half minutes, with report artifacts that make failures reviewable without rerunning.",
+                                    List.of(),
+                                    List.of("Playwright", "Pytest", "GitHub Actions", "CI/CD"),
+                                    1),
+
+                            new Project.Challenge(
+                                    "consistent-test-environments",
+                                    "Keeping local and CI test environments identical",
+                                    "Browser automation is sensitive to environment drift - browser versions, dependencies, and OS differences can make tests pass locally and fail in CI.",
+                                    "Containerized the suite with Docker so the same image runs locally and in CI, and managed dependencies with Poetry with pinned Playwright browser installs.",
+                                    "The suite behaves the same everywhere it runs, from a laptop to the scheduled CI workflow.",
+                                    List.of(),
+                                    List.of("Docker", "Python", "devx"),
+                                    2))));
 
     public List<Project> all() {
         return projectTemplates.stream()
