@@ -14,102 +14,83 @@ public class TechService {
 
         private final List<TechItem> techItems = Arrays.asList(
 
+                        // ------------------ DATA ENGINEERING ------------------
+                        new TechItem("dbt", "Data Engineering", "dbt",
+                                        "dbt drives the transformation layer of my data warehouse work. My movie analytics ETL project models 176M+ IMDb records into a Kimball star schema with staging and marts layers, backed by 30+ data-quality tests.",
+                                        YearMonth.of(2025, 9),
+                                        new ArrayList<>()),
+
+                        new TechItem("PostgreSQL", "Data Engineering", "postgresql",
+                                        "PostgreSQL is my primary data store for both warehousing and applications. I design dimensional models for analytics warehouses and normalized schemas for services like CS2 Analytics.",
+                                        YearMonth.of(2023, 8),
+                                        new ArrayList<>()),
+
+                        new TechItem("SQLAlchemy", "Data Engineering", "sqlalchemy",
+                                        "I use SQLAlchemy to define relational models and queries in my Python services, keeping database access and schema management clean across ingestion pipelines and APIs.",
+                                        YearMonth.of(2023, 8),
+                                        new ArrayList<>()),
+
+                        new TechItem("Pandas", "Data Engineering", "pandas",
+                                        "My core library for data wrangling in ETL pipelines. I use it to clean, reshape, and prepare large datasets before loading them into PostgreSQL.",
+                                        YearMonth.of(2023, 8),
+                                        new ArrayList<>()),
+
+                        new TechItem("BeautifulSoup", "Data Engineering", "beautifulsoup",
+                                        "I use BeautifulSoup for web scraping and HTML parsing to extract structured data from web pages for ingestion pipelines and data collection projects.",
+                                        YearMonth.of(2024, 1),
+                                        new ArrayList<>()),
+
                         // ------------------ LANGUAGES ------------------
                         new TechItem("Python", "Languages", "python",
-                                        "Python serves as my primary language for backend development, ETL pipelines, and data analysis. I leverage it for FastAPI services, Pandas workflows, and machine learning experiments.",
+                                        "Python is my primary language for data engineering. I use it for ingestion pipelines, ETL jobs, and the FastAPI services that serve the results, including the CS2 Analytics pipeline with its Typer-based CLI.",
                                         YearMonth.of(2023, 8),
                                         new ArrayList<>()),
 
                         new TechItem("SQL", "Languages", "sql",
-                                        "For data engineering and analytics, SQL provides the foundation for my work. I write complex queries, optimize schemas, and integrate SQL logic across ETL and reporting pipelines.",
+                                        "SQL is the foundation of my data work. I write analytical queries, design dimensional and normalized schemas, and build dbt transformations across staging and marts layers.",
                                         YearMonth.of(2024, 5),
                                         new ArrayList<>()),
 
                         new TechItem("Java", "Languages", "java",
-                                        "With Java, I build enterprise-grade backend systems using Spring Boot, focusing on scalable REST APIs and strong typing. Currently studying DSA with Java.",
+                                        "I use Java with Spring Boot for backend services, including the API behind this portfolio site. I lean on its strong typing and mature tooling to keep services well-tested and maintainable.",
                                         YearMonth.of(2025, 8),
                                         new ArrayList<>()),
 
                         new TechItem("TypeScript", "Languages", "typescript",
-                                        "TypeScript ensures type safety in my React applications, maintaining reliability in frontend logic. It enables clean, maintainable UI development.",
+                                        "TypeScript keeps my React frontends type-safe and maintainable, including the CS2 Analytics dashboard and this site.",
                                         YearMonth.of(2025, 8),
                                         new ArrayList<>()),
 
-                        // ------------------ BACKEND & DATA ------------------
+                        // ------------------ BACKEND ------------------
                         new TechItem("FastAPI", "Backend", "fastapi",
-                                        "FastAPI powers my high-performance API development for backend services, analytics endpoints, and ETL integrations.",
+                                        "FastAPI powers my Python APIs, including the live CS2 Analytics service and the in-development FreightFolio backend with its AWS Cognito auth.",
                                         YearMonth.of(2025, 3),
                                         new ArrayList<>()),
 
                         new TechItem("Spring Boot", "Backend", "spring-boot",
-                                        "Spring Boot enables rapid development of production-ready Java applications with integrated data persistence, REST APIs, and comprehensive test coverage.",
+                                        "Spring Boot runs this portfolio's intentionally lightweight Java 21 REST API, with test coverage and CI on every change.",
                                         YearMonth.of(2025, 8),
                                         new ArrayList<>()),
 
-                        new TechItem("PostgreSQL", "Backend", "postgresql",
-                                        "PostgreSQL serves as my go-to database for analytics and warehousing. I design normalized schemas and dimensional models to support BI and reporting.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("dbt", "Backend", "dbt",
-                                        "I use dbt for SQL-based data transformation, testing, and documentation. Enables maintainable pipelines for analytics datasets.",
-                                        YearMonth.of(2025, 9),
-                                        new ArrayList<>()),
-
-                        new TechItem("SQLAlchemy", "Backend", "sqlalchemy",
-                                        "I use SQLAlchemy as my ORM for defining relational models and queries in my Python backend services, enabling clean database interactions and schema management.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("BeautifulSoup", "Backend", "beautifulsoup",
-                                        "I use BeautifulSoup for web scraping and HTML parsing to extract structured data from web pages for ETL pipelines and data collection projects.",
-                                        YearMonth.of(2024, 1),
-                                        new ArrayList<>()),
-
                         // ------------------ DATA SCIENCE & MACHINE LEARNING ------------------
-                        new TechItem("Pandas", "Data Science & Machine Learning", "pandas",
-                                        "My go-to library for data wrangling, feature engineering, and exploratory analysis. I use it extensively for ETL and data preparation in machine learning workflows.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
                         new TechItem("NumPy", "Data Science & Machine Learning", "numpy",
-                                        "I use NumPy for efficient numerical computation, vectorization, and matrix manipulation in ETL and model development.",
+                                        "I use NumPy for efficient numerical computation and vectorized operations when transforming and analyzing datasets.",
                                         YearMonth.of(2023, 8),
                                         new ArrayList<>()),
 
                         new TechItem("scikit-learn", "Data Science & Machine Learning", "scikit-learn",
-                                        "My preferred toolkit for prototyping ML models — regression, classification, and clustering. I apply it to predictive analytics and churn modeling.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("XGBoost", "Data Science & Machine Learning", "xgboost",
-                                        "I use XGBoost for high-performance gradient boosting models in predictive analytics and classification problems, focusing on feature importance and interpretability.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("Matplotlib", "Data Science & Machine Learning", "matplotlib",
-                                        "I use Matplotlib for detailed static visualizations and performance analysis of models and KPIs.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("Seaborn", "Data Science & Machine Learning", "seaborn",
-                                        "Built on Matplotlib, Seaborn lets me create statistical plots for exploratory data analysis, correlation studies, and distribution insights.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("Plotly", "Data Science & Machine Learning", "plotly",
-                                        "I use Plotly for interactive data visualization and dashboards that communicate analytics insights effectively.",
+                                        "I use scikit-learn to prototype regression, classification, and clustering models, applying training from my graduate data science and machine learning coursework.",
                                         YearMonth.of(2023, 8),
                                         new ArrayList<>()),
 
                         new TechItem("Jupyter Notebook", "Data Science & Machine Learning", "jupyter",
-                                        "I use Jupyter Notebook for exploratory data analysis, experimentation, and clear presentation of machine learning workflows.",
+                                        "I use Jupyter Notebook for exploratory data analysis and for validating datasets during pipeline development.",
                                         YearMonth.of(2023, 8),
                                         new ArrayList<>()),
 
                         // ------------------ FRONTEND ------------------
                         new TechItem("React", "Frontend", "react",
-                                        "My framework of choice for creating modular, responsive UIs. I use it for portfolio dashboards and data visualization interfaces.",
+                                        "My framework of choice for creating modular, responsive UIs. I use it for the CS2 Analytics dashboard and this portfolio site.",
                                         YearMonth.of(2025, 8),
                                         new ArrayList<>()),
 
@@ -125,17 +106,17 @@ public class TechService {
 
                         // ------------------ DEVOPS & TOOLS ------------------
                         new TechItem("Docker", "DevOps & Tools", "docker",
-                                        "I containerize all services for reproducible environments and smooth CI/CD deployments across dev and production.",
+                                        "I containerize services for reproducible environments and consistent CI/CD, including Dockerized Postgres for FreightFolio's per-service databases and migrations.",
                                         YearMonth.of(2025, 6),
                                         new ArrayList<>()),
 
                         new TechItem("AWS", "DevOps & Tools", "aws",
-                                        "I use AWS services for authentication workflows and password reset functionality, leveraging cloud-based identity management for secure user operations. Expanding skills with S3, Lambda, ECS, and RDS for full-stack deployments.",
+                                        "I use AWS Cognito for production-grade authentication in FreightFolio, with JWKS caching, key rotation, and RS256 token verification. Expanding skills with S3, Lambda, ECS, and RDS for full-stack deployments.",
                                         YearMonth.of(2025, 3),
                                         new ArrayList<>()),
 
                         new TechItem("GitHub Actions", "DevOps & Tools", "github-actions",
-                                        "I automate tests, builds, and deployments using GitHub Actions, ensuring reliable and repeatable CI/CD pipelines.",
+                                        "I automate tests, builds, and deployments with GitHub Actions, including CI for CS2 Analytics and a twice-daily QA suite that monitors this site.",
                                         YearMonth.of(2025, 3),
                                         new ArrayList<>()),
 
@@ -145,7 +126,7 @@ public class TechService {
                                         new ArrayList<>()),
 
                         new TechItem("Pytest", "DevOps & Tools", "pytest",
-                                        "I use Pytest for unit and integration testing to maintain code quality and catch regressions early in CI pipelines.",
+                                        "I use Pytest for unit and integration testing, including 137 automated tests on CS2 Analytics and the Playwright + Pytest QA suite that checks this site twice daily.",
                                         YearMonth.of(2024, 3),
                                         new ArrayList<>()),
 
