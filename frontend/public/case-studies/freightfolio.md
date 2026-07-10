@@ -25,7 +25,7 @@ FreightFolio is composed of several independent services tied together through a
   Endpoints follow REST conventions with full OpenAPI documentation and Pydantic-based validation.
 
 - **Data Model & Persistence:**  
-  A **PostgreSQL** design with **per-service Alembic migrations** supports safe schema evolution without data overlap; tenant-scoped data isolation is designed and planned for an upcoming milestone.  
+  A **PostgreSQL** design with **per-service Alembic migrations** provides per-service schema separation and safe schema evolution today; tenant-scoped data isolation is designed and planned for an upcoming milestone.  
   The ORM layer uses **SQLAlchemy 2.0** with typed models and foreign key constraints to preserve relational integrity.
 
 - **Domain Workflows:**  
@@ -58,7 +58,7 @@ FreightFolio is composed of several independent services tied together through a
 - Pytest unit and integration tests cover routes and services.
 - Modular architecture allows each domain (loads, invoices, payments) to evolve independently.
 - Documented with clear API specs and onboarding guides for future integration with a frontend or third-party dashboard.
-- Simple dashboard that displays some KPIs, this will be expanded on in later versions.
+- Simple dashboard that displays some KPIs. This will be expanded on in later versions.
 
 ---
 
