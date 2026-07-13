@@ -26,6 +26,9 @@ jobs:
   frontend:
     name: Frontend (Node)
     runs-on: ubuntu-latest
+    env:
+      # Prerendering fetches project/skill routes from the API at build time
+      VITE_API_URL: ${{ secrets.VITE_API_URL }}
     defaults:
       run:
         working-directory: frontend
