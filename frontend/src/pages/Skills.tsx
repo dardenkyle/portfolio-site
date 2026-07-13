@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { getSkills } from "@/api/client";
 import type { ApiSkillItem } from "@/api/types";
 import { useRandomGlow } from "@/hooks/useRandomGlow";

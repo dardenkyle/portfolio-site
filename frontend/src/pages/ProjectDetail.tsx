@@ -1,6 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router";
 import { apiGet } from "@/api/client";
 import type { Project } from "@/domain/projects";
 import Button from "@/ui/Button";
