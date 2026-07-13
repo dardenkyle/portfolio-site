@@ -1,6 +1,6 @@
 import type { Project } from "@/domain/projects";
 import TagChip from "@/ui/TagChip";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
 
 export default function ProjectCard({ p }: { p: Project }) {

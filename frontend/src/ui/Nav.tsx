@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
 import { trackExternalLink } from "@/utils/analytics";
 

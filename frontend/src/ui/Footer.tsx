@@ -1,5 +1,5 @@
 import Button from "./Button";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
 
 export default function Footer() {
   const location = useLocation();
