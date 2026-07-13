@@ -44,6 +44,10 @@ export default {
       "/skills",
       "/about",
       "/contact",
+      // Caught by the "*" route, so this prerenders the NotFound page;
+      // the deploy workflow copies it to 404.html, which GitHub Pages
+      // serves (with a real 404 status) for unknown paths
+      "/404",
       ...projectSlugs.map((slug) => `/projects/${slug}`),
       ...PROJECTS_WITH_CASE_STUDIES.map(
         (slug) => `/projects/${slug}/case-study`
