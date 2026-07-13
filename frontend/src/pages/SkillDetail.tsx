@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getSkillBySlug } from "@/api/client";
+import { ApiError, getSkillBySlug } from "@/api/client";
 import Button from "@/ui/Button";
 import ProjectCard from "@/ui/ProjectCard";
 import { toProject } from "@/api/mappers";
@@ -22,8 +22,14 @@ export function meta({ data }: Route.MetaArgs) {
 export async function loader({ params }: Route.LoaderArgs) {
   try {
     return await getSkillBySlug(params.slug);
-  } catch {
-    throw new Response("Skill not found.", { status: 404 });
+  } catch (error) {
+    // Only an API 404 means the skill doesn't exist; outages and server
+    // errors must propagate so they fail the build instead of quietly
+    // prerendering a "Skill Not Found" page.
+    if (error instanceof ApiError && error.status === 404) {
+      throw new Response("Skill not found.", { status: 404 });
+    }
+    throw error;
   }
 }
 
