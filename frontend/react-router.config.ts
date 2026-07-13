@@ -21,11 +21,9 @@ async function prerenderedRoutePaths(clientDir: string): Promise<string[]> {
 }
 
 // GitHub Pages 301s directory paths without a trailing slash, so the
-// sitemap lists the canonical trailing-slash form crawlers get a 200
-// from; /404 is the error page and must not be indexed
+// sitemap lists the canonical trailing-slash form crawlers get a 200 from
 function sitemapXml(paths: string[]): string {
   const urls = paths
-    .filter((p) => p !== "/404")
     .map((p) => `${SITE_ORIGIN}${p === "/" ? "/" : `${p}/`}`)
     .map((loc) => `  <url><loc>${loc}</loc></url>`)
     .join("\n");
@@ -98,9 +96,11 @@ const config: Config = {
     if (routePaths.length === 0) {
       throw new Error(`Sitemap: no prerendered routes found in ${clientDir}`);
     }
+    // /404 is the error page and must not be indexed
+    const sitemapPaths = routePaths.filter((p) => p !== "/404");
     const sitemapPath = path.join(clientDir, "sitemap.xml");
-    await writeFile(sitemapPath, sitemapXml(routePaths), "utf-8");
-    console.log(`Sitemap: ${routePaths.length - 1} URLs -> ${sitemapPath}`);
+    await writeFile(sitemapPath, sitemapXml(sitemapPaths), "utf-8");
+    console.log(`Sitemap: ${sitemapPaths.length} URLs -> ${sitemapPath}`);
   },
 };
 
