@@ -1,38 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ProjectsGrid from "@/ui/ProjectGrid";
-import type { Project } from "@/domain/projects";
 import { apiGet } from "@/api/client";
 import type { ApiProject } from "@/api/types";
 import { toProject } from "@/api/mappers";
+import { pageMeta } from "@/utils/meta";
+import type { Route } from "./+types/Projects";
 
-export default function Projects() {
-  const [projects, setProjects] = useState<Project[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+export function meta() {
+  return pageMeta(
+    "Projects — Kyle Darden",
+    "Data pipelines, warehouses, and backend services built with Python, SQL, dbt, FastAPI, PostgreSQL, and Docker."
+  );
+}
 
-  useEffect(() => {
-    let alive = true;
-    apiGet<ApiProject[]>("projects")
-      .then((data) => {
-        if (!alive) return;
-        const mapped = data.map(toProject);
-        // Sort projects by order value (ascending)
-        const sorted = mapped.sort((a, b) => (a.order || 0) - (b.order || 0));
-        setProjects(sorted);
-      })
-      .catch((e) => alive && setError(e.message));
-    return () => {
-      alive = false;
-    };
-  }, []);
+// Runs at build time (prerender); the result ships as static data.
+export async function loader() {
+  const list = await apiGet<ApiProject[]>("projects");
+  // Sort projects by order value (ascending)
+  return list.map(toProject).sort((a, b) => (a.order || 0) - (b.order || 0));
+}
 
+export default function Projects({
+  loaderData: projects,
+}: Route.ComponentProps) {
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  if (error)
-    return <main className="max-w-5xl mx-auto p-6">Error: {error}</main>;
-  if (!projects) return <main className="max-w-5xl mx-auto p-6">Loading…</main>;
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-8">

@@ -1,4 +1,12 @@
 import { useEffect } from "react";
+import { pageMeta } from "@/utils/meta";
+
+export function meta() {
+  return pageMeta(
+    "About — Kyle Darden",
+    "Data engineer working in Python, SQL, and dbt on a backend-engineering foundation of FastAPI, PostgreSQL, and Docker."
+  );
+}
 
 export default function About() {
   // Scroll to top when component mounts

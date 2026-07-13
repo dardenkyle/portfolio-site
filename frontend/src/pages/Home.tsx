@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { apiGet } from "@/api/client";
 import type { ApiProject } from "@/api/types";
 import ProjectsGrid from "@/ui/ProjectGrid";
@@ -6,6 +6,8 @@ import Button from "@/ui/Button";
 import TechStack from "@/ui/TechStack";
 import { toProject } from "@/api/mappers";
 import type { Project } from "@/domain/projects";
+import { pageMeta, SITE_TITLE, SITE_DESCRIPTION } from "@/utils/meta";
+import type { Route } from "./+types/Home";
 
 // Order: explicit order first (asc), then most recently updated.
 function sortProjects(a: Project, b: Project) {
@@ -17,22 +19,23 @@ function sortProjects(a: Project, b: Project) {
   return bd - ad; // newer first
 }
 
-export default function Home() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [err, setErr] = useState<string | null>(null);
+export function meta() {
+  return pageMeta(SITE_TITLE, SITE_DESCRIPTION);
+}
 
-  useEffect(() => {
-    apiGet<ApiProject[]>("projects")
-      .then((list) => setProjects(list.map(toProject).sort(sortProjects)))
-      .catch((e) => setErr(e.message));
-  }, []);
+// Runs at build time (prerender); the result ships as static data.
+export async function loader() {
+  const list = await apiGet<ApiProject[]>("projects");
+  return list.map(toProject).sort(sortProjects);
+}
 
+export default function Home({ loaderData: projects }: Route.ComponentProps) {
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const teasers = useMemo(() => projects.slice(0, 3), [projects]);
+  const teasers = projects.slice(0, 3);
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-14">
@@ -120,11 +123,7 @@ export default function Home() {
           </Button>
         </header>
 
-        {err ? (
-          <p className="text-red-400">Failed to load projects: {err}</p>
-        ) : (
-          <ProjectsGrid projects={teasers} />
-        )}
+        <ProjectsGrid projects={teasers} />
       </section>
 
       {/* Tech Stack */}

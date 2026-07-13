@@ -1,59 +1,65 @@
 import ReactMarkdown from "react-markdown";
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router";
+import { useEffect } from "react";
+import { Link } from "react-router";
 import { apiGet } from "@/api/client";
-import type { Project } from "@/domain/projects";
 import Button from "@/ui/Button";
 import type { ApiProject } from "@/api/types";
 import { toProject } from "@/api/mappers";
 import { PROJECTS_WITH_CASE_STUDIES } from "@/config/caseStudies";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
 import { trackContentView } from "@/utils/analytics";
+import { pageMeta } from "@/utils/meta";
+import type { Route } from "./+types/ProjectDetail";
 
-export default function ProjectDetail() {
-  const { slug } = useParams();
-  const [project, setProject] = useState<Project | null>(null);
-  const [error, setError] = useState<string | null>(null);
+export function meta({ data }: Route.MetaArgs) {
+  // data is undefined when the loader threw (ErrorBoundary render)
+  if (!data) {
+    return pageMeta("Project Not Found — Kyle Darden", "This project doesn't exist.");
+  }
+  return pageMeta(
+    `${data.title} — Kyle Darden`,
+    data.summary || `${data.title} — project details.`
+  );
+}
+
+// Runs at build time (prerender); the result ships as static data.
+export async function loader({ params }: Route.LoaderArgs) {
+  const list = await apiGet<ApiProject[]>("projects");
+  const project = list
+    .map(toProject)
+    .find((p) => p.slug.toLowerCase() === params.slug.toLowerCase());
+  if (!project) {
+    throw new Response("Project not found.", { status: 404 });
+  }
+  return project;
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="min-h-screen flex items-center justify-center flex-col gap-4">
+      <h1 className="text-2xl font-bold text-white">Project Not Found</h1>
+      <p className="text-slate-400">This project doesn't exist.</p>
+      <Button to="/projects" variant="primary">
+        Back to Projects
+      </Button>
+    </div>
+  );
+}
+
+export default function ProjectDetail({
+  loaderData: project,
+}: Route.ComponentProps) {
   const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
 
+  // Track project view
   useEffect(() => {
-    if (!slug) {
-      setError("Missing project slug.");
-      return;
-    }
-    let alive = true;
-
-    apiGet<ApiProject[]>("projects")
-      .then((list) => {
-        if (!alive) return;
-        const mapped = list.map(toProject);
-        const p = mapped.find(
-          (x) => x.slug.toLowerCase() === slug.toLowerCase()
-        );
-        if (!p) {
-          setError("Project not found.");
-          return;
-        }
-        setProject(p);
-
-        // Track project view
-        trackContentView("project", p.title, p.slug);
-      })
-      .catch((e) => alive && setError(e.message));
-
-    return () => {
-      alive = false;
-    };
-  }, [slug]);
+    trackContentView("project", project.title, project.slug);
+  }, [project.title, project.slug]);
 
   // Scroll to top when component mounts or slug changes
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]);
-
-  if (error)
-    return <main className="max-w-5xl mx-auto p-6">Error: {error}</main>;
-  if (!project) return <main className="max-w-5xl mx-auto p-6">Loading…</main>;
+  }, [project.slug]);
 
   // Already sorted in the mapper; just provide safe fallbacks.
   const tech = project.techStack ?? [];

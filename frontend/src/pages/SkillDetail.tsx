@@ -1,57 +1,56 @@
-import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { getSkillBySlug } from "@/api/client";
-import type { ApiSkillItem } from "@/api/types";
 import Button from "@/ui/Button";
 import ProjectCard from "@/ui/ProjectCard";
 import { toProject } from "@/api/mappers";
 import { trackContentView } from "@/utils/analytics";
+import { pageMeta } from "@/utils/meta";
+import type { Route } from "./+types/SkillDetail";
 
-export default function SkillDetail() {
-  const { slug } = useParams<{ slug: string }>();
-  const [skill, setSkill] = useState<ApiSkillItem | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export function meta({ data }: Route.MetaArgs) {
+  // data is undefined when the loader threw (ErrorBoundary render)
+  if (!data) {
+    return pageMeta("Skill Not Found — Kyle Darden", "This skill doesn't exist.");
+  }
+  return pageMeta(
+    `${data.name} — Kyle Darden`,
+    data.description || `My experience with ${data.name}.`
+  );
+}
 
+// Runs at build time (prerender); the result ships as static data.
+export async function loader({ params }: Route.LoaderArgs) {
+  try {
+    return await getSkillBySlug(params.slug);
+  } catch {
+    throw new Response("Skill not found.", { status: 404 });
+  }
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="min-h-screen flex items-center justify-center flex-col gap-4">
+      <h1 className="text-2xl font-bold text-white">Skill Not Found</h1>
+      <p className="text-slate-400">This skill doesn't exist.</p>
+      <Button to="/" variant="primary">
+        Back to Home
+      </Button>
+    </div>
+  );
+}
+
+export default function SkillDetail({
+  loaderData: skill,
+}: Route.ComponentProps) {
+  // Track skill view
   useEffect(() => {
-    if (!slug) return;
-
-    getSkillBySlug(slug)
-      .then((skillData) => {
-        setSkill(skillData);
-        // Track skill view
-        if (skillData) {
-          trackContentView("skill", skillData.name, skillData.slug);
-        }
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [slug]);
+    trackContentView("skill", skill.name, skill.slug);
+  }, [skill.name, skill.slug]);
 
   // Scroll to top when component mounts or slug changes
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-slate-400">Loading skill details...</div>
-      </div>
-    );
-  }
-
-  if (error || !skill) {
-    return (
-      <div className="min-h-screen flex items-center justify-center flex-col gap-4">
-        <h1 className="text-2xl font-bold text-white">Skill Not Found</h1>
-        <p className="text-slate-400">{error || "This skill doesn't exist."}</p>
-        <Button to="/" variant="primary">
-          Back to Home
-        </Button>
-      </div>
-    );
-  }
+  }, [skill.slug]);
 
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-8">

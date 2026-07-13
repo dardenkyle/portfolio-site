@@ -1,8 +1,11 @@
 import { StrictMode } from "react";
-import { Links, Meta, Outlet, Scripts } from "react-router";
+import { Links, Meta, Outlet, Scripts, isRouteErrorResponse } from "react-router";
 import "@/index.css";
 import Starfield from "@/ui/Starfield";
 import { usePageTracking } from "@/hooks/usePageTracking";
+import { pageMeta, SITE_TITLE, SITE_DESCRIPTION } from "@/utils/meta";
+import NotFound from "@/pages/NotFound";
+import type { Route } from "./+types/root";
 
 const GA_MEASUREMENT_ID = "G-RR5WDS9DYH";
 
@@ -16,17 +19,18 @@ const GA_INIT = `
   gtag("config", "${GA_MEASUREMENT_ID}");
 `;
 
+// Fallback for routes without their own meta export; every page module
+// overrides this with route-specific tags via pageMeta().
+export function meta() {
+  return pageMeta(SITE_TITLE, SITE_DESCRIPTION);
+}
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Kyle Darden — Portfolio</title>
-        <meta
-          name="description"
-          content="Kyle Darden — Data Engineer & backend systems builder. Live CS2 analytics platform, dbt data warehousing, and FastAPI services."
-        />
 
         {/* Favicon(s) */}
         <link
@@ -37,12 +41,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <link rel="manifest" href="/site.webmanifest" />
 
-        {/* Social preview (add /public/og-image.png if you want previews) */}
-        <meta property="og:title" content="Kyle Darden — Portfolio" />
-        <meta
-          property="og:description"
-          content="Kyle Darden — Data Engineer & backend systems builder. Live CS2 analytics platform, dbt data warehousing, and FastAPI services."
-        />
+        {/* Social preview (add /public/og-image.png if you want previews).
+            og:title/og:description are per-route via meta exports. */}
         <meta property="og:type" content="website" />
 
         {/* Google tag (gtag.js) */}
@@ -110,5 +110,25 @@ export default function App() {
         <Outlet />
       </div>
     </div>
+  );
+}
+
+// Last-resort boundary: loader 404s are handled by the route-level
+// boundaries, so this mostly covers unexpected render/data errors.
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+  if (isRouteErrorResponse(error) && error.status === 404) {
+    return <NotFound />;
+  }
+
+  return (
+    <main className="min-h-screen flex items-center justify-center flex-col gap-4 p-6 text-center">
+      <h1 className="text-2xl font-bold text-white">Something went wrong</h1>
+      <p className="text-slate-400">
+        An unexpected error occurred. Please try again.
+      </p>
+      <a href="/" className="underline hover:no-underline">
+        Go back home
+      </a>
+    </main>
   );
 }

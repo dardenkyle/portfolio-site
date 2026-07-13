@@ -11,9 +11,10 @@
     "jsx": "react-jsx",
     "strict": true,
     "baseUrl": ".",
+    "rootDirs": [".", "./.react-router/types"],
     "paths": { "@/*": ["src/*"] },
     "types": ["vite/client"] // keep Node types OUT of app tsconfig
   },
-  "include": ["src"],
+  "include": ["src", ".react-router/types/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,22 +1,25 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
 import { getSkills } from "@/api/client";
 import type { ApiSkillItem } from "@/api/types";
 import { useRandomGlow } from "@/hooks/useRandomGlow";
-import Button from "@/ui/Button";
+import { pageMeta } from "@/utils/meta";
+import type { Route } from "./+types/Skills";
 
-export default function Skills() {
-  const [skills, setSkills] = useState<ApiSkillItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export function meta() {
+  return pageMeta(
+    "Skills & Technologies — Kyle Darden",
+    "The technologies, frameworks, and tools I use to build modern applications."
+  );
+}
+
+// Runs at build time (prerender); the result ships as static data.
+export async function loader() {
+  return getSkills();
+}
+
+export default function Skills({ loaderData: skills }: Route.ComponentProps) {
   const { handleMouseEnter, handleMouseLeave, getGlowClass } = useRandomGlow();
-
-  useEffect(() => {
-    getSkills()
-      .then(setSkills)
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -31,26 +34,6 @@ export default function Skills() {
     acc[skill.category].push(skill);
     return acc;
   }, {} as Record<string, ApiSkillItem[]>);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-slate-400">Loading skills...</div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center flex-col gap-4">
-        <h1 className="text-2xl font-bold text-white">Error Loading Skills</h1>
-        <p className="text-slate-400">{error}</p>
-        <Button to="/" variant="primary">
-          Back to Home
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-14">

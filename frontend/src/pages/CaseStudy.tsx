@@ -1,109 +1,60 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router";
 import ReactMarkdown from "react-markdown";
 import Button from "@/ui/Button";
 import { trackContentView } from "@/utils/analytics";
 import { apiGet } from "@/api/client";
-import type { Project } from "@/domain/projects";
 import type { ApiProject } from "@/api/types";
 import { toProject } from "@/api/mappers";
+import { pageMeta } from "@/utils/meta";
+import type { Route } from "./+types/CaseStudy";
 
-export default function CaseStudy() {
+export function meta({ data }: Route.MetaArgs) {
+  // data is undefined when the loader threw (ErrorBoundary render)
+  if (!data) {
+    return pageMeta(
+      "Case Study Not Found — Kyle Darden",
+      "This case study doesn't exist yet."
+    );
+  }
+  return pageMeta(
+    `${data.project.title} Case Study — Kyle Darden`,
+    data.project.summary ||
+      `Case study for the ${data.project.title} project.`
+  );
+}
+
+// Runs at build time (prerender) in Node, so the case-study markdown is
+// read straight from public/ instead of fetched over HTTP; the result
+// ships as static data.
+export async function loader({ params }: Route.LoaderArgs) {
+  const { slug } = params;
+
+  const [project, content] = await Promise.all([
+    apiGet<ApiProject[]>("projects").then((list) =>
+      list
+        .map(toProject)
+        .find((p) => p.slug.toLowerCase() === slug.toLowerCase())
+    ),
+    import("node:fs/promises").then((fs) =>
+      fs
+        .readFile(`public/case-studies/${slug}.md`, "utf-8")
+        .catch(() => null)
+    ),
+  ]);
+
+  if (!project || content === null) {
+    throw new Response("Case study not found.", { status: 404 });
+  }
+  return { project, content };
+}
+
+export function ErrorBoundary() {
   const { slug } = useParams();
-  const [content, setContent] = useState<string>("");
-  const [project, setProject] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!slug) {
-      setError("Missing project slug");
-      setLoading(false);
-      return;
-    }
-
-    // Fetch both project data and case study content
-    Promise.all([
-      // Fetch project data for repository link
-      apiGet<ApiProject[]>("projects").then((list) => {
-        const mapped = list.map(toProject);
-        return mapped.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
-      }),
-      // Fetch case study markdown content
-      fetch(`/case-studies/${slug}.md`).then(async (response) => {
-        if (!response.ok) {
-          throw new Error("Case study not found");
-        }
-        return response.text();
-      }),
-    ])
-      .then(([projectData, markdownContent]) => {
-        if (!projectData) {
-          throw new Error("Project not found");
-        }
-        setProject(projectData);
-        setContent(markdownContent);
-
-        // Track case study view
-        trackContentView("case_study", slug, slug);
-      })
-      .catch((err) => {
-        setError(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [slug]);
-
-  // Scroll to top when component mounts or slug changes
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <main className="max-w-5xl mx-auto p-6">
-        <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
-          <span className="ml-3 text-slate-300">Loading case study...</span>
-        </div>
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main className="max-w-5xl mx-auto p-6">
-        <nav className="mb-8">
-          <Button
-            to={`/projects/${slug}`}
-            size="sm"
-            variant="link"
-            useGlow
-            glowKey="project-back"
-          >
-            ← Back to Project
-          </Button>
-        </nav>
-
-        <div className="text-center py-12">
-          <h1 className="text-2xl font-bold text-white mb-4">
-            Case Study Not Found
-          </h1>
-          <p className="text-slate-400 mb-6">
-            The case study for "{slug}" doesn't exist yet.
-          </p>
-          <Button to={`/projects/${slug}`} variant="link" size="sm">
-            ← Back to Project
-          </Button>
-        </div>
-      </main>
-    );
-  }
 
   return (
-    <main className="max-w-5xl mx-auto p-6 space-y-8">
-      <nav className="flex items-center justify-between">
+    <main className="max-w-5xl mx-auto p-6">
+      <nav className="mb-8">
         <Button
           to={`/projects/${slug}`}
           size="sm"
@@ -113,8 +64,50 @@ export default function CaseStudy() {
         >
           ← Back to Project
         </Button>
+      </nav>
 
-        {project?.repoUrl && (
+      <div className="text-center py-12">
+        <h1 className="text-2xl font-bold text-white mb-4">
+          Case Study Not Found
+        </h1>
+        <p className="text-slate-400 mb-6">
+          The case study for "{slug}" doesn't exist yet.
+        </p>
+        <Button to={`/projects/${slug}`} variant="link" size="sm">
+          ← Back to Project
+        </Button>
+      </div>
+    </main>
+  );
+}
+
+export default function CaseStudy({ loaderData }: Route.ComponentProps) {
+  const { project, content } = loaderData;
+
+  // Track case study view
+  useEffect(() => {
+    trackContentView("case_study", project.slug, project.slug);
+  }, [project.slug]);
+
+  // Scroll to top when component mounts or slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [project.slug]);
+
+  return (
+    <main className="max-w-5xl mx-auto p-6 space-y-8">
+      <nav className="flex items-center justify-between">
+        <Button
+          to={`/projects/${project.slug}`}
+          size="sm"
+          variant="link"
+          useGlow
+          glowKey="project-back"
+        >
+          ← Back to Project
+        </Button>
+
+        {project.repoUrl && (
           <Button
             href={project.repoUrl}
             size="sm"

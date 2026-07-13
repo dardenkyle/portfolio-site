@@ -1,5 +1,13 @@
 import Button from "@/ui/Button";
 import { useState, useEffect } from "react";
+import { pageMeta } from "@/utils/meta";
+
+export function meta() {
+  return pageMeta(
+    "Contact — Kyle Darden",
+    "Get in touch about data engineering roles, projects, or collaboration."
+  );
+}
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
