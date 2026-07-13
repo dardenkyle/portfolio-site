@@ -52,11 +52,29 @@ export default function Contact() {
     }
 
     try {
-      // Submit to FormSubmit
-      await fetch("https://formsubmit.co/darden_kyle@hotmail.com", {
-        method: "POST",
-        body: formData,
-      });
+      // FormSubmit only processes programmatic (fetch) posts on its
+      // /ajax/ endpoint; the plain endpoint answers them with 200 +
+      // homepage HTML and silently drops the submission (issue #82).
+      // The path segment is FormSubmit's random-string alias for the
+      // destination address, keeping the email out of the bundle.
+      const response = await fetch(
+        "https://formsubmit.co/ajax/af29b69af1f12fb2889f3bb3d41b2376",
+        {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: formData,
+        }
+      );
+
+      // FormSubmit reports failures as 200 + {"success": "false"}, so
+      // the body is the only reliable signal
+      const result = (await response.json()) as {
+        success?: string;
+        message?: string;
+      };
+      if (!response.ok || result.success !== "true") {
+        throw new Error(result.message || `HTTP ${response.status}`);
+      }
 
       setShowSuccess(true);
       form.reset();
