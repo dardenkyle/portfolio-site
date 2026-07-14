@@ -330,9 +330,9 @@ public class ProjectService {
                             new Project.TechReference("dbt", 4),
                             new Project.TechReference("pandas", 5),
                             new Project.TechReference("numpy", 6),
-                            new Project.TechReference("docker", 10),
-                            new Project.TechReference("git", 11),
-                            new Project.TechReference("github-actions", 12)),
+                            new Project.TechReference("docker", 7),
+                            new Project.TechReference("git", 8),
+                            new Project.TechReference("github-actions", 9)),
 
                     /* challenges */
                     List.of(
