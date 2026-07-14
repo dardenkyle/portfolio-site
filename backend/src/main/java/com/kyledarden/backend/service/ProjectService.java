@@ -172,7 +172,7 @@ public class ProjectService {
                     null,
 
                     /* overview */
-                    "Private, in-development SaaS backend designed for small freight carriers. It provides a modular system to streamline logistics operations through FastAPI services, focusing on load management, invoicing, and secure user authentication via AWS Cognito. Multi-tenant data isolation is designed and planned for an upcoming milestone. Not yet deployed; the source is private, with a public overview repo.",
+                    "Private SaaS backend designed for small freight carriers; active development is paused after the venture behind it ended before launch. It provides a modular system to streamline logistics operations through FastAPI services, focusing on load management, invoicing, and secure user authentication via AWS Cognito. Multi-tenant data isolation is designed but not yet enabled. Not deployed; the source is private, with a public overview repo.",
 
                     /* techStack - using references to TechService */
                     List.of(
