@@ -35,6 +35,11 @@ public class TechService {
                                         YearMonth.of(2023, 8),
                                         new ArrayList<>()),
 
+                        new TechItem("NumPy", "Data Engineering", "numpy",
+                                        "I use NumPy for efficient numerical computation and vectorized operations when transforming and analyzing datasets.",
+                                        YearMonth.of(2023, 8),
+                                        new ArrayList<>()),
+
                         new TechItem("BeautifulSoup", "Data Engineering", "beautifulsoup",
                                         "I use BeautifulSoup for web scraping and HTML parsing to extract structured data from web pages for ingestion pipelines and data collection projects.",
                                         YearMonth.of(2024, 1),
@@ -70,22 +75,6 @@ public class TechService {
                         new TechItem("Spring Boot", "Backend", "spring-boot",
                                         "Spring Boot runs this portfolio's intentionally lightweight Java 21 REST API, with test coverage and CI on every change.",
                                         YearMonth.of(2025, 8),
-                                        new ArrayList<>()),
-
-                        // ------------------ DATA SCIENCE & MACHINE LEARNING ------------------
-                        new TechItem("NumPy", "Data Science & Machine Learning", "numpy",
-                                        "I use NumPy for efficient numerical computation and vectorized operations when transforming and analyzing datasets.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("scikit-learn", "Data Science & Machine Learning", "scikit-learn",
-                                        "I use scikit-learn to prototype regression, classification, and clustering models, applying training from my graduate data science and machine learning coursework.",
-                                        YearMonth.of(2023, 8),
-                                        new ArrayList<>()),
-
-                        new TechItem("Jupyter Notebook", "Data Science & Machine Learning", "jupyter",
-                                        "I use Jupyter Notebook for exploratory data analysis and for validating datasets during pipeline development.",
-                                        YearMonth.of(2023, 8),
                                         new ArrayList<>()),
 
                         // ------------------ FRONTEND ------------------
@@ -133,11 +122,6 @@ public class TechService {
                         new TechItem("Playwright", "DevOps & Tools", "playwright",
                                         "I use Playwright for real-browser automation in my QA work. It drives site-sentry's smoke, navigation, and UI checks against kyledarden.com on a twice-daily schedule.",
                                         YearMonth.of(2025, 10),
-                                        new ArrayList<>()),
-
-                        new TechItem("Postman", "DevOps & Tools", "postman",
-                                        "I use Postman to test, document, and automate RESTful API requests and workflows during backend and data service development.",
-                                        YearMonth.of(2024, 2),
                                         new ArrayList<>()));
 
         public List<TechItem> getAllTechItems() {
