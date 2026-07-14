@@ -35,7 +35,7 @@ The pipeline follows a **multi-layered architecture** built around dbt and Postg
   Referential integrity ensured across all dimension and fact tables.
 
 - **Analytics & Visualization:**  
-  Generated an **interactive HTML dashboard** using Python + Plotly, visualizing content trends, genre popularity, and rating distributions.
+  Generated an **interactive HTML dashboard** from a Python script, visualizing content trends, genre popularity, and rating distributions.
 
 ---
 
@@ -76,7 +76,7 @@ The pipeline follows a **multi-layered architecture** built around dbt and Postg
 
 **Languages & Tools:** Python, dbt, PostgreSQL, Docker Compose  
 **Testing & CI/CD:** dbt tests, GitHub Actions, pre-commit hooks  
-**Visualization:** Plotly, HTML Dashboards  
+**Visualization:** Python-generated interactive HTML dashboards  
 **Data Volume:** 176M+ records processed  
 **Design Methodology:** Kimball-style dimensional modeling
 
