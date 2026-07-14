@@ -8,11 +8,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 /**
- * Every project tech reference must resolve against TechService. A dangling
- * slug otherwise surfaces only at request time as a 500 on /api/projects,
- * which has nearly shipped before when removing skill entries.
+ * Every project tech reference must resolve against TechService.
+ * ProjectService resolves references lazily and throws on the first
+ * dangling slug (naming it in the exception message), so without this
+ * test a bad reference surfaces only at request time as a 500 on
+ * /api/projects - which has nearly shipped before when removing skills.
  */
 @SpringBootTest
 class ProjectTechReferenceIntegrityTest {
@@ -20,22 +23,12 @@ class ProjectTechReferenceIntegrityTest {
     @Autowired
     private ProjectService projectService;
 
-    @Autowired
-    private TechService techService;
-
     @Test
     void everyProjectTechReferenceResolvesToAKnownSkill() {
-        List<Project> projects = projectService.all();
+        List<Project> projects = assertDoesNotThrow(
+                projectService::all,
+                "A project references a tech slug missing from TechService;"
+                        + " the cause names the dangling slug");
         assertThat(projects).isNotEmpty();
-
-        for (Project project : projects) {
-            for (Project.TechItem tech : project.getTechStack()) {
-                assertThat(techService.getTechItemBySlug(tech.getId()))
-                        .withFailMessage(
-                                "Project '%s' references tech slug '%s', which does not exist in TechService",
-                                project.getSlug(), tech.getId())
-                        .isPresent();
-            }
-        }
     }
 }
