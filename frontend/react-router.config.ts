@@ -98,8 +98,12 @@ const config: Config = {
     if (routePaths.length === 0) {
       throw new Error(`Sitemap: no prerendered routes found in ${clientDir}`);
     }
-    // /404 is the error page and must not be indexed
-    const sitemapPaths = routePaths.filter((p) => p !== "/404");
+    // /404 is the error page and must not be indexed. Per-skill pages
+    // stay prerendered and reachable from the skills index, but the
+    // sitemap advertises only the primary pages.
+    const sitemapPaths = routePaths.filter(
+      (p) => p !== "/404" && !p.startsWith("/skills/")
+    );
     const sitemapPath = path.join(clientDir, "sitemap.xml");
     await writeFile(sitemapPath, sitemapXml(sitemapPaths), "utf-8");
     console.log(`Sitemap: ${sitemapPaths.length} URLs -> ${sitemapPath}`);
