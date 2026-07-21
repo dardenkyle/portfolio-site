@@ -21,7 +21,7 @@ export function meta({ data, location }: Route.MetaArgs) {
     `${data.project.title} Case Study — Kyle Darden`,
     data.project.summary ||
       `Case study for the ${data.project.title} project.`,
-    { pathname: location.pathname }
+    { pathname: location.pathname, ogType: "article" }
   );
 }
 

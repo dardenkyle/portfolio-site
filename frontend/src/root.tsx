@@ -43,9 +43,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <link rel="manifest" href="/site.webmanifest" />
 
-        {/* Social preview: og:title/og:description/og:url/og:image are
-            per-route via meta exports (pageMeta); only the type is global. */}
-        <meta property="og:type" content="website" />
+        {/* Social preview tags (og:*, twitter:card, canonical link) are
+            all per-route via meta exports (pageMeta). */}
 
         {/* Google tag (gtag.js) */}
         <script

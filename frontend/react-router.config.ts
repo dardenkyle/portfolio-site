@@ -3,9 +3,7 @@ import path from "node:path";
 import type { Config } from "@react-router/dev/config";
 import { loadEnv } from "vite";
 import { PROJECTS_WITH_CASE_STUDIES } from "./src/config/caseStudies";
-
-// Canonical origin for sitemap URLs (mirrors frontend/public/CNAME)
-const SITE_ORIGIN = "https://kyledarden.com";
+import { canonicalUrl } from "./src/utils/meta";
 
 // The prerendered output is the source of truth: every route the build
 // emitted is a <dir>/index.html under the client directory. (The config
@@ -21,10 +19,11 @@ async function prerenderedRoutePaths(clientDir: string): Promise<string[]> {
 }
 
 // GitHub Pages 301s directory paths without a trailing slash, so the
-// sitemap lists the canonical trailing-slash form crawlers get a 200 from
+// sitemap lists the canonical trailing-slash form crawlers get a 200 from;
+// canonicalUrl (shared with the per-page tags) produces exactly that form
 function sitemapXml(paths: string[]): string {
   const urls = paths
-    .map((p) => `${SITE_ORIGIN}${p === "/" ? "/" : `${p}/`}`)
+    .map((p) => canonicalUrl(p))
     .map((loc) => `  <url><loc>${loc}</loc></url>`)
     .join("\n");
   return [
