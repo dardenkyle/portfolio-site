@@ -39,7 +39,7 @@ export default function Nav() {
             Home
           </NavLink>
           <NavLink
-            to="/projects"
+            to="/projects/"
             className={(props) => cls(props, "projects")}
             onMouseEnter={() => handleMouseEnter("projects")}
             onMouseLeave={handleMouseLeave}
@@ -47,7 +47,7 @@ export default function Nav() {
             Projects
           </NavLink>
           <NavLink
-            to="/skills"
+            to="/skills/"
             className={(props) => cls(props, "skills")}
             onMouseEnter={() => handleMouseEnter("skills")}
             onMouseLeave={handleMouseLeave}
@@ -55,7 +55,7 @@ export default function Nav() {
             Skills
           </NavLink>
           <NavLink
-            to="/about"
+            to="/about/"
             className={(props) => cls(props, "about")}
             onMouseEnter={() => handleMouseEnter("about")}
             onMouseLeave={handleMouseLeave}
@@ -73,7 +73,7 @@ export default function Nav() {
             Resume
           </a>
           <NavLink
-            to="/contact"
+            to="/contact/"
             className={(props) => cls(props, "contact")}
             onMouseEnter={() => handleMouseEnter("contact")}
             onMouseLeave={handleMouseLeave}

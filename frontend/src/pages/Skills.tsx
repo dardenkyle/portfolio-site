@@ -57,7 +57,7 @@ export default function Skills({ loaderData: skills }: Route.ComponentProps) {
               {categorySkills.map((skill) => (
                 <Link
                   key={skill.slug}
-                  to={`/skills/${skill.slug}`}
+                  to={`/skills/${skill.slug}/`}
                   className={`
                     block rounded-2xl shadow p-5 transition-all duration-100
                     ${getGlowClass(skill.slug)}

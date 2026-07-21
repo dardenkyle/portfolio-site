@@ -39,7 +39,7 @@ export function ErrorBoundary() {
     <div className="min-h-screen flex items-center justify-center flex-col gap-4">
       <h1 className="text-2xl font-bold text-white">Project Not Found</h1>
       <p className="text-slate-400">This project doesn't exist.</p>
-      <Button to="/projects" variant="primary">
+      <Button to="/projects/" variant="primary">
         Back to Projects
       </Button>
     </div>
@@ -69,7 +69,7 @@ export default function ProjectDetail({
     <main className="max-w-5xl mx-auto p-6 space-y-8">
       <nav className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <Button
-          to="/projects"
+          to="/projects/"
           size="sm"
           variant="link"
           useGlow
@@ -79,7 +79,7 @@ export default function ProjectDetail({
         </Button>
         {PROJECTS_WITH_CASE_STUDIES.includes(project.slug) && (
           <Button
-            to={`/projects/${project.slug}/case-study`}
+            to={`/projects/${project.slug}/case-study/`}
             size="sm"
             variant="link"
             useGlow
@@ -129,7 +129,7 @@ export default function ProjectDetail({
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-medium">Tech Stack</h2>
             <Button
-              to="/skills"
+              to="/skills/"
               size="sm"
               variant="link"
               useGlow
@@ -149,7 +149,7 @@ export default function ProjectDetail({
               return (
                 <Link
                   key={t.id}
-                  to={`/skills/${techSlug}`}
+                  to={`/skills/${techSlug}/`}
                   className={`block rounded-2xl border border-white/15 p-4 text-center space-y-2 transition-all duration-300 hover:border-white/25 ${getGlowClass(
                     techSlug
                   )}`}
@@ -264,7 +264,7 @@ export default function ProjectDetail({
             )}
             {PROJECTS_WITH_CASE_STUDIES.includes(project.slug) && (
               <Button
-                to={`/projects/${project.slug}/case-study`}
+                to={`/projects/${project.slug}/case-study/`}
                 size="sm"
                 variant="link"
                 useGlow

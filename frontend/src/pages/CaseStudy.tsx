@@ -56,7 +56,7 @@ export function ErrorBoundary() {
     <main className="max-w-5xl mx-auto p-6">
       <nav className="mb-8">
         <Button
-          to={`/projects/${slug}`}
+          to={`/projects/${slug}/`}
           size="sm"
           variant="link"
           useGlow
@@ -73,7 +73,7 @@ export function ErrorBoundary() {
         <p className="text-slate-400 mb-6">
           The case study for "{slug}" doesn't exist yet.
         </p>
-        <Button to={`/projects/${slug}`} variant="link" size="sm">
+        <Button to={`/projects/${slug}/`} variant="link" size="sm">
           ← Back to Project
         </Button>
       </div>
@@ -98,7 +98,7 @@ export default function CaseStudy({ loaderData }: Route.ComponentProps) {
     <main className="max-w-5xl mx-auto p-6 space-y-8">
       <nav className="flex items-center justify-between">
         <Button
-          to={`/projects/${project.slug}`}
+          to={`/projects/${project.slug}/`}
           size="sm"
           variant="link"
           useGlow

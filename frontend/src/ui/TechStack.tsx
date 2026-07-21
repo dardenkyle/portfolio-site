@@ -13,7 +13,7 @@ function TechItem({ name, category, slug }: TechItemProps) {
 
   return (
     <Link
-      to={`/skills/${slug}`}
+      to={`/skills/${slug}/`}
       className={`block rounded-2xl border border-white/15 p-4 text-center space-y-2 transition-all duration-300 hover:border-white/25 ${getGlowClass(
         slug
       )}`}
