@@ -49,13 +49,13 @@ export default function Home({ loaderData: projects }: Route.ComponentProps) {
     <main className="max-w-6xl mx-auto px-6 py-12 space-y-14">
       {/* HERO */}
       <section className="mx-auto max-w-3xl text-center space-y-4">
-        <h1 className="text-4xl font-bold">Kyle Darden — Data Engineer</h1>
-        <p className="opacity-80">
-          Python • SQL • dbt • FastAPI • PostgreSQL • Docker
+        <h1 className="text-4xl font-bold">Kyle Darden</h1>
+        <p className="text-xl font-medium opacity-90">
+          Software Engineer — Data Platforms &amp; Pipelines
         </p>
         <p className="opacity-80">
-          I build data platforms end to end — ingestion, storage, and the APIs
-          that serve them, on a backend-engineering foundation.
+          I build data-intensive systems: ingestion pipelines, dimensional
+          models, and the APIs that serve them. Austin, TX.
         </p>
         <div className="flex items-center justify-center gap-3">
           <Button
