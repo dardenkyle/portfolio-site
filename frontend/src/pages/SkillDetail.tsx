@@ -7,14 +7,15 @@ import { trackContentView } from "@/utils/analytics";
 import { pageMeta } from "@/utils/meta";
 import type { Route } from "./+types/SkillDetail";
 
-export function meta({ data }: Route.MetaArgs) {
+export function meta({ data, location }: Route.MetaArgs) {
   // data is undefined when the loader threw (ErrorBoundary render)
   if (!data) {
     return pageMeta("Skill Not Found — Kyle Darden", "This skill doesn't exist.");
   }
   return pageMeta(
     `${data.name} — Kyle Darden`,
-    data.description || `My experience with ${data.name}.`
+    data.description || `My experience with ${data.name}.`,
+    { pathname: location.pathname }
   );
 }
 

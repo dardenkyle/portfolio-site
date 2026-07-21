@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { pageMeta } from "@/utils/meta";
+import type { Route } from "./+types/About";
 
-export function meta() {
+export function meta({ location }: Route.MetaArgs) {
   return pageMeta(
     "About — Kyle Darden",
-    "Data engineer working in Python, SQL, and dbt on a backend-engineering foundation of FastAPI, PostgreSQL, and Docker."
+    "Data engineer working in Python, SQL, and dbt on a backend-engineering foundation of FastAPI, PostgreSQL, and Docker.",
+    { pathname: location.pathname }
   );
 }
 

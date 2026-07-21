@@ -21,8 +21,10 @@ const GA_INIT = `
 
 // Fallback for routes without their own meta export; every page module
 // overrides this with route-specific tags via pageMeta().
-export function meta() {
-  return pageMeta(SITE_TITLE, SITE_DESCRIPTION);
+export function meta({ location }: Route.MetaArgs) {
+  return pageMeta(SITE_TITLE, SITE_DESCRIPTION, {
+    pathname: location.pathname,
+  });
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -41,9 +43,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
         <link rel="manifest" href="/site.webmanifest" />
 
-        {/* Social preview (add /public/og-image.png if you want previews).
-            og:title/og:description are per-route via meta exports. */}
-        <meta property="og:type" content="website" />
+        {/* Social preview tags (og:*, twitter:card, canonical link) are
+            all per-route via meta exports (pageMeta). */}
 
         {/* Google tag (gtag.js) */}
         <script

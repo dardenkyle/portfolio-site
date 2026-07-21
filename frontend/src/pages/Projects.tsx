@@ -6,10 +6,11 @@ import { toProject } from "@/api/mappers";
 import { pageMeta } from "@/utils/meta";
 import type { Route } from "./+types/Projects";
 
-export function meta() {
+export function meta({ location }: Route.MetaArgs) {
   return pageMeta(
     "Projects — Kyle Darden",
-    "Data pipelines, warehouses, and backend services built with Python, SQL, dbt, FastAPI, PostgreSQL, and Docker."
+    "Data pipelines, warehouses, and backend services built with Python, SQL, dbt, FastAPI, PostgreSQL, and Docker.",
+    { pathname: location.pathname }
   );
 }
 

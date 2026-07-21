@@ -6,10 +6,11 @@ import { useRandomGlow } from "@/hooks/useRandomGlow";
 import { pageMeta } from "@/utils/meta";
 import type { Route } from "./+types/Skills";
 
-export function meta() {
+export function meta({ location }: Route.MetaArgs) {
   return pageMeta(
     "Skills & Technologies — Kyle Darden",
-    "The technologies, frameworks, and tools I use to build modern applications."
+    "The technologies, frameworks, and tools I use to build modern applications.",
+    { pathname: location.pathname }
   );
 }
 

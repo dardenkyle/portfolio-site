@@ -11,14 +11,15 @@ import { trackContentView } from "@/utils/analytics";
 import { pageMeta } from "@/utils/meta";
 import type { Route } from "./+types/ProjectDetail";
 
-export function meta({ data }: Route.MetaArgs) {
+export function meta({ data, location }: Route.MetaArgs) {
   // data is undefined when the loader threw (ErrorBoundary render)
   if (!data) {
     return pageMeta("Project Not Found — Kyle Darden", "This project doesn't exist.");
   }
   return pageMeta(
     `${data.title} — Kyle Darden`,
-    data.summary || `${data.title} — project details.`
+    data.summary || `${data.title} — project details.`,
+    { pathname: location.pathname }
   );
 }
 

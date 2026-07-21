@@ -24,6 +24,7 @@
   "include": [
     "vite.config.ts",
     "react-router.config.ts",
-    "src/config/caseStudies.ts"
+    "src/config/caseStudies.ts",
+    "src/utils/meta.ts"
   ]
 }

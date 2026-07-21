@@ -6,7 +6,12 @@ import Button from "@/ui/Button";
 import TechStack from "@/ui/TechStack";
 import { toProject } from "@/api/mappers";
 import type { Project } from "@/domain/projects";
-import { pageMeta, SITE_TITLE, SITE_DESCRIPTION } from "@/utils/meta";
+import {
+  pageMeta,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  HOME_OG_DESCRIPTION,
+} from "@/utils/meta";
 import type { Route } from "./+types/Home";
 
 // Order: explicit order first (asc), then most recently updated.
@@ -19,8 +24,11 @@ function sortProjects(a: Project, b: Project) {
   return bd - ad; // newer first
 }
 
-export function meta() {
-  return pageMeta(SITE_TITLE, SITE_DESCRIPTION);
+export function meta({ location }: Route.MetaArgs) {
+  return pageMeta(SITE_TITLE, SITE_DESCRIPTION, {
+    pathname: location.pathname,
+    ogDescription: HOME_OG_DESCRIPTION,
+  });
 }
 
 // Runs at build time (prerender); the result ships as static data.

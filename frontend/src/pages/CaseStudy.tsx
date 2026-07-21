@@ -9,7 +9,7 @@ import { toProject } from "@/api/mappers";
 import { pageMeta } from "@/utils/meta";
 import type { Route } from "./+types/CaseStudy";
 
-export function meta({ data }: Route.MetaArgs) {
+export function meta({ data, location }: Route.MetaArgs) {
   // data is undefined when the loader threw (ErrorBoundary render)
   if (!data) {
     return pageMeta(
@@ -20,7 +20,8 @@ export function meta({ data }: Route.MetaArgs) {
   return pageMeta(
     `${data.project.title} Case Study — Kyle Darden`,
     data.project.summary ||
-      `Case study for the ${data.project.title} project.`
+      `Case study for the ${data.project.title} project.`,
+    { pathname: location.pathname, ogType: "article" }
   );
 }
 
