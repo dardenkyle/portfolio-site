@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 export default function Footer() {
   const location = useLocation();
-  const isContactPage = location.pathname === "/contact";
+  const isContactPage = location.pathname.replace(/\/+$/, "") === "/contact";
 
   // Show only copyright on contact page
   if (isContactPage) {
@@ -31,7 +31,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-4 justify-center">
             <Button
-              to="/projects"
+              to="/projects/"
               variant="secondary"
               useGlow
               glowKey="footer-projects"
@@ -47,7 +47,7 @@ export default function Footer() {
               Download Resume
             </Button>
             <Button
-              to="/contact"
+              to="/contact/"
               variant="secondary"
               useGlow
               glowKey="footer-contact"

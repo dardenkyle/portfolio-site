@@ -72,6 +72,9 @@ const config: Config = {
       fetchSlugs(`${apiBase}/skills`),
     ]);
 
+    // Prerender paths must stay slash-less: the prerenderer rejects
+    // trailing-slash entries (build fails in writeBundle). Canonical
+    // trailing-slash URLs are produced downstream by sitemapXml().
     return [
       "/",
       "/projects",

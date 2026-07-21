@@ -61,7 +61,7 @@ export default function SkillDetail({
   return (
     <main className="max-w-5xl mx-auto p-6 space-y-8">
       <nav>
-        <Button to="/skills" size="sm" variant="link">
+        <Button to="/skills/" size="sm" variant="link">
           ← Back to Skills
         </Button>
       </nav>
@@ -91,7 +91,7 @@ export default function SkillDetail({
         <section className="space-y-3">
           <header className="flex items-end justify-between">
             <h2 className="text-xl font-medium">Projects Using {skill.name}</h2>
-            <Button to="/projects" size="sm" variant="link">
+            <Button to="/projects/" size="sm" variant="link">
               View all projects →
             </Button>
           </header>

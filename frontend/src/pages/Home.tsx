@@ -51,7 +51,7 @@ export default function Home({ loaderData: projects }: Route.ComponentProps) {
         </p>
         <div className="flex items-center justify-center gap-3">
           <Button
-            to="/projects"
+            to="/projects/"
             variant="secondary"
             useGlow
             glowKey="hero-projects"
@@ -67,7 +67,7 @@ export default function Home({ loaderData: projects }: Route.ComponentProps) {
             Download Resume
           </Button>
           <Button
-            to="/contact"
+            to="/contact/"
             variant="secondary"
             useGlow
             glowKey="hero-contact"
@@ -82,7 +82,7 @@ export default function Home({ loaderData: projects }: Route.ComponentProps) {
         <header className="flex items-end justify-between">
           <h2 className="text-2xl font-semibold">About</h2>
           <Button
-            to="/about"
+            to="/about/"
             size="sm"
             variant="link"
             useGlow
@@ -113,7 +113,7 @@ export default function Home({ loaderData: projects }: Route.ComponentProps) {
         <header className="flex items-end justify-between">
           <h2 className="text-2xl font-semibold">Featured Projects</h2>
           <Button
-            to="/projects"
+            to="/projects/"
             size="sm"
             variant="link"
             useGlow
@@ -131,7 +131,7 @@ export default function Home({ loaderData: projects }: Route.ComponentProps) {
         <header className="flex items-end justify-between">
           <h2 className="text-2xl font-semibold">Tech Stack</h2>
           <Button
-            to="/skills"
+            to="/skills/"
             size="sm"
             variant="link"
             useGlow

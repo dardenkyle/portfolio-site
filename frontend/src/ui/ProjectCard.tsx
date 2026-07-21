@@ -8,7 +8,7 @@ export default function ProjectCard({ p }: { p: Project }) {
 
   return (
     <Link
-      to={`/projects/${p.slug}`}
+      to={`/projects/${p.slug}/`}
       className={`block rounded-2xl shadow p-5 transition-all duration-100 ${getGlowClass(
         p.slug
       )}`}
