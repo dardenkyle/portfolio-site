@@ -372,14 +372,14 @@ public class ProjectService {
                     "Automated QA suite for kyledarden.com - Playwright + Pytest browser tests running twice daily via GitHub Actions, with HTML reports and Docker support.",
                     List.of("QA Automation", "Testing", "CI/CD", "Monitoring"),
                     "https://github.com/dardenkyle/site-sentry",
-                    null,
+                    "https://dardenkyle.github.io/site-sentry/",
                     50,
                     OffsetDateTime.parse("2025-10-15T00:00:00Z"),
                     null,
                     null,
 
                     /* overview */
-                    "site-sentry is an automated QA suite that continuously verifies kyledarden.com. Playwright drives real-browser smoke, navigation, and UI tests orchestrated with Pytest, and a scheduled GitHub Actions workflow runs the suite twice daily. Failures produce HTML reports with screenshots, and the suite runs locally or in Docker for consistent environments.",
+                    "site-sentry is an automated QA suite that continuously verifies kyledarden.com. Playwright drives real-browser smoke, navigation, and UI tests orchestrated with Pytest, and a scheduled GitHub Actions workflow runs the suite twice daily. Failures produce HTML reports with screenshots, and the suite runs locally or in Docker for consistent environments. A live dashboard publishes uptime and Navigation Timing trends collected from each scheduled run.",
 
                     /* techStack - using references to TechService */
                     List.of(
