@@ -1,16 +1,63 @@
 // Shared shape for per-route meta exports so every page carries a real
 // title/description and matching Open Graph tags in its prerendered HTML.
 
-export const SITE_TITLE = "Kyle Darden — Portfolio";
+import type { MetaDescriptor } from "react-router";
+
+// Canonical origin (mirrors frontend/public/CNAME and react-router.config.ts)
+export const SITE_ORIGIN = "https://kyledarden.com";
+
+export const SITE_TITLE =
+  "Kyle Darden — Software Engineer | Data Platforms & Pipelines";
 
 export const SITE_DESCRIPTION =
-  "Kyle Darden — Data Engineer & backend systems builder. Live CS2 analytics platform, dbt data warehousing, and FastAPI services.";
+  "Software engineer building data-intensive systems — ingestion pipelines, dimensional models, and the APIs that serve them. Case studies on each project.";
 
-export function pageMeta(title: string, description: string) {
-  return [
+// Homepage share-card copy is shorter than the meta description because
+// preview cards truncate aggressively.
+export const HOME_OG_DESCRIPTION =
+  "Case studies on data pipelines, dimensional modeling, and full-stack systems.";
+
+export const OG_IMAGE_URL = `${SITE_ORIGIN}/og-image.png`;
+
+// GitHub Pages serves each prerendered route as <route>/index.html and
+// 301s the slash-less form, so the trailing-slash URL is the canonical
+// one everywhere: sitemap, internal links, og:url, and this tag. The
+// pathname is normalized rather than used verbatim because prerendering
+// renders routes at their slash-less paths while the deployed site serves
+// them with the slash.
+export function canonicalUrl(pathname: string): string {
+  const trimmed = pathname.replace(/\/+$/, "");
+  return trimmed === "" ? `${SITE_ORIGIN}/` : `${SITE_ORIGIN}${trimmed}/`;
+}
+
+type PageMetaOptions = {
+  // Route pathname (from Route.MetaArgs location); emits og:url and the
+  // canonical link. Omitted on error/404 renders, which have no canonical.
+  pathname?: string;
+  // Share-card copy when it should differ from the meta description.
+  ogDescription?: string;
+};
+
+export function pageMeta(
+  title: string,
+  description: string,
+  options: PageMetaOptions = {}
+): MetaDescriptor[] {
+  const tags: MetaDescriptor[] = [
     { title },
     { name: "description", content: description },
     { property: "og:title", content: title },
-    { property: "og:description", content: description },
+    {
+      property: "og:description",
+      content: options.ogDescription ?? description,
+    },
+    { property: "og:image", content: OG_IMAGE_URL },
+    { name: "twitter:card", content: "summary_large_image" },
   ];
+  if (options.pathname !== undefined) {
+    const url = canonicalUrl(options.pathname);
+    tags.push({ property: "og:url", content: url });
+    tags.push({ tagName: "link", rel: "canonical", href: url });
+  }
+  return tags;
 }

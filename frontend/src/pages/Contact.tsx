@@ -1,11 +1,13 @@
 import Button from "@/ui/Button";
 import { useState, useEffect } from "react";
 import { pageMeta } from "@/utils/meta";
+import type { Route } from "./+types/Contact";
 
-export function meta() {
+export function meta({ location }: Route.MetaArgs) {
   return pageMeta(
     "Contact — Kyle Darden",
-    "Get in touch about data engineering roles, projects, or collaboration."
+    "Get in touch about data engineering roles, projects, or collaboration.",
+    { pathname: location.pathname }
   );
 }
 
