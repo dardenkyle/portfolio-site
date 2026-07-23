@@ -142,7 +142,7 @@ frontend/
 ## Contact
 
 - Email: [darden_kyle@hotmail.com](mailto:darden_kyle@hotmail.com)
-- LinkedIn: [linkedin.com/in/kyle-darden](https://www.linkedin.com/in/kyle-darden/)
+- LinkedIn: [linkedin.com/in/kyle-darden](https://linkedin.com/in/kyle-darden/)
 - GitHub: [github.com/dardenkyle](https://github.com/dardenkyle)
 
 ## License
